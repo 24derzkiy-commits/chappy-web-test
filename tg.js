@@ -1,0 +1,1 @@
+(function(){var t=window.Telegram&&window.Telegram.WebApp;if(!t)return;try{t.ready();t.expand();if(t.setHeaderColor)t.setHeaderColor('#f7f5ef');if(t.setBackgroundColor)t.setBackgroundColor('#f7f5ef');if(t.disableVerticalSwipes)t.disableVerticalSwipes();}catch(e){}})();

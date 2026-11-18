@@ -1,0 +1,54 @@
+/* sk-home: ряд «Твои», шторка закрепления, оживающая панель */
+:root{--hh:196px;--ln:#29262a}
+.hero{height:var(--hh)}
+.feature::before{height:calc(var(--hh) + 2px)}
+.discover{min-height:48px}
+.discover h1{font-size:23px}
+.yours{margin:9px 0 0;height:62px}
+.yours h2{margin:0;height:14px;padding-left:1px;font:600 11px/14px var(--reader);color:var(--mute);letter-spacing:.02em}
+.yours h2 span{padding:0 3px;background:linear-gradient(transparent 55%,#f5d75d 55%,#f5d75d 90%,transparent 90%)}
+.pins{display:flex;gap:5px;margin-top:5px}
+.pin{flex:1 1 0;min-width:0;height:44px;display:flex;align-items:center;gap:3px;padding:0 2px 0 3px;background:#fffdf6;border:1.5px solid var(--ln);border-radius:3px;text-align:left;text-decoration:none;color:var(--ink)}
+.pin:nth-child(1){transform:rotate(-1deg)}.pin:nth-child(3){transform:rotate(.8deg)}
+.pin .gl{flex:none;width:17px;height:16px;display:block}
+.pin .gl svg{width:17px;height:16px;display:block}
+.pin .cut,.srow .cut{stroke:var(--ln);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.pin .fine,.srow .fine{fill:none;stroke:var(--ln);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.pin .nm{font:600 10.3px/12px var(--reader);letter-spacing:-.3px;overflow-wrap:normal;hyphens:manual}
+.pin.add{flex:none;width:44px;justify-content:center;padding:0;background:transparent;border:1.5px dashed var(--ln);transform:none}
+.pin.add .gl,.pin.add svg{width:24px;height:22px}
+.pin.add .fine{stroke-width:2.2}
+.pin:active{background:#f5dc73}
+.pins.new{align-items:center}
+.pin.add.wide{width:auto;flex:none;padding:0 12px 0 6px;gap:5px;justify-content:flex-start}
+.pin.add.wide .nm{font-size:12.5px;font-weight:620}
+.hint{font:500 12px/1.2 var(--reader);color:var(--mute);margin-left:4px}
+/* оживающая панель */
+.dock-stickers .ink image{pointer-events:none}
+/* шторка */
+.veil{position:fixed;inset:0;z-index:5;background:rgba(25,24,23,.5)}
+.sheet{position:fixed;z-index:6;left:50%;transform:translateX(-50%);bottom:0;width:min(100%,460px);background:#fffdf6;border:1.5px solid var(--ln);border-bottom:0;border-radius:4px 4px 0 0;box-shadow:0 -2.5px 0 var(--ln);padding:14px 20px 22px}
+.sh-head{display:flex;align-items:center;justify-content:space-between;height:36px;margin-bottom:6px}
+.sh-head h2{margin:0;font:650 19px/1.1 var(--reader);letter-spacing:-.4px}
+.cnt{background:#f5dc73;border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);padding:4px 8px;font:650 12px/1 var(--reader);transform:rotate(-3deg);font-variant-numeric:tabular-nums}
+.sheet ul{list-style:none;margin:0;padding:0}
+.srow{width:100%;min-height:46px;display:flex;align-items:center;gap:12px;border-top:1px solid var(--rule);text-align:left}
+.sheet li:first-child .srow{border-top:0}
+.srow .gl{width:30px;height:27px;flex:none}.srow .gl svg{width:30px;height:27px;display:block}
+.srow .nm{flex:1;font:590 15px/1.2 var(--reader);letter-spacing:-.2px}
+.srow .mk{width:28px;height:28px;display:grid;place-items:center;border:1.5px dashed #b9b2a6;border-radius:50%}
+.srow .mk svg{display:none;width:15px;height:14px;fill:none;stroke:var(--ln);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.srow[aria-pressed=true] .mk{background:#f5dc73;border:1.5px solid var(--ln);border-radius:4px;transform:rotate(-4deg)}
+.srow[aria-pressed=true] .mk svg{display:block}
+.done{display:block;width:100%;height:52px;margin:12px 0 0;background:#fffdf6;border:1.5px solid var(--ln);box-shadow:2.5px 2.5px 0 var(--ln);width:calc(100% - 3px);font:650 17px/1 var(--reader);transform:rotate(-1deg)}
+.done:active{transform:translate(2px,2px) rotate(-1deg);box-shadow:.5px .5px 0 var(--ln)}
+
+/* 17.11 правка: названия в «Твои» крупнее и в одну строку, ряд листается, плюс стоит первым */
+.pins{gap:8px;overflow-x:auto;scrollbar-width:none;margin:2px -20px 0 -3px;padding:3px 20px 4px 3px}
+.pins::-webkit-scrollbar{display:none}
+.pin{flex:none;padding:0 11px 0 8px;gap:6px;box-shadow:1.5px 1.5px 0 var(--ln)}
+.pin .gl,.pin .gl svg{width:23px;height:21px}
+.pin .nm{font:600 12.5px/1 var(--reader);letter-spacing:-.15px;white-space:nowrap}
+.pin.add{order:-1;box-shadow:none}
+.pin.add.wide{order:0}
+.yours{height:auto;min-height:62px}
