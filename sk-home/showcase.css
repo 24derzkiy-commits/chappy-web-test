@@ -151,3 +151,21 @@ main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
 .td-showall:active span{transform:translate(1px,1px)}
 
 .td-snd-btn{width:44px;height:44px;top:8px;right:8px;padding:0;cursor:pointer;font:inherit;appearance:none;border-radius:0;z-index:3}.td-snd-btn svg{width:22px;height:20px}.td-snd-btn[aria-pressed="true"]{background:#f5dc73}
+
+/* ===== песни на большом экране: «Слушать / Пауза» и шкала хода (ex-) ===== */
+.td-play{position:absolute;z-index:3;left:50%;top:56%;width:96px;height:96px;margin:-48px 0 0 -48px;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:50%;background:var(--yel);color:var(--ln);border:1.5px solid var(--ln);box-shadow:3px 3px 0 var(--ln);transform:rotate(-3deg);cursor:pointer;appearance:none;font:inherit;-webkit-tap-highlight-color:transparent}
+.td-play svg{width:30px;height:30px;display:block}
+.td-play .i-pause{display:none}
+.td-play[aria-pressed="true"] .i-play{display:none}
+.td-play[aria-pressed="true"] .i-pause{display:block}
+.td-pl-t{font:750 12px/1 var(--reader);letter-spacing:.02em}
+.td-play:active{transform:translate(1px,1px) rotate(-3deg);box-shadow:1.5px 1.5px 0 var(--ln)}
+.td-play:focus-visible{outline:3px solid #1d64ba;outline-offset:3px}
+.td-slide.is-song .td-plate{min-width:min(220px,calc(100% - 64px))}
+.td-prog{display:block;height:8px;margin-top:8px;background:#fffdf6;border:1.5px solid var(--ln);overflow:hidden}
+.td-prog i{display:block;height:100%;width:100%;background:var(--yel);transform-origin:0 50%;transform:scaleX(0)}
+@media(max-height:700px){.td-play{width:80px;height:80px;margin:-40px 0 0 -40px}.td-play svg{width:26px;height:26px}}
+
+/* кнопка «Слушать» стоит справа над названием и не закрывает героя (18.11) */
+.td-play{left:auto;right:22px;top:auto;bottom:148px;margin:0}
+@media(max-height:700px){.td-play{margin:0;bottom:128px}}
