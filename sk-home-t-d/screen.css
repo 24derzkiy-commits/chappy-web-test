@@ -1,0 +1,112 @@
+/* sk-home-t-d: «Витрина» (home.html) и большой экран тренда (trend.html). Свои классы — td- */
+:root{--ln:#29262a;--yel:#f5dc73;--rose:#f7a4c9;--tdw:min(100vw,460px)}
+/* каркас: шапка и панель стоят, листается только середина */
+.screen{height:100svh;min-height:0;display:flex;flex-direction:column;padding-bottom:calc(110px + env(safe-area-inset-bottom));overflow:hidden}
+header{flex:none}
+main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+.dock-stickers .ink image{pointer-events:none}
+/* «Твои»: одна компактная строка (как в исходной главной) */
+.yours{flex:none;height:56px;display:flex;align-items:center;gap:8px;margin:2px 0 0}
+.yours h2{flex:none;margin:0;height:auto;padding-left:1px;font:600 11px/14px var(--reader);color:var(--mute);letter-spacing:.02em}
+.yours h2 span{padding:0 3px;background:linear-gradient(transparent 55%,#f5d75d 55%,#f5d75d 90%,transparent 90%)}
+.pins{flex:1;min-width:0;display:flex;align-items:center;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -20px 0 0;padding:3px 20px 4px 2px}
+.pins::-webkit-scrollbar{display:none}
+.pin{flex:none;height:44px;display:flex;align-items:center;gap:6px;padding:0 11px 0 8px;background:#fffdf6;border:1.5px solid var(--ln);border-radius:3px;box-shadow:1.5px 1.5px 0 var(--ln);text-align:left;text-decoration:none;color:var(--ink)}
+.pin:nth-child(2){transform:rotate(-1deg)}.pin:nth-child(4){transform:rotate(.8deg)}
+.pin .gl,.pin .gl svg{flex:none;width:21px;height:19px;display:block}
+.pin .cut{stroke:var(--ln);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.pin .fine{fill:none;stroke:var(--ln);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.pin .nm{font:600 12.5px/1 var(--reader);letter-spacing:-.15px;white-space:nowrap}
+.pin.add{order:-1;width:44px;justify-content:center;padding:0;background:transparent;border:1.5px dashed var(--ln);box-shadow:none;transform:none}
+.pin.add .gl,.pin.add svg{width:22px;height:20px}
+.pin.add .fine{stroke-width:2.2}
+.pin:active{background:var(--yel)}
+
+/* ===== «Витрина» ===== */
+.td-home main{overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;padding-bottom:18px;display:block}
+.td-home main::-webkit-scrollbar{display:none}
+.td-sticky{position:sticky;top:0;z-index:4;height:46px;margin:0 -20px;padding:0 20px;background:var(--paper);display:flex;align-items:center}
+.td-sticky.stuck{box-shadow:0 1px 0 var(--rule)}
+.td-filters{display:flex;gap:7px;align-items:center}
+.td-filters button{height:44px;display:flex;align-items:center;min-width:44px;justify-content:center}
+.td-filters button span{display:block;padding:6px 10px 6px;background:#fffdf6;border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);font:600 13px/1 var(--reader);letter-spacing:-.1px;color:var(--ink)}
+.td-filters button:nth-child(odd) span{transform:rotate(-1.2deg)}
+.td-filters button:nth-child(even) span{transform:rotate(1deg)}
+.td-filters button[aria-pressed=true] span{background:var(--yel);font-weight:700}
+.td-filters button:active span{transform:translate(1px,1px);box-shadow:.5px .5px 0 var(--ln)}
+.td-sec{margin:0}
+.td-h{margin:2px 0 7px;font:650 17px/22px var(--reader);letter-spacing:-.3px}
+.td-h span{padding:0 3px 0 0;background:linear-gradient(transparent 62%,#f5d75d 62%,#f5d75d 92%,transparent 92%)}
+.td-all .td-h{margin-top:4px}
+/* ряд «В тренде» */
+.td-row{display:flex;gap:12px;margin:0 -20px;padding:2px 20px 9px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-left:20px;overscroll-behavior-x:contain;scrollbar-width:none;outline:0}
+.td-row::-webkit-scrollbar{display:none}
+.td-row::after{content:"";flex:none;width:8px}
+.td-rc{flex:none;width:calc(var(--tdw)*.62);height:clamp(240px,36svh,330px);scroll-snap-align:start;scroll-snap-stop:always}
+/* карточка */
+.td-card{position:relative;display:block;overflow:hidden;background:#d4d2ca;border:1.5px solid var(--ln);box-shadow:2px 2px 0 var(--ln);color:#fff;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.td-card[hidden]{display:none}
+.td-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:56%;background:linear-gradient(to top,rgba(20,18,17,.84),rgba(20,18,17,0));pointer-events:none}
+.td-card:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ln)}
+.td-card:focus-visible{outline:3px solid #1d64ba;outline-offset:3px}
+.td-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.td-kind{position:absolute;z-index:1;top:9px;left:9px;width:32px;height:30px;display:grid;place-items:center;background:var(--yel);color:var(--ln);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(-3deg)}
+.td-kind svg{width:16px;height:14px;display:block}
+.td-info{position:absolute;z-index:1;left:11px;right:10px;bottom:11px;display:flex;flex-direction:column;align-items:flex-start;gap:7px}
+.td-hot{padding:4px 7px;background:var(--rose);color:var(--ln);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(-2deg);font:750 11px/1 var(--reader);letter-spacing:.02em}
+.td-price{position:absolute;z-index:1;top:10px;right:9px;padding:5px 7px 5px;background:#fffdf6;color:var(--ln);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(3deg);font:700 12.5px/1 var(--reader);font-variant-numeric:tabular-nums;white-space:nowrap}
+.td-name{display:block;max-width:100%;font:700 21px/1.06 var(--reader);letter-spacing:-.4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:break-word;hyphens:manual}
+/* сетка «Все тренды» */
+.td-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 3px 3px 0}
+.td-gc{aspect-ratio:3/4}
+.td-gc .td-kind{top:8px;left:8px;width:30px;height:28px}
+.td-gc .td-price{top:9px;right:8px;font-size:11.5px;padding:4px 6px}
+.td-gc .td-info{left:9px;right:8px;bottom:9px;gap:6px}
+.td-gc .td-hot{font-size:10.5px}
+.td-gc .td-name{font-size:16px;letter-spacing:-.3px}
+
+/* ===== большой экран тренда ===== */
+.td-trend header,.td-trend footer{flex:none}
+.td-wrap{position:relative;flex:1 1 auto;min-height:0;margin-top:4px}
+.td-lane{position:absolute;inset:0 -20px 0 -20px;padding:0 23px 0 20px;overflow-y:auto;overflow-x:hidden;scroll-snap-type:y mandatory;overscroll-behavior:contain;touch-action:pan-y;scrollbar-width:none;outline:0;cursor:grab}
+.td-lane::-webkit-scrollbar{display:none}
+.td-lane.drag{cursor:grabbing;user-select:none}
+.td-slide{position:relative;height:var(--s,420px);margin:0 0 11px;scroll-snap-align:start;scroll-snap-stop:always}
+.td-slide::before{content:"";position:absolute;left:11px;right:-11px;top:11px;bottom:-11px;background:radial-gradient(circle at 3px 3px,var(--pink) 1.5px,transparent 1.8px) 0 0/6.5px 6.5px}
+.td-frame{position:absolute;inset:0;overflow:hidden;background:#d4d2ca;border:1.5px solid var(--ln)}
+.td-frame .td-media{pointer-events:none}
+.td-img{transform:scale(1.03)}
+.td-slide.cur .td-img{animation:td-drift 11s ease-in-out infinite alternate}
+@keyframes td-drift{from{transform:scale(1.03) translate(0,0)}to{transform:scale(1.11) translate(var(--dx,0),-1.2%)}}
+.td-tags{position:absolute;top:15px;left:68px;right:56px;display:flex;align-items:center;gap:7px}
+.td-kt{flex:none;display:flex;align-items:center;gap:5px;padding:5px 8px;background:var(--yel);color:var(--ln);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(-3deg);font:750 11px/1 var(--reader);letter-spacing:.05em;text-transform:uppercase}
+.td-kt svg{width:13px;height:12px}
+.td-hot2{flex:none;padding:4px 7px;background:var(--rose);color:var(--ln);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(2deg);font:750 11px/1 var(--reader);letter-spacing:.03em}
+.td-snd{position:absolute;top:12px;right:12px;width:34px;height:30px;display:grid;place-items:center;background:#fffdf6;color:var(--ln);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(3deg)}
+.td-snd svg{width:18px;height:16px}
+.td-plate{position:absolute;left:12px;bottom:14px;max-width:calc(100% - 64px);padding:9px 12px 10px;background:#fffdf6;border:1.5px solid var(--ln);box-shadow:2.5px 2.5px 0 var(--ln);transform:rotate(-1.5deg);transition:opacity .35s ease,transform .35s ease}
+.td-plate h2{margin:0;font:650 24px/1.05 var(--reader);letter-spacing:-.5px}
+.td-slide:not(.cur) .td-plate{opacity:0;transform:translateY(10px) rotate(-1.5deg)}
+.td-back{position:absolute;z-index:3;top:9px;left:9px;width:48px;height:48px;display:grid;place-items:center;background:#fffdf6;color:var(--ln);border:1.5px solid var(--ln);border-radius:50%;box-shadow:2px 2px 0 var(--ln);text-decoration:none;transform:rotate(-4deg)}
+.td-back svg{width:24px;height:24px;display:block}
+.td-back:active{transform:translate(1px,1px) rotate(-4deg);box-shadow:1px 1px 0 var(--ln)}
+.td-back:focus-visible{outline:3px solid #1d64ba;outline-offset:3px}
+/* положение: точки, а при числе карточек больше восьми — тонкая шкала */
+.td-dots{position:absolute;top:0;right:13px;height:var(--s,420px);width:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;pointer-events:none;z-index:2}
+.td-dots i{display:block;width:8px;height:8px;border-radius:50%;background:#fffdf6;border:1.5px solid var(--ln);transition:height .25s,background .25s}
+.td-dots i.on{height:20px;border-radius:4px;background:var(--yel)}
+.td-dots.scale{display:block;top:calc(var(--s,420px)*.5 - 80px);height:160px;width:8px;right:16px;background:#fffdf6;border:1.5px solid var(--ln);position:absolute}
+.td-dots.scale b{position:absolute;left:-1.5px;right:-1.5px;top:0;min-height:12px;background:var(--yel);border:1.5px solid var(--ln);border-radius:2px;transition:top .25s}
+.td-hint{position:absolute;right:15px;top:calc(var(--s,420px) - 62px);width:42px;height:42px;display:grid;place-items:center;background:var(--yel);color:var(--ln);border:1.5px solid var(--ln);box-shadow:2px 2px 0 var(--ln);transform:rotate(4deg);z-index:3;pointer-events:none;animation:td-bob 1.4s ease-in-out infinite;transition:opacity .3s}
+.td-hint svg{width:24px;height:24px}
+.td-hint.gone{opacity:0;animation:none}
+@keyframes td-bob{0%,100%{transform:translateY(0) rotate(4deg)}50%{transform:translateY(-9px) rotate(4deg)}}
+.td-bar{flex:none;padding:6px 0 4px}
+.td-cta{margin:0;min-height:52px;width:calc(100% - 3px);text-decoration:none;font-size:22px}
+.td-cta .price{display:inline-block}
+.td-cta .price.pop{animation:td-pop .3s ease-out}
+@keyframes td-pop{from{opacity:.2}to{opacity:1}}
+@media(max-height:700px){.td-cta{min-height:48px}.td-bar{padding:5px 0 3px}.td-name{font-size:19px}}
+@media(max-height:700px) and (max-width:370px){.td-rc .td-name{font-size:18px}}
+@media(max-width:370px){.td-filters{gap:5px}.td-filters button span{padding:6px 8px;font-size:12.5px}.td-gc .td-name{font-size:15px}.td-plate h2{font-size:22px}}
+@media(prefers-reduced-motion:reduce){.td-slide.cur .td-img,.td-hint{animation:none}.td-plate{transition:none}.td-cta .price.pop{animation:none}.td-dots.scale b{transition:none}}

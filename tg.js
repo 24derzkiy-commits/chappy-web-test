@@ -25,7 +25,7 @@ for(var i=0;i<list.length;i++){var hit=null;try{hit=el.closest(list[i][0]);}catc
 if(hit){e.preventDefault();go(list[i][1]);return;}}
 if(link)e.preventDefault();
 },false);
-var V=[['0','sk-home/home.html'],['A','sk-home-t-a/home.html'],['B','sk-home-t-b/home.html'],['C','sk-home-t-c/home.html']];
+var V=[['0','sk-home/home.html'],['A','sk-home-t-a/home.html'],['B','sk-home-t-b/home.html'],['C','sk-home-t-c/home.html'],['D','sk-home-t-d/home.html']];
 if(V.some(function(v){return v[1]===here;})){var bar=document.createElement('div');
 bar.setAttribute('style','position:fixed;top:2px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;gap:3px;font:700 11px/1 -apple-system,Arial,sans-serif');
 V.forEach(function(v){var a=document.createElement('a');a.href=base+v[1];a.textContent=v[0];
