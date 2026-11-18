@@ -132,3 +132,19 @@ a.cta{text-decoration:none}
 .spin .boom,.spin .boomtxt{transition:opacity .25s,transform .4s cubic-bezier(.3,1.7,.5,1)}
 .spin:not(.won) .boom,.spin:not(.won) .boomtxt{opacity:0;transform:translate(-50%,-48%) rotate(-7deg) scale(.2)}
 .spun .wheelbig{opacity:.55}
+
+/* 18.11: одна валюта — «Подарки» вместо второго счёта */
+.oc-ar{width:12px;height:12px;flex:none;color:var(--mute)}
+.cur .chip.oc-gift{gap:8px;margin:-2px 0 -2px 8px;padding:0 12px 0 8px;min-height:44px;background:#fffdf6;border:1.5px solid var(--ln);box-shadow:2px 2px 0 var(--ln);border-radius:4px;transform:rotate(-1deg);color:var(--ink);font:650 14px/1 var(--reader);text-decoration:none}
+.cur .chip.oc-gift:before{display:none}
+.cur .chip.oc-gift .ico{width:28px;height:25px}
+a.acct.oc-gift{color:var(--ink);text-decoration:none}
+.acct.oc-gift p{justify-content:space-between;align-items:center}
+.acct.oc-gift p b{font:750 26px/1 var(--reader);letter-spacing:-.8px}
+.plan b.oc-pm{display:flex;flex-direction:column;gap:4px;font-size:22px}
+.plan b.oc-pm small{font:600 12px/1 var(--reader);letter-spacing:0}
+.oc-line{margin:0 0 4px;font:500 14px/1.2 var(--reader);color:var(--mute)}
+.bn-how li.oc-lk{padding:0}
+.bn-how .oc-lk a{display:flex;align-items:center;gap:12px;width:100%;min-height:46px;color:var(--ink);text-decoration:none}
+.bn-how .oc-lk a span{flex:1}
+.bn-day .oc-u{display:block;margin-top:3px;font:600 11px/1 var(--reader);color:var(--mute);letter-spacing:0;text-align:center}
