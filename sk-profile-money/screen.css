@@ -75,3 +75,5 @@
 .mn-ops .r{display:flex;flex-direction:column;align-items:flex-end;gap:4px}.mn-ops .r b{font:700 14px/1.1 var(--reader);font-variant-numeric:tabular-nums}
 .mn-ops time{font:500 12px/1 var(--reader);color:var(--mute)}
 .mn-pr{font:700 12px/1 var(--reader);color:var(--ink);white-space:nowrap}
+
+.mn-fit{font:560 13px/1.25 var(--reader);color:var(--mute);font-variant-numeric:tabular-nums}.mn-pk.on .mn-fit{color:var(--ink)}
