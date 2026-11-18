@@ -1,0 +1,90 @@
+/* sk-home-t-b: «Было → стало». Шапка и панель — из sk-home; здесь только зона трендов (tb-). */
+:root{--ln:#29262a;--yel:#f5dc73;--rose:#f7a4c9;--sheet:#fffdf6;--reader:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
+/* вид иконок шапки и панели — как в sk-home */
+.account>span:first-child{display:block;width:42px;height:38px}.wheel{width:42px;height:38px}
+header .brand{position:relative;z-index:0;width:fit-content;color:#28252a;font:450 38px/1 ui-rounded,"Avenir Next",system-ui,sans-serif;letter-spacing:-.85px;text-transform:lowercase;transform:none}
+header .brand::after{content:"";position:absolute;z-index:-1;width:32px;height:4px;background:#f5d75d;left:1px;bottom:2px;transform:rotate(-3deg)}
+.screen{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+body{font-family:var(--reader)}
+main{display:block}
+
+/* ряд «Твои»: одна компактная строка */
+.tb-yours{display:flex;align-items:center;gap:8px;height:32px;margin:4px 0 0}
+.tb-lab{flex:none;font:600 11px/14px var(--reader);color:#5f5a54;letter-spacing:.02em}
+.tb-lab span{padding:0 3px;background:linear-gradient(transparent 55%,#f5d75d 55%,#f5d75d 90%,transparent 90%)}
+.tb-pins{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin-right:-20px;padding:2px 20px 4px 1px;min-width:0;flex:1}
+.tb-pins::-webkit-scrollbar{display:none}
+.tb-pin{flex:none;height:30px;display:flex;align-items:center;gap:5px;padding:0 9px 0 6px;background:var(--sheet);border:1.5px solid var(--ln);border-radius:3px;box-shadow:1.5px 1.5px 0 var(--ln);color:#191817;white-space:nowrap}
+.tb-pin:nth-child(1){transform:rotate(-1deg)}.tb-pin:nth-child(3){transform:rotate(.8deg)}
+.tb-gl,.tb-gl svg{width:19px;height:17px;display:block}
+.tb-cut{stroke:var(--ln);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.tb-fine{fill:none;stroke:var(--ln);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.tb-nm{font:600 12px/1 var(--reader);letter-spacing:-.15px}
+.tb-pin.tb-add{order:-1;width:30px;padding:0;justify-content:center;background:transparent;border:1.5px dashed var(--ln);box-shadow:none;transform:none}
+.tb-pin.tb-add .tb-gl,.tb-pin.tb-add svg{width:20px;height:18px}
+.tb-pin:active{background:var(--yel)}
+
+/* рамка-сравнение */
+.tb-trends{margin-top:6px}
+.tb-wrap{position:relative;margin-right:0;padding-bottom:0}
+.tb-wrap::before{content:"";position:absolute;left:11px;right:-11px;top:11px;bottom:-11px;background:radial-gradient(circle at 3px 3px,var(--pink) 1.5px,transparent 1.8px) 0 0/6.5px 6.5px}
+.tb-stage{--p:50%;position:relative;z-index:1;height:clamp(250px,calc(100svh - 371px),64svh);background:#1b1a1c;border:1.5px solid var(--ln);overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;contain:paint}
+.tb-after,.tb-before{position:absolute;inset:0}
+.tb-after .tb-m,.tb-before img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.tb-after .tb-m{opacity:0;transition:opacity .38s ease;will-change:opacity}
+.tb-after .tb-m.on{opacity:1}
+img.tb-m.on{animation:tb-drift 11s ease-in-out infinite alternate}
+@keyframes tb-drift{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.1) translate(-1.6%,-1.1%)}}
+.tb-before{display:none;clip-path:inset(0 calc(100% - var(--p)) 0 0);z-index:1}
+.is-pair .tb-before{display:block}
+.tb-before img{object-position:50% 18%}
+
+/* шкала положения: сегменты сверху */
+.tb-scale{position:absolute;z-index:3;left:10px;right:10px;top:9px;display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.tb-scale i{height:4px;background:rgba(255,253,246,.45);border:1px solid var(--ln);border-radius:1px}
+.tb-scale i.on{background:var(--yel)}
+
+/* метки */
+.tb-tag{position:absolute;z-index:4;top:22px;padding:5px 9px;font:700 12px/1 var(--reader);color:var(--ln);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);letter-spacing:.01em;pointer-events:none}
+.tb-was{left:10px;background:var(--sheet);transform:rotate(-3deg);opacity:0;transition:opacity .25s}
+.tb-now{right:10px;background:var(--yel);transform:rotate(2.5deg)}
+.is-pair .tb-was{opacity:1}
+
+/* ручка */
+.tb-grab{position:absolute;z-index:3;top:0;bottom:0;left:var(--p);width:56px;margin-left:-28px;display:none;touch-action:none;cursor:ew-resize}
+.is-pair .tb-grab{display:block}
+.tb-line{position:absolute;left:25px;top:0;bottom:0;width:6px;background:var(--sheet);border-left:1.5px solid var(--ln);border-right:1.5px solid var(--ln)}
+.tb-knob{position:absolute;left:5px;top:54%;width:46px;height:46px;margin-top:-23px;display:grid;place-items:center;background:var(--yel);border:1.5px solid var(--ln);border-radius:4px;box-shadow:2.5px 2.5px 0 var(--ln);transform:rotate(-4deg)}
+.tb-knob svg{width:26px;height:19px}
+.tb-grab:active .tb-knob{transform:rotate(-4deg) translate(1.5px,1.5px);box-shadow:1px 1px 0 var(--ln)}
+.tb-grab:focus-visible{outline:none}.tb-grab:focus-visible .tb-knob{outline:3px solid #1d64ba;outline-offset:2px}
+/* подсказка первого жеста */
+.tb-hint{position:absolute;z-index:4;left:var(--p);top:calc(54% - 62px);display:none;align-items:center;gap:6px;margin-left:-30px;padding:5px 8px 5px 6px;background:var(--sheet);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(2deg);pointer-events:none;font:700 12px/1 var(--reader);color:var(--ln);white-space:nowrap;transition:opacity .3s}
+.tb-hint svg{width:24px;height:14px}
+.is-pair .tb-hint{display:flex}
+.tb-hint.gone{opacity:0;visibility:hidden}
+
+/* плашка с названием: размер неподвижен, меняется только текст */
+.tb-plate{position:absolute;z-index:4;left:10px;right:10px;bottom:10px;height:50px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 8px 0 12px;background:var(--sheet);border:1.5px solid var(--ln);box-shadow:2.5px 2.5px 0 var(--ln);transform:rotate(-.8deg)}
+.tb-plate h2{margin:0;min-width:0;font:650 22px/1.1 var(--reader);letter-spacing:-.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .16s ease,transform .16s ease}
+.tb-plate h2.out{opacity:0;transform:translateY(5px)}
+.tb-kind{flex:none;display:flex;align-items:center;gap:5px;padding:5px 8px;background:var(--yel);border:1.5px solid var(--ln);font:700 12px/1 var(--reader);color:var(--ln);transform:rotate(1.5deg)}
+.tb-kind svg{width:15px;height:13px;display:block}
+
+/* ряд круглых наклеек-трендов */
+.tb-reel{display:flex;gap:12px;height:70px;margin:13px -20px 0 -6px;padding:0 20px 0 6px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x;align-items:center}
+.tb-reel::-webkit-scrollbar{display:none}
+.tb-dot{flex:none;width:60px;height:60px;border-radius:50%;padding:0;overflow:hidden;border:1.5px solid var(--ln);background:var(--sheet);scroll-snap-align:center;box-shadow:0 0 0 2px var(--paper),0 0 0 4.5px transparent;transition:box-shadow .2s;position:relative}
+.tb-dot img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;-webkit-user-drag:none}
+.tb-dot[aria-selected=true]{box-shadow:0 0 0 2px var(--paper),0 0 0 4.5px var(--pink)}
+.tb-dot:focus-visible{outline:3px solid #1d64ba;outline-offset:3px}
+
+/* главная кнопка */
+.tb-cta{display:flex;margin:6px 0 0;width:calc(100% - 3px);min-height:54px;text-decoration:none;font-size:23px;line-height:1}
+.tb-cta .price{min-width:44px;text-align:right}
+
+@media(max-width:350px){.tb-reel{margin-right:-14px;padding-right:14px}}
+@media(prefers-reduced-motion:reduce){
+ img.tb-m.on{animation:none}
+ .tb-after .tb-m,.tb-plate h2,.tb-was,.tb-dot,.tb-hint{transition:none}
+}
