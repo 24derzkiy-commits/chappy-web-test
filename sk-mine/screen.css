@@ -128,3 +128,35 @@ main{padding-bottom:0}
 .ly-two{display:flex;gap:12px;width:calc(100% - 3px);margin-top:14px}
 .ly-two>a{flex:1 1 0;min-width:0}
 .ly-two>a:nth-child(2){transform:rotate(.9deg)}
+
+/* лёгкая история: ряд «Мои нейросети», отправка в чат · приставка mh- */
+.mh-wrap{display:flex;align-items:center;gap:6px;margin:4px 0 0}
+.mh-lab{flex:none;width:66px;font:600 12.5px/1.15 var(--reader);letter-spacing:-.1px;color:var(--mute)}
+.mh-row{flex:1;min-width:0;display:flex;gap:10px;margin-right:-20px;padding:5px 24px 7px 2px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+.mh-row::-webkit-scrollbar{display:none}
+.mh-m{flex:none;display:flex;align-items:center;gap:6px;height:46px;padding:0 10px 0 6px;background:#fffdf6;border:1.5px solid var(--ln);border-radius:4px;box-shadow:2px 2px 0 var(--ln);color:var(--ink);text-decoration:none;font:620 13.5px/1 var(--reader);letter-spacing:-.2px;white-space:nowrap;scroll-snap-align:start}
+.mh-m:nth-child(odd){transform:rotate(-.6deg)}
+.mh-m:nth-child(even){transform:rotate(.5deg)}
+.mh-m:active{transform:translate(1px,1px)}
+.mh-m svg{display:block;flex:none;width:26px;height:23px}
+.mh-m .cut{stroke:var(--ln);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.mh-m .fine{fill:none;stroke:var(--ln);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.mh-note{margin:18px 0 0;padding:0 0 0 1px;font:550 13px/1.2 var(--reader);color:var(--mute)}
+.mh-send{appearance:none;-webkit-appearance:none;margin:0;padding:0 8px;cursor:pointer}
+.mh-st,.mh-ok{display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.mh-ok{display:none}
+.mh-send.is-sent{background:var(--yel)}
+.mh-send.is-sent .mh-st{display:none}
+.mh-send.is-sent .mh-ok{display:inline-flex}
+.mh-send svg{display:block;flex:none;width:22px;height:20px;fill:none;stroke:var(--ln);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.mh-n{display:none}
+.my-two>.mh-send{flex:1 1 0;min-width:0}
+.cta.mh-send{padding:0 14px;border:1.5px solid var(--ink);box-shadow:2px 2px var(--ink);font-weight:680;letter-spacing:-.35px;color:#151413}
+.cta.mh-send.is-sent{background:var(--yel)}
+.cta.mh-send .mh-st,.cta.mh-send .mh-ok{gap:9px}
+.cta.mh-send svg{width:26px;height:23px}
+@media(max-width:379px){.my-two .mh-f{display:none}.my-two .mh-n{display:inline}}
+.mh-hint{width:calc(100% - 3px);margin:-3px 0 0;text-align:center;font:550 13px/1.2 var(--reader);color:var(--mute)}
+@media(prefers-reduced-motion:no-preference){.mh-send.is-sent .mh-ok svg{animation:mhpop .22s ease-out}@keyframes mhpop{from{transform:scale(.6)}to{transform:scale(1)}}}
+@media(max-width:379px){.my-live.mh-fit{gap:7px;padding-right:8px;font-size:13px;letter-spacing:-.3px;margin-right:6px}.my-live.mh-fit .my-ic{width:30px;height:27px}}
+@media(max-height:700px){.my-res .my-pic{height:190px}.my-cover{width:176px;margin-top:8px}.my-cover .my-pic>img{height:100px}.my-player{margin-top:14px}.my-bar{margin-top:10px}.my-stack{gap:9px}.my-lyr{min-height:44px;margin-top:6px}}
