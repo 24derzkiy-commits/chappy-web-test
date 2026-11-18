@@ -169,3 +169,39 @@ main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
 /* кнопка «Слушать» стоит справа над названием и не закрывает героя (18.11) */
 .td-play{left:auto;right:22px;top:auto;bottom:148px;margin:0}
 @media(max-height:700px){.td-play{margin:0;bottom:128px}}
+
+/* ===== первая генерация в подарок (18.11) · приставка gf- ===== */
+.gf-ic{display:block;flex:none;width:24px;height:22px}
+.gf-first{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;padding:4px 9px 4px 5px;background:var(--yel);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(-2deg);font:700 12.5px/1 var(--reader);letter-spacing:-.1px;color:var(--ln);white-space:nowrap}
+.gf-first .gf-ic{width:22px;height:20px}
+.gf-banner{flex:none;display:flex;align-items:center;gap:12px;min-height:64px;margin:6px 3px 0 0;padding:6px 13px 6px 10px;background:var(--yel);border:1.5px solid var(--ln);border-radius:3px;box-shadow:2.5px 2.5px 0 var(--ln);color:var(--ink);text-decoration:none;transform:rotate(-.7deg)}
+.gf-banner:active{transform:translate(1px,1px) rotate(-.7deg);box-shadow:1px 1px 0 var(--ln)}
+.gf-banner:focus-visible,.gf-more:focus-visible{outline:3px solid #1d64ba;outline-offset:3px}
+.gf-banner .gf-big{width:46px;height:41px}
+.gf-banner b{flex:1;min-width:0;font:700 17px/1.1 var(--reader);letter-spacing:-.3px}
+.gf-ar{flex:none;width:24px;height:24px;display:block}
+.gf-tag{position:absolute;z-index:1;top:9px;right:8px;display:flex;align-items:center;gap:3px;padding:3px 7px 3px 4px;background:#fffdf6;color:var(--ln);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(3deg);font:750 12px/1 var(--reader);letter-spacing:-.1px;white-space:nowrap}
+.gf-tag .gf-ic{width:22px;height:20px}
+.gf-gc .gf-tag,.td-gc .gf-tag{top:8px;right:7px;font-size:11.5px;padding:3px 6px 3px 3px}
+.pin.add.gf-wide{width:auto;padding:0 12px 0 8px;gap:6px;justify-content:flex-start}
+.pin.add.gf-wide .nm{font-size:12.5px;font-weight:620}
+.gf-hint{flex:none;margin-left:4px;font:500 12px/1.2 var(--reader);color:var(--mute);white-space:nowrap}
+/* тренд новичка: один тренд, без ленты */
+.gf-single .td-dots,.gf-single .td-hint{display:none}
+.gf-single .td-lane{cursor:default}
+.td-plate .gf-first{display:flex;width:max-content;margin-top:8px}
+.gf-cta .price{font-weight:560}
+@media(max-width:370px){.gf-banner{gap:10px;padding-right:11px}.gf-banner .gf-big{width:38px;height:34px}.gf-banner b{font-size:15.5px}.gf-cta{font-size:20px}.gf-cta .price{font-size:12px;padding-right:9px}.gf-cta .tail{gap:9px}}
+
+/* ===== верх «Главной»: поиск свёрнут в лупу (ht-) ===== */
+.td-home main>.td-sticky:first-child{margin-top:4px}
+.td-sticky{gap:0}
+.ht-lupa{flex:none;width:44px;height:44px;margin-left:20px;display:grid;place-items:center;background:#fffdf6;border:1.5px solid var(--ln);border-radius:3px;box-shadow:1.5px 1.5px 0 var(--ln);color:var(--ink);transform:rotate(-1.5deg)}
+.ht-lupa[hidden]{display:none}
+.ht-lupa svg{width:20px;height:20px}
+.ht-lupa:active{background:var(--yel);transform:translate(1px,1px);box-shadow:.5px .5px 0 var(--ln)}
+.ht-lupa:focus-visible{outline:3px solid #1d64ba;outline-offset:3px}
+.td-sticky .td-filters[hidden]{display:none}
+.td-sticky .td-filters{padding-left:15px;scroll-padding-left:15px}
+.td-sticky .ht-field{flex:1;min-width:0;margin:0 23px 0 20px;height:44px}
+.td-sticky .ht-field[hidden]{display:none}
