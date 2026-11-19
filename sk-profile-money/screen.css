@@ -157,3 +157,33 @@
 .tf-own{background:#fffdf6;border:1.5px solid #b9b2a6;transform:rotate(-1deg)}
 .tf-h.sec{margin-top:26px}
 .tf-cmp thead th{font-size:11px;font-weight:700;letter-spacing:-.1px}
+
+/* профиль · деньги · приставка pm- (19.11) */
+[hidden]{display:none!important}
+.tf-row{--tfw:calc(var(--scw) - 40px);gap:26px;padding:18px 20px 14px;scroll-padding-inline:20px}
+.pm-rule{display:inline-block;max-width:calc(100% - 8px);margin:8px 0 0;background:var(--yel);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(-1.5deg);padding:7px 10px;font:650 14px/1.25 var(--reader)}
+.pm-rule+.tf-card{margin-top:18px}
+.pm-keep,.pm-offs{display:inline-block;background:#fffdf6;color:var(--ln);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(-1.5deg);padding:6px 9px;font:700 13px/1.1 var(--reader)}
+.pm-offs{background:var(--pink-soft,#f7a4c9);transform:rotate(1.5deg)}
+.pm-stk{display:flex;flex-wrap:wrap;gap:8px 10px;margin:12px 0 0}
+.pm-keepw{margin:4px 0 0}.pm-keepw+.tf-row{margin-top:0}
+.tf-save span{max-width:100%}
+.pm-t .tf-bar .tf-quiet{height:auto;min-height:24px;text-align:center}
+.pm-pd h1{margin:0;font:800 38px/1.05 var(--reader);letter-spacing:-1.4px}
+.pm-pd .mn-ssub{margin:12px auto 0;font-size:18px;color:var(--ink)}
+.pm-pd .mn-ssub b{font-weight:800;font-variant-numeric:tabular-nums}
+.pm-one-pk{margin-top:22px;min-height:120px;width:calc(100% - 3px);box-sizing:border-box}
+.pm-after{display:flex;align-items:baseline;justify-content:space-between;margin:20px 0 0;padding-top:12px;border-top:1.5px dashed #b9b2a6;font:600 15px/1.1 var(--reader);color:var(--mute)}
+.pm-after b{font:750 20px/1 var(--reader);color:var(--ink);font-variant-numeric:tabular-nums}
+a.mn-veil{display:block}
+.mn-two{flex-direction:column}
+.mn-in.bad{border-color:var(--ln);background:#fffdf6}
+.mn-err{display:inline-block;background:#f7a4c9;border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(1.5deg);padding:6px 11px;font:700 15px/1 var(--reader)}
+.mn-quiet{text-decoration:underline}
+.pm-t{display:block}
+a.cta{text-decoration:none}
+.tf-tabs{margin-top:12px}
+.accts.pm-one{grid-template-columns:1fr}
+.pm-one .acct{flex-direction:row;align-items:center;justify-content:flex-start;gap:14px;min-height:76px;transform:rotate(-.8deg)}
+.pm-one .acct .ico{width:44px;height:39px}
+.pm-one .acct b{font-size:44px}

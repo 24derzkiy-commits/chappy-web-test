@@ -177,3 +177,70 @@ footer{height:calc(110px + env(safe-area-inset-bottom))}
 @keyframes hgift-w{0%,62%,100%{transform:rotate(0) scale(1)}68%{transform:rotate(-10deg) scale(1.08)}74%{transform:rotate(9deg) scale(1.08)}80%{transform:rotate(-6deg) scale(1.04)}86%{transform:rotate(4deg)}92%{transform:rotate(-2deg)}}
 @keyframes hgift-d{0%,62%,100%{transform:scale(1)}74%{transform:scale(1.35)}86%{transform:scale(.9)}}
 @media (prefers-reduced-motion:reduce){.hgift .wheel,.hgift i{animation:none}}
+
+/* hw-kit:start */
+/* hw-kit: колесо дня и подарок в шапке (19.11.2026). Только transform и opacity в движении. */
+header .account{display:flex;align-items:center;gap:0}
+header .account .purse{margin-left:6px}
+header .account .hw-btn+.hw-btn{margin-left:4px}
+.hw-btn{position:relative;display:flex;align-items:center;justify-content:center;width:44px;height:44px;flex:none;color:#29262a;text-decoration:none;-webkit-tap-highlight-color:transparent;cursor:pointer;background:transparent;border:0;padding:0}
+.hw-btn:focus-visible{outline:3px solid #1d64ba;outline-offset:-3px}
+.hw-btn:active .hw-ico{transform:scale(.92)}
+.hw-ico{position:relative;z-index:1;display:block;width:40px;height:36px;transform-origin:50% 86%}
+.hw-gift .hw-ico{width:42px;height:38px}
+.hw-burst{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px 0 0 -22px;transform-origin:50% 50%;pointer-events:none}
+.hw-dot{position:absolute;right:0;top:1px;z-index:2;width:10px;height:10px;border-radius:50%;background:#fa4a9a;border:1.5px solid #29262a;transform-origin:50% 50%;pointer-events:none}
+.account:not([data-gift="1"]) .hw-gift{display:none}
+.hw-wheel .hw-w{fill:#f7a4c9}
+.hw-wheel .hw-hub{fill:#f5dc73}
+.hw-wheel .hw-pt{fill:#fffdf6}
+.hw-wheel .hw-body{fill:#fffdf6}
+.hw-wheel.hw-done .hw-burst,.hw-wheel.hw-done .hw-dot{display:none}
+.hw-wheel.hw-done .hw-w{fill:#ece8de}
+.hw-wheel.hw-done .hw-hub,.hw-wheel.hw-done .hw-pt{fill:#fffdf6}
+.hw-wheel.hw-done .hw-body{fill:#f7f5ef}
+.hw-wheel:not(.hw-done) .hw-ico{animation:hw-wob 3.6s ease-in-out infinite}
+.hw-wheel:not(.hw-done) .hw-burst{animation:hw-pulse 3.6s ease-in-out infinite}
+.hw-wheel:not(.hw-done) .hw-dot{animation:hw-dotp 3.6s ease-in-out infinite}
+.hw-gift .hw-ico{transform-origin:50% 86%;animation:hw-wob 3.6s ease-in-out -1.8s infinite}
+@keyframes hw-wob{0%,60%,100%{transform:rotate(0) scale(1)}66%{transform:rotate(-11deg) scale(1.07)}72%{transform:rotate(9deg) scale(1.07)}78%{transform:rotate(-6deg) scale(1.03)}84%{transform:rotate(4deg)}91%{transform:rotate(-2deg)}}
+@keyframes hw-pulse{0%,60%,100%{transform:scale(1) rotate(0);opacity:1}72%{transform:scale(1.1) rotate(8deg);opacity:1}84%{transform:scale(.96) rotate(-3deg);opacity:.9}}
+@keyframes hw-dotp{0%,60%,100%{transform:scale(1)}72%{transform:scale(1.35)}84%{transform:scale(.9)}}
+
+/* окно колеса: лист снизу */
+.hw-sheet{position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-end;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;color:#191817}
+.hw-sheet[hidden]{display:none}
+.hw-scrim{position:absolute;inset:0;background:#29262a;opacity:0;transition:opacity .25s ease}
+.hw-on .hw-scrim{opacity:.55}
+.hw-panel{position:relative;width:min(100%,460px);max-height:100%;overflow-y:auto;overscroll-behavior:contain;background:#f7f5ef;border:1.5px solid #29262a;border-bottom:0;border-radius:4px 4px 0 0;box-shadow:0 -3px 0 #29262a;padding:12px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(104%);transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+.hw-on .hw-panel{transform:translateY(0)}
+.hw-top{display:flex;align-items:center;justify-content:space-between;min-height:44px}
+.hw-title{margin:0;background:#f5dc73;border:1.5px solid #29262a;box-shadow:1.5px 1.5px 0 #29262a;transform:rotate(-2deg);padding:5px 12px;font:650 16px/1.1 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
+.hw-x{display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:#fffdf6;border:1.5px solid #29262a;box-shadow:2px 2px 0 #29262a;border-radius:3px;color:#29262a;cursor:pointer;padding:0}
+.hw-x svg{width:16px;height:16px;display:block}
+.hw-x:active{transform:translate(1px,1px);box-shadow:1px 1px 0 #29262a}
+.hw-x:focus-visible,.hw-cta:focus-visible{outline:3px solid #1d64ba;outline-offset:3px}
+.hw-stage{position:relative;width:min(340px,100%);margin:4px auto 0}
+.hw-big{display:block;width:100%;height:auto;overflow:visible;transition:opacity .3s ease}
+.hw-rot{transform-box:view-box;transform-origin:170px 152px}
+.hw-sheet.hw-spin .hw-rot{transition:transform 3.6s cubic-bezier(.12,.6,.08,1)}
+.hw-boom{position:absolute;left:50%;top:51%;width:132px;height:132px;transform:translate(-50%,-48%) rotate(-7deg);opacity:0;pointer-events:none}
+.hw-boomtxt{position:absolute;left:50%;top:51%;transform:translate(-50%,-48%) rotate(-7deg);text-align:center;display:flex;flex-direction:column;gap:3px;opacity:0;pointer-events:none;white-space:nowrap}
+.hw-boomtxt b{font:800 28px/1 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;letter-spacing:-1.2px}
+.hw-boomtxt span{font:650 12.5px/1 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
+.hw-boom,.hw-boomtxt{transition:opacity .25s,transform .4s cubic-bezier(.3,1.7,.5,1)}
+.hw-sheet:not([data-st=win]) .hw-boom,.hw-sheet:not([data-st=win]) .hw-boomtxt{transform:translate(-50%,-48%) rotate(-7deg) scale(.2)}
+.hw-sheet[data-st=win] .hw-boom,.hw-sheet[data-st=win] .hw-boomtxt{opacity:1}
+.hw-sheet[data-st=spun] .hw-big{opacity:.5}
+.hw-cap{display:flex;justify-content:center;margin:8px 0 14px;min-height:30px}
+.hw-cap span{background:#f5dc73;border:1.5px solid #29262a;box-shadow:1.5px 1.5px 0 #29262a;transform:rotate(-2deg);padding:5px 12px;font:650 14px/1.1 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
+.hw-sheet[data-st=ready] .hw-cap span{background:#fffdf6}
+.hw-sheet[data-st=spun] .hw-cap span{background:#fffdf6}
+.hw-cta{display:flex;align-items:center;justify-content:center;width:calc(100% - 3px);min-height:54px;margin:0;padding:0 14px;background:#fa4a9a;color:#151413;border:1.5px solid #29262a;box-shadow:2px 2px 0 #29262a;border-radius:0;font:680 23px/1 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;letter-spacing:-.35px;cursor:pointer}
+.hw-cta:active{transform:translate(1px,1px);box-shadow:1px 1px 0 #29262a}
+.hw-cta[aria-disabled=true]{background:#e9e5db;color:#8a857c;border-color:#8a857c;box-shadow:none;cursor:default;pointer-events:none}
+.hw-sheet[data-st=spun] .hw-cta{background:#fffdf6}
+@media (max-width:350px){.hw-panel{padding-inline:10px}.hw-title{font-size:15px}}
+@media (max-height:620px){.hw-stage{width:min(260px,100%)}}
+@media (prefers-reduced-motion:reduce){.hw-btn *,.hw-sheet,.hw-sheet *{animation:none!important;transition:none!important}.hw-btn:active .hw-ico{transform:none}}
+/* hw-kit:end */
