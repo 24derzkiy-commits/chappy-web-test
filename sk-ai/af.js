@@ -275,10 +275,31 @@ var CHEV2='<i aria-hidden="true">'+CHEV+'</i>';
 function tgHtml(id,pid,label){return'<button type="button" class="ab-tg" id="'+id+'" aria-expanded="false" aria-controls="'+pid+'"><strong><span>'+label+'</span></strong>'+CHEV2+'</button>'}
 function bindTg(b,onOpen){var p=$(b.getAttribute('aria-controls'));b.onclick=function(){var o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',String(o));p.hidden=!o;if(onOpen)onOpen(o)}}
 function exSet(kind,m){var E=D.examples||{};return E[m.k]||E['*'+kind]||null}
+/* фото: карточка «кадр комикса» — наклейка-подпись, картинка в рамке, облачко с запросом; нажатие: запрос в поле или картинка крупнее (ex-k) */
+function buildExK(sec,list,hasField){
+  var real=list.some(function(e){return/^img\/ex\//.test(e.img||'')});
+  sec.innerHTML=tgHtml('abexb','abexp','Примеры · '+list.length)+'<div class="ab-pn" id="abexp" hidden>'+
+    '<div class="ex-big" id="exbig" hidden><button type="button" class="ex-bigx" id="exbigx" aria-label="Свернуть картинку"><img alt=""></button></div>'+
+    '<div class="ex-row ex-kr" id="exr" tabindex="0">'+list.map(function(e,i){
+      var q=e.q!==undefined?e.q:(e.d||''),cap=e.cap||e.t||'',alt=esc(e.d||cap||q),use=!!(hasField&&q);
+      return'<button type="button" class="ex-k" data-i="'+i+'" data-q="'+esc(q)+'" data-use="'+(use?1:0)+'" aria-label="'+(use?'Взять запрос: ':'Открыть крупнее: ')+esc(cap||q)+'">'+
+        '<span class="ex-kt">'+esc(cap)+'</span>'+
+        '<span class="ex-kf"><img src="'+e.img+'" alt="'+alt+'" loading="lazy" style="object-position:'+(e.pos||'50% 40%')+'"></span>'+
+        (q?'<span class="ex-kb"><span>'+esc(q)+'</span></span>':'')+'</button>'}).join('')+'</div>'+
+    (real?'<p class="ex-src">Примеры со страницы модели</p>':'')+'</div>';
+  bindTg($('abexb'));
+  var big=$('exbig'),bimg=big.querySelector('img'),cur=-1;
+  $('exbigx').onclick=function(){big.hidden=true;cur=-1};
+  [].forEach.call(sec.querySelectorAll('.ex-k'),function(b){b.onclick=function(){
+    var i=+b.dataset.i;
+    if(b.dataset.use==='1'){var f=$('fld');if(!f)return;f.value=b.dataset.q;f.dispatchEvent(new Event('input',{bubbles:true}));if(f.scrollIntoView)f.scrollIntoView({block:'nearest',behavior:'smooth'});return}
+    if(cur===i){big.hidden=true;cur=-1;return}
+    cur=i;bimg.src=list[i].img;bimg.alt=list[i].cap||list[i].t||'';big.hidden=false}})}
 function buildEx(kind,m,hasField){
   var sec=$('abex');if(!sec)return;
   var list=exSet(kind,m);if(!list||!list.length){sec.parentNode.removeChild(sec);return}
   var vid=kind==='video';
+  if(!vid){buildExK(sec,list,hasField);return}
   sec.innerHTML=tgHtml('abexb','abexp','Примеры · '+list.length)+'<div class="ab-pn" id="abexp" hidden><div class="ex-row" id="exr" tabindex="0">'+list.map(function(e){
     var cap='<span class="ex-cap">'+esc(e.t)+'</span>',alt=esc(e.d||e.t),
       inner=vid?'<video muted playsinline loop preload="none" poster="'+e.poster+'" data-src="'+e.clip+'" aria-label="'+alt+'" style="object-position:'+(e.pos||'50% 30%')+'"></video>'

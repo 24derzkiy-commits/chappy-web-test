@@ -25,11 +25,24 @@ window.AF_DATA.examples={
   {t:"Танец",d:"Танцующая девушка в синем свете",poster:"img/clip-dance-poster.jpg",clip:"img/clip-dance.mp4",pos:"50% 25%"},
   {t:"Старт",d:"Бегун на старте",poster:"img/clip-sport-poster.jpg",clip:"img/clip-sport.mp4",pos:"50% 25%"},
   {t:"Город",d:"Город будущего",poster:"img/clip-future-poster.jpg",clip:"img/clip-future.mp4",pos:"50% 40%"}],
+/* настоящие работы моделей (19.11.2026): img/ex/, источники — design-20261119/model-about/EXAMPLES.md. q — запрос со страницы модели по-русски (нет — без облачка), cap — подпись */
  "seedream-5-5":[
-  {t:"Мода",d:"Девушка в алом платье",img:"img/fashion.jpg",pos:"50% 40%"},
-  {t:"Портрет",d:"Портрет девушки под дождём",img:"img/ava-face.jpg",pos:"50% 35%"},
-  {t:"Кино",d:"Кинопортрет на вечерней улице",img:"img/kino.jpg",pos:"58% 30%"},
-  {t:"Неон",d:"Портрет в неоновом свете",img:"img/neon.jpg",pos:"50% 35%"}],
+  {img:"img/ex/seedream-5-5-1.jpg",q:"Постер «Summer Night Cinema»: синий шрифт, луч проектора",cap:"Постер",pos:"50% 30%"},
+  {img:"img/ex/seedream-5-5-2.jpg",q:"Свежий хлеб на закваске на ореховой доске, мягкий свет, пар",cap:"Хлеб",pos:"40% 50%"},
+  {img:"img/ex/seedream-5-5-3.jpg",q:"Инфографика «Как делается дождь»: озеро, горы, четыре шага",cap:"Инфографика",pos:"50% 40%"}],
+ "nano-banana-2-1":[
+  {img:"img/ex/nano-banana-2-1-1.jpg",q:"",cap:"Инфографика",pos:"50% 40%"},
+  {img:"img/ex/nano-banana-2-1-2.jpg",q:"",cap:"Причал",pos:"50% 50%"}],
+ "minimax-h3-image":[
+  {img:"img/ex/minimax-h3-image-1.jpg",q:"Вид сверху: девять предметов путешественника в сетке 3×3",cap:"Раскладка",pos:"50% 50%"},
+  {img:"img/ex/minimax-h3-image-2.jpg",q:"Квадратный постер «Lantern Ferry»: ночной паром, золотые блики",cap:"Постер",pos:"50% 40%"},
+  {img:"img/ex/minimax-h3-image-3.jpg",q:"Инфографика «Идеальный пуровер»: гуашь, кофе по шагам",cap:"Инфографика",pos:"50% 50%"}],
+ "flux-3-klein":[
+  {img:"img/ex/flux-3-klein-1.jpg",q:"Студийное фото зелёной керамической вазы на белом фоне",cap:"Ваза",pos:"50% 50%"},
+  {img:"img/ex/flux-3-klein-2.jpg",q:"Кафе после вечернего дождя, тёплый свет, плёнка 35 мм",cap:"Кафе",pos:"50% 45%"},
+  {img:"img/ex/flux-3-klein-3.jpg",q:"Плоская иллюстрация приморского города с маяком и яхтами",cap:"Город",pos:"55% 50%"}],
+ "flux-2-pro":[
+  {img:"img/ex/flux-2-pro-1.jpg",q:"Инфографика «Почему Фрайбург такой солнечный»: горы и долина",cap:"Инфографика",pos:"50% 40%"}],
  "upscale":[
   {t:"Арт",d:"",img:"img/tr-anime.jpg",pos:"50% 30%"},
   {t:"Киберпанк",d:"",img:"img/tr-cyber.jpg",pos:"50% 30%"},
