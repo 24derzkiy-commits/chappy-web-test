@@ -21,6 +21,12 @@ T={
   song:{n:"Песня в подарок",p:"23 кр",i:"clip-sing-poster.jpg",o:"50% 30%",m:"ava-face.jpg",mo:"",s:1},
   love:{n:"Моё место рядом с тобой",p:"23 кр",i:"ava-hero.jpg",o:"50% 22%",m:"ava-face.jpg",mo:"",s:1},
   summer:{n:"Этим летом мы вдвоём",p:"23 кр",i:"mira-4.jpg",o:"50% 22%",m:"ava-face.jpg",mo:"",s:1},
+  /* составные форматы (19.11, довод «Вкладки»). c — составной формат: экран trend.html?t=<ключ> без ленты, шаги идут с параметром s (compose | own).
+     card: цена — сумма существующих (Песня в подарок 23 кр + Оживить фото от 23 кр = от 46 кр), цена — сумма, уточнить у владельца;
+     parts — строки «Проверь».
+     clip: цена 108 кр взята со старых экранов «Создать» (create-b/create.html, «Мини-клип · 108 кр»), в таблице hf-data её раньше не было — уточнить у владельца. */
+  card:{n:"Живая открытка",p:"от 46 кр",i:"mira-5.jpg",o:"50% 22%",m:"ava-face.jpg",mo:"",c:1,parts:[["Песня","23 кр"],["Оживление","от 23 кр"]]},
+  clip:{n:"Мини-клип",p:"108 кр",i:"tr-dance.jpg",o:"50% 25%",m:"ava-face.jpg",mo:"",c:1},
   'tool-swap':{n:"Замена лица",p:null,m:'ava-face.jpg',mo:'',t:1,svg:"<svg viewBox=\"0 0 44 40\"><path d=\"M3 10c4-6 12-6 16-1 3 4 2 12-4 14C6 25 0 19 3 10Z\" class=\"bg\"/><circle cx=\"14\" cy=\"15\" r=\"6.5\"/><path d=\"M11.5 16.5q2.5 2 5 0\"/><circle cx=\"30\" cy=\"27\" r=\"6.5\"/><path d=\"M27.5 28.5q2.5 2 5 0\"/><path d=\"M24 9h10m-3.5-3.5L34 9l-3.5 3.5M20 33H10m3.5-3.5L10 33l3.5 3.5\"/></svg>"},
   'tool-tryon':{n:"Примерка",p:null,m:'ava-face.jpg',mo:'',t:1,svg:"<svg viewBox=\"0 0 44 40\"><path d=\"M4 31 21 11l17 20c1 1.5 0 3-1.5 3h-31C4 34 3 32.5 4 31Z\" class=\"bg\"/><path d=\"M21 12v-2.2c0-1.600 3.200-2 3.200-4.800 0-2.200-1.800-3.300-3.700-3.300-2 0-3.300 1.300-3.300 3\"/><path d=\"M4.5 31 21 14l16.5 17q1 3-1.5 3H6.5q-2.5 0-2-3Z\"/></svg>"},
   'tool-nobg':{n:"Убрать фон",p:null,m:'ava-face.jpg',mo:'',t:1,svg:"<svg viewBox=\"0 0 44 40\"><path d=\"M5 6h32v28H5Z\" class=\"bg\"/><rect x=\"5\" y=\"5\" width=\"34\" height=\"30\" rx=\"2\" stroke-dasharray=\"3.5 3.5\"/><circle cx=\"22\" cy=\"16\" r=\"5\"/><path d=\"M12 31c0-7 5-10.5 10-10.5S32 24 32 31\"/></svg>"},
@@ -36,7 +42,7 @@ function num(p){var m=p&&/(\d+)/.exec(p);return m?+m[1]:0}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
 window.HF={T:T,k:k,it:it,has:has,bal:BAL,price:num(it.p),
  /* ссылка на шаг с тем же ключом */
- go:function(h,extra){if(!has)return h+(extra?'?'+extra:'');return h+'?t='+encodeURIComponent(k)+(extra?'&'+extra:'')},
+ go:function(h,extra){if(!has)return h+(extra?'?'+extra:'');var s=q.get('s');return h+'?t='+encodeURIComponent(k)+(s?'&s='+encodeURIComponent(s):'')+(extra?'&'+extra:'')},
  fill:function(root){root=root||document;
   root.querySelectorAll('[data-hf-go]').forEach(function(a){if(has)a.setAttribute('href',HF.go(a.getAttribute('data-hf-go')))});
   root.querySelectorAll('[data-hf=name]').forEach(function(e){e.textContent=it.n});

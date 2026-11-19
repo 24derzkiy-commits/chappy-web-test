@@ -249,3 +249,135 @@ main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
 .pins.ht5-pins>.pin:nth-child(even){transform:rotate(.8deg)}
 .pins.ht5-pins>.pin:nth-child(3){transform:rotate(-.6deg)}
 .pins.ht5-pins>.pin .nm{overflow:hidden;text-overflow:ellipsis}
+
+/* ===== вкладки главной: разные виды (19.11) · приставка hd- ===== */
+.hd-panel[hidden]{display:none}
+.td-filters button[data-f="Видео"][aria-pressed=true] span{background:var(--rose)}
+.td-filters button[data-f="Песни"][aria-pressed=true] span{background:var(--ln);color:#fffdf6}
+/* полоса под вкладками: фото — жёлтая с растром, видео — розовая с перфорацией плёнки, песни — тёмная с волной */
+.hd-band{position:relative;height:52px;margin:0 -20px 12px;padding:0 20px;display:flex;align-items:center;border-top:1.5px solid var(--ln);border-bottom:1.5px solid var(--ln);overflow:hidden}
+.hd-cap{position:relative;z-index:2;padding:6px 10px;background:#fffdf6;border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(-1.5deg);font:700 13px/1 var(--reader);letter-spacing:-.1px}
+.hd-b-photo{background:var(--yel)}
+.hd-b-photo::before,.hd-b-photo::after{content:"";position:absolute;top:0;bottom:0}
+.hd-b-photo::before{left:0;right:0;background:radial-gradient(circle at 3.5px 3.5px,var(--ln) .9px,transparent 1.2px) 0 0/7px 7px}
+.hd-b-photo::after{right:0;width:40%;background:radial-gradient(circle at 5px 5px,var(--ln) 2.1px,transparent 2.4px) 0 0/10px 10px}
+.hd-b-video{background:var(--rose)}
+.hd-b-video::before,.hd-b-video::after{content:"";position:absolute;left:0;right:0;height:7px;background:repeating-linear-gradient(90deg,var(--paper) 0 9px,transparent 9px 18px) 6px 0}
+.hd-b-video::before{top:5px}
+.hd-b-video::after{bottom:5px}
+.hd-b-song{background:var(--ln)}
+.hd-wave{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hd-b-song .hd-cap{transform:rotate(-1.5deg)}
+.hd-panel>.td-sec+.td-sec{margin-top:6px}
+/* фото: два столбца крупных вертикальных карточек, правый сдвинут */
+.hd-pgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px 10px;padding:0 3px 24px 0}
+.hd-pc{aspect-ratio:2/3}
+.hd-pgrid>.hd-pc:nth-child(even){margin-top:22px}
+.hd-pc .td-name{font-size:18px}
+.hd-pc .gf-tag{top:8px;right:7px}
+.hd-t2{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:2px 3px 12px 0}
+.hd-t2a{display:flex;align-items:center;gap:8px;min-height:56px;padding:6px 8px;background:#fffdf6;border:1.5px solid var(--ln);border-radius:3px;box-shadow:2px 2px 0 var(--ln);color:var(--ink);text-decoration:none;font:650 13px/1.1 var(--reader);letter-spacing:-.2px}
+.hd-t2a:nth-child(odd){transform:rotate(-.6deg)}.hd-t2a:nth-child(even){transform:rotate(.5deg)}
+.hd-t2a:active{background:#fffaf0;transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ln)}
+.hd-t2a:focus-visible{outline:3px solid #1d64ba;outline-offset:3px}
+.hd-t2a svg{flex:none;width:38px;height:34px;fill:none;stroke:var(--ln);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.hd-t2a svg .bg{fill:var(--yel);stroke:none}
+/* крупные форматы (видео и песни) */
+.hd-hero{position:relative;display:flex;flex-wrap:wrap;align-items:stretch;gap:10px 12px;min-height:112px;margin:0 3px 14px 0;padding:8px;background:#fffdf6;border:1.5px solid var(--ln);border-radius:3px;box-shadow:2.5px 2.5px 0 var(--ln);color:var(--ink);text-decoration:none}
+.hd-hero.a{transform:rotate(-.5deg)}.hd-hero.b{transform:rotate(.4deg)}
+.hd-hero:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ln)}
+.hd-hero:focus-visible,.hd-hl:focus-visible,.hd-recl:focus-visible,.hd-listen:focus-visible{outline:3px solid #1d64ba;outline-offset:3px}
+.hd-hi{position:relative;flex:none;width:100px;min-height:96px;border:1.5px solid var(--ln);background:#d4d2ca;overflow:hidden}
+.hd-hi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hd-hi.disc{width:96px;height:96px;min-height:0;border-radius:50%;align-self:center}
+.hd-hi.disc::after{content:"";position:absolute;inset:41%;border-radius:50%;background:var(--paper);border:1.5px solid var(--ln)}
+.hd-play{position:absolute;z-index:3;left:50%;top:50%;width:44px;height:44px;margin:-22px 0 0 -22px;display:grid;place-items:center;background:var(--yel);border:1.5px solid var(--ln);border-radius:50%;box-shadow:1.5px 1.5px 0 var(--ln)}
+.hd-play svg{width:18px;height:18px;margin-left:2px;display:block}
+.hd-ht{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:6px}
+.hd-ht b{font:700 19px/1.08 var(--reader);letter-spacing:-.4px;overflow-wrap:break-word;hyphens:manual}
+.hd-ht small{font:550 12.5px/1.2 var(--reader);color:var(--mute)}
+.hd-hp{display:inline-block;padding:4px 7px;background:var(--yel);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(-2deg);font:700 12.5px/1 var(--reader);font-variant-numeric:tabular-nums;color:var(--ln)}
+.hd-hl{flex:1 1 100%;min-width:0;display:flex;gap:12px;color:var(--ink);text-decoration:none}
+.hd-songh{padding-bottom:62px}
+.hd-songh .hd-listen{position:absolute;right:8px;bottom:8px;width:150px}
+/* перфорация плёнки */
+.hd-perf{position:absolute;z-index:2;top:0;bottom:0;left:0;width:13px;background:repeating-linear-gradient(180deg,transparent 0 4px,var(--paper) 4px 10px,transparent 10px 14px) 3px 0/7px 100% no-repeat,var(--ln);pointer-events:none}
+.hd-perf.r{left:auto;right:0}
+.hd-hi.film{width:112px}
+.hd-hi.film .hd-perf{width:11px;background-position:2px 0;background-size:7px 100%}
+.hd-hi.film img{left:11px;right:11px;width:calc(100% - 22px)}
+.hd-hi.film .hd-play{width:40px;height:40px;margin:-20px 0 0 -20px}
+.hd-films{display:grid;gap:14px;padding:0 3px 24px 0}
+.hd-film{aspect-ratio:16/9}
+.hd-film .td-info{left:26px;right:26px;bottom:10px}
+.hd-film .td-price{top:9px;right:23px}
+.hd-film .td-name{font-size:20px}
+.hd-film .hd-play{width:48px;height:48px;margin:-24px 0 0 -24px}
+.hd-film .hd-play svg{width:20px;height:20px}
+/* три шага одной строкой */
+.hd-st3{flex:1 1 100%;display:flex;align-items:center;justify-content:space-between;gap:4px;padding-top:2px}
+.hd-s{flex:1 1 auto;min-width:0;display:flex;align-items:center;justify-content:center;gap:4px;min-height:34px;padding:0 5px;background:var(--paper);border:1.5px solid var(--ln);border-radius:3px;font:700 12px/1 var(--reader);white-space:nowrap}
+.hd-s i{font-style:normal}
+.hd-si{flex:none;width:18px;height:18px;display:grid;place-items:center;background:var(--yel);border:1.5px solid var(--ln);border-radius:2px}
+.hd-si svg{width:13px;height:12px;display:block}
+.hd-ar{flex:none;width:12px;height:12px}
+/* песни: пластинки и «слушать» */
+.hd-recs{display:grid;grid-template-columns:1fr 1fr;gap:14px 14px;padding:4px 3px 24px 0}
+.hd-rec{display:flex;flex-direction:column;gap:9px}
+.hd-recl{display:flex;flex-direction:column;align-items:flex-start;gap:9px;color:var(--ink);text-decoration:none}
+.hd-disc{position:relative;display:block;width:100%;aspect-ratio:1/1;border:1.5px solid var(--ln);border-radius:50%;overflow:hidden;background:var(--ln);box-shadow:2.5px 2.5px 0 var(--ln)}
+.hd-disc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hd-disc::before{content:"";position:absolute;inset:11%;border-radius:50%;border:1.5px dashed var(--paper);z-index:1}
+.hd-disc::after{content:"";position:absolute;inset:42%;border-radius:50%;background:var(--paper);border:1.5px solid var(--ln);z-index:2}
+.hd-rn{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
+.hd-rn b{font:700 15.5px/1.1 var(--reader);letter-spacing:-.3px;overflow-wrap:break-word;hyphens:manual}
+.hd-listen{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;min-height:44px;padding:0 10px;background:var(--yel);border:1.5px solid var(--ln);border-radius:3px;box-shadow:1.5px 1.5px 0 var(--ln);color:var(--ink);font:700 13.5px/1 var(--reader);cursor:pointer;appearance:none}
+.hd-listen svg{width:13px;height:13px;flex:none}
+.hd-listen[aria-pressed=true]{background:#fffdf6}
+.hd-listen:active{transform:translate(1px,1px);box-shadow:.5px .5px 0 var(--ln)}
+@media(max-width:370px){.hd-hi{width:88px}.hd-hi.film{width:100px}.hd-ht b{font-size:17.5px}.hd-hi.disc{width:84px;height:84px}.hd-s{font-size:11px;gap:3px}.hd-si{width:17px}.hd-pc .td-name{font-size:16px}.hd-film .td-name{font-size:18px}.hd-recs{gap:12px}}
+
+/* ===== выпуклое стекло на картинках (19.11) · общий класс hd-glass, слой .hd-gl добавляет скрипт ===== */
+/* единственное место, где разрешены полупрозрачные переходы: блик не плотнее 25 %, кромка светлая сверху-слева и тёмная снизу-справа */
+.hd-glass{will-change:transform;transition:transform .28s ease-out,box-shadow .12s}
+.hd-glass.hd-live{transition:none}
+.hd-gl{position:absolute;inset:0;z-index:0;pointer-events:none;box-shadow:inset 2px 2px 0 rgba(255,255,255,.55),inset -2px -2px 0 rgba(20,18,17,.35);overflow:hidden}
+.hd-gl::before{content:"";position:absolute;left:-20%;top:-24%;width:100%;height:76%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.25),rgba(255,255,255,0));transform:translate(var(--hx,0),var(--hy,0));transition:transform .28s ease-out}
+.hd-glass.hd-live .hd-gl::before{transition:none}
+@media(prefers-reduced-motion:reduce){.hd-glass,.hd-gl::before{transition:none}}
+
+/* ===== экран составного формата: trend.html?t=card | clip (19.11) ===== */
+.td-trend.hd-isfmt .td-wrap{display:none}
+.hd-fs{flex:1 1 auto;min-height:0;margin:0 -20px;padding:2px 20px 14px;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none}
+.hd-fs::-webkit-scrollbar{display:none}
+.hd-fs[hidden]{display:none}
+.hd-fs-top{display:flex;align-items:center;gap:10px;min-height:52px}
+.hd-fs-top .td-back{position:static;flex:none}
+.hd-fs-top h1{margin:0;font:650 24px/1.05 var(--reader);letter-spacing:-.6px}
+.hd-ex{position:relative;margin:8px 11px 0 0}
+.hd-ex::before{content:"";position:absolute;left:11px;right:-11px;top:11px;bottom:-11px;background:radial-gradient(circle at 3px 3px,var(--pink) 1.5px,transparent 1.8px) 0 0/6.5px 6.5px}
+.hd-ex-f{position:relative;height:clamp(150px,27svh,250px);overflow:hidden;background:#d4d2ca;border:1.5px solid var(--ln)}
+.hd-ex-f img,.hd-ex-f video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hd-ex-play{position:absolute;z-index:3;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:var(--yel);color:var(--ln);border:1.5px solid var(--ln);border-radius:50%;box-shadow:2px 2px 0 var(--ln);font:750 11px/1 var(--reader);cursor:pointer;appearance:none}
+.hd-ex-play svg{width:22px;height:22px;display:block}
+.hd-ex-play .i-pa{display:none}
+.hd-ex-play[aria-pressed=true] .i-pl{display:none}
+.hd-ex-play[aria-pressed=true] .i-pa{display:block}
+.hd-ex-play:active{transform:translate(1px,1px)}
+.hd-ex-play:focus-visible,.hd-way:focus-visible{outline:3px solid #1d64ba;outline-offset:3px}
+.hd-ex-tag{position:absolute;z-index:3;left:9px;top:9px;padding:5px 8px;background:var(--yel);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(-3deg);font:750 11px/1 var(--reader);letter-spacing:.04em}
+.hd-fs-steps{display:flex;align-items:center;gap:4px;margin:18px 3px 0 0}
+.hd-fs-step{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 4px 9px;background:#fffdf6;border:1.5px solid var(--ln);border-radius:3px;box-shadow:2px 2px 0 var(--ln);font:700 13px/1.1 var(--reader);text-align:center}
+.hd-fs-step:nth-child(1){transform:rotate(-.8deg)}.hd-fs-step:nth-child(5){transform:rotate(.8deg)}
+.hd-fs-step .hd-si{width:34px;height:30px}
+.hd-fs-step .hd-si svg{width:22px;height:20px}
+.hd-fs-steps .hd-ar{width:14px;height:14px}
+.hd-ways{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 3px 0 0}
+.hd-way{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 8px;background:#fffdf6;border:1.5px solid var(--ln);border-radius:3px;box-shadow:1px 1px 0 var(--ln);color:var(--mute);font:650 14px/1.1 var(--reader);text-align:center;cursor:pointer;appearance:none}
+.hd-way .hd-ck{flex:none;width:18px;height:18px;border:1.5px solid var(--ln);border-radius:3px;background:#fffdf6}
+.hd-way[aria-checked=true]{color:var(--ink);box-shadow:2.5px 2.5px 0 var(--ln);transform:rotate(-1.2deg);font-weight:700}
+.hd-way[aria-checked=true] .hd-ck{background:var(--yel);box-shadow:inset 0 0 0 3px #fffdf6}
+.hd-fs-note{margin:12px 3px 0 0;font:550 12.5px/1.2 var(--reader);color:var(--mute)}
+@media(max-width:370px){.hd-fs-step{font-size:12px}.hd-way{font-size:13px}.hd-fs-top h1{font-size:22px}}
+.hd-pc .gf-tag{font-size:11px;padding:2px 5px 2px 2px}
+.hd-pc .gf-tag .gf-ic{width:18px;height:16px}
