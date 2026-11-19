@@ -167,3 +167,81 @@ html.sc-root,html.sc-root body{height:100%;overflow:hidden}
 .sc-in .sc-field{overflow-y:auto}
 /* круг 1 разговора */
 .sc-feed{padding-top:14px;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16px);mask-image:linear-gradient(to bottom,transparent 0,#000 16px)}
+
+/* ===== довод до сдачи 19.11 · приставка cf- («Chappy говорит») ===== */
+.cf-defs{position:absolute;width:0;height:0;overflow:hidden}
+.cf-bg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.cf-bg path{stroke:#29262a;stroke-width:1.5px;stroke-linejoin:round;stroke-linecap:round}
+.cf-bg .sh{fill:#29262a}
+.cf-hero use,.cf-av use{stroke:#29262a;stroke-width:2.4px;stroke-linejoin:round;stroke-linecap:round}
+/* первый экран */
+.cf-talk{margin:10px 0 0}
+.cf-top{display:flex;align-items:center;gap:16px}
+.cf-hero{position:relative;flex:none;width:118px;height:106px;margin:0 0 0 2px}
+.cf-hero::before{content:"";position:absolute;left:9px;top:10px;width:100%;height:100%;background:radial-gradient(circle at 3px 3px,var(--rose,#f7a4c9) 1.6px,transparent 2px) 0 0/6.5px 6.5px;-webkit-mask:radial-gradient(ellipse at 50% 50%,#000 62%,transparent 64%);mask:radial-gradient(ellipse at 50% 50%,#000 62%,transparent 64%)}
+.cf-hero svg{position:relative;display:block;width:100%;height:100%;overflow:visible;transform:rotate(-5deg)}
+.cf-say{position:relative;flex:1;min-width:0;margin:0 3px 0 0;min-height:84px;padding:12px 12px 13px 20px;display:flex;align-items:center;font:700 26px/1.08 var(--reader);letter-spacing:-.55px;color:var(--ink);transform:rotate(-1deg);transform-origin:0 60%;animation:cf-pop .45s cubic-bezier(.2,.9,.3,1.2) both}
+.cf-say>span{position:relative}
+.cf-info{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin:16px 0 0}
+.cf-free{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 14px 0 10px;background:var(--yel);border:1.5px solid var(--ln);border-radius:3px;box-shadow:2.5px 2.5px 0 var(--ln);font:700 17px/1 var(--reader);letter-spacing:-.2px;color:var(--ink);transform:rotate(-1.8deg);white-space:nowrap}
+.cf-free svg{flex:none;width:20px;height:18px}
+.cf-free .cut{stroke:#29262a;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.cf-note{margin:0 3px 0 4px;padding:10px 13px 11px;background:#fffdf6;border:1.5px solid var(--ln);border-radius:4px;box-shadow:2.5px 2.5px 0 var(--ln);font:600 15.5px/1.28 var(--reader);letter-spacing:-.25px;transform:rotate(.6deg);text-wrap:balance}
+.cf-ans{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px;margin:26px 3px 0 0}
+.cf-chip{display:flex;align-items:center;min-height:64px;padding:6px 12px;background:var(--yel);border:1.5px solid var(--ln);border-radius:3px;box-shadow:2.5px 2.5px 0 var(--ln);color:var(--ink);text-decoration:none;font:700 16px/1.12 var(--reader);letter-spacing:-.3px;text-wrap:balance;animation:cf-pop .4s cubic-bezier(.2,.9,.3,1.2) both;-webkit-tap-highlight-color:transparent}
+.cf-chip:nth-child(1){transform:rotate(-1.2deg);animation-delay:.2s}
+.cf-chip:nth-child(2){transform:rotate(.9deg);animation-delay:.28s}
+.cf-chip:nth-child(3){transform:rotate(.8deg);animation-delay:.36s}
+.cf-chip:nth-child(4){transform:rotate(-1deg);animation-delay:.44s}
+.cf-chip:active{background:#fffdf6;box-shadow:1px 1px 0 var(--ln);translate:1px 1px}
+.cf-chip:focus-visible,.cf-alt:focus-visible,.cf-go:focus-visible{outline:3px solid #1d64ba;outline-offset:3px}
+@keyframes cf-pop{from{scale:.93;translate:0 4px}to{scale:1;translate:0 0}}
+/* верхняя полоса разговора */
+.cf-bar{display:flex;align-items:center;gap:6px;min-height:52px;margin-top:2px}
+.cf-back{flex:none;display:grid;place-items:center;width:44px;height:44px;margin-left:-8px;color:var(--ink);text-decoration:none}
+.cf-back svg{width:20px;height:20px}
+.cf-bar .cf-free{min-height:34px;font-size:14px}
+.cf-bar .sc-new{margin-left:auto}
+/* реплики Chappy в разговоре */
+.sc-g.cf-g{flex-direction:row;align-items:flex-start;gap:10px;width:100%;max-width:100%;margin-left:0}
+.cf-av{position:relative;flex:none;width:34px;height:31px;margin-top:4px}
+.cf-av svg{display:block;width:100%;height:100%;overflow:visible;transform:rotate(-6deg)}
+.cf-av use{stroke-width:1.6px}
+.cf-col{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding-right:6px}
+.cf-col>.sc-a,.cf-col>.sc-post{max-width:100%}
+.cf-col .sc-a{position:relative;isolation:isolate}
+.cf-col .sc-a::before{content:"";position:absolute;z-index:-1;left:-7px;top:13px;width:11px;height:11px;background:#fffdf6;border:solid #29262a;border-width:0 0 1.5px 1.5px;transform:rotate(45deg)}
+.cf-col .sc-offer{width:100%;margin:0}
+.cf-col .sc-chips{margin-left:0}
+.cf-col .sc-cost,.cf-col .sc-copy{margin-left:0}
+.cf-go{display:flex;align-items:center;justify-content:center;width:calc(100% - 3px);min-height:52px;margin:10px 0 0;padding:0 10px;background:var(--pink);border:1.5px solid var(--ln);box-shadow:2.5px 2.5px 0 var(--ln);border-radius:3px;font:700 18px/1 var(--reader);letter-spacing:-.3px;color:#151413;text-decoration:none;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cf-go:active{transform:translate(2px,2px);box-shadow:.5px .5px 0 var(--ln)}
+.cf-go.old{background:var(--yel)}
+.cf-alts{display:flex;gap:10px;width:calc(100% - 4px)}
+.cf-alt{flex:1 1 0;min-width:0;min-height:52px;display:flex;flex-direction:column;justify-content:center;gap:3px;padding:5px 10px;background:#fffdf6;border:1.5px solid var(--ln);border-radius:3px;box-shadow:2px 2px 0 var(--ln);color:var(--ink);text-align:left;text-decoration:none;font:inherit}
+.cf-alt:nth-child(1){transform:rotate(-1deg)}.cf-alt:nth-child(2){transform:rotate(.9deg)}
+.cf-alt b{font:700 14px/1.1 var(--reader);letter-spacing:-.2px}
+.cf-alt small{font:600 12.5px/1 var(--reader);color:var(--mute);font-variant-numeric:tabular-nums}
+.cf-alt:active{transform:translate(2px,2px);box-shadow:.5px .5px 0 var(--ln)}
+.cf-done{display:flex;align-items:center;justify-content:center;width:calc(100% - 3px);min-height:44px;margin:0;padding:0 10px;border:1.5px dashed var(--ln);border-radius:3px;font:650 14px/1 var(--reader);color:var(--mute)}
+.cf-sec .sc-go{display:none}
+.sc-feed .sc-u{margin-right:4px}
+.cf-ask .sc-feed{justify-content:flex-start}
+/* состояния «запущено / готово / не хватило» */
+.as-m .cf-bar{margin-bottom:4px}
+.as-offer .cf-go{width:calc(100% - 3px);margin-top:12px}
+.as-m>.cf-bar+.as-q{margin-top:10px}
+.as-acts .cf-go{margin:0;flex:1.2;min-height:48px;font-size:16px;white-space:nowrap}
+@media(max-width:380px){.cf-hero{width:92px;height:83px}.cf-top{gap:14px}.cf-say{font-size:22px;padding-left:16px;min-height:72px}.cf-chip{font-size:15px}.cf-free{font-size:15.5px}}
+@media(max-height:700px){.cf-hero{width:76px;height:68px}.cf-say{min-height:58px;font-size:20px}.cf-info{margin-top:8px;gap:8px}.cf-note{font-size:14.5px;padding:8px 12px}.cf-ans{margin-top:14px;gap:10px}.cf-chip{min-height:50px}.cf-free{min-height:36px;font-size:15px}}
+@media(prefers-reduced-motion:reduce){.cf-say,.cf-chip{animation:none}}
+@keyframes cf-bob{0%,100%{transform:rotate(-5deg) translateY(0)}50%{transform:rotate(-2deg) translateY(-3px)}}
+.cf-hero svg{animation:cf-bob 3.2s ease-in-out .8s infinite}
+@media(prefers-reduced-motion:reduce){.cf-hero svg{animation:none}}
+.cf-free{background:var(--rose)}
+.sc-tips .sc-tip{background:var(--yel);min-height:64px;justify-content:center;font-size:16px}
+.sc-tips .sc-tip .ic{display:none}
+.sc-tips{gap:14px 12px}
+.sc-new>button{min-height:44px;padding:0 6px}
+.cf-ask .sc-u,.cf-ask .sc-g{animation:none!important}
+@media(max-width:380px){.cf-bar{gap:4px}.cf-back{width:40px;margin-left:-10px}.cf-bar .cf-free{font-size:12.5px;padding:0 8px 0 6px;gap:5px}.cf-bar .cf-free svg{width:15px;height:14px}.cf-bar .sc-new button{padding:0 2px}.cf-bar .sc-new{padding:0 8px}}

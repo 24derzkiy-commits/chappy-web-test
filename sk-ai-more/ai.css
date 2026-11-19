@@ -97,3 +97,32 @@ a.row{text-decoration:none}
 @media(max-width:370px){.ex-c{width:76px}.ex-c.ex-v{width:90px}.ex-sc{width:124px}}
 @media(max-height:700px){.ex-t .ex-sec{margin-top:8px}}
 @media(prefers-reduced-motion:reduce){.ex-pg i{transition:none}}
+
+/* ===== af-: довод раздела «Нейросети» (выбор модели, цена, одна шапка) ===== */
+.af-sub{display:flex;align-items:center;gap:8px;min-width:0}
+.af-new{display:inline-block;flex:none;margin-left:6px;padding:2px 5px;background:var(--rose);border:1.5px solid var(--ln);box-shadow:1px 1px 0 var(--ln);transform:rotate(-3deg);font:750 10.5px/1.1 var(--reader);letter-spacing:-.1px;color:var(--ln);white-space:nowrap;vertical-align:middle}
+.af-sub .af-new{margin-left:0}
+.af-new[hidden],.af-for[hidden]{display:none}
+.af-for{font:600 12.5px/1.2 var(--reader);color:var(--mute);white-space:nowrap}
+.opts[hidden]{display:none}
+.af-opts .opt{padding:0 4px;min-width:44px}
+.opt[aria-disabled=true]{border-style:dashed;color:#9a948a;box-shadow:none;transform:none;background:transparent}
+.af-one{flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;border:1.5px dashed var(--rule);border-radius:3px;font:600 14px var(--reader);color:var(--mute)}
+.af-cnt{margin:6px 2px 0;min-height:20px;font:500 13px/20px var(--reader);color:var(--mute);font-variant-numeric:tabular-nums}
+.af-pop{animation:afpop .45s ease-out}
+@keyframes afpop{0%{transform:translateY(4px);opacity:.2}100%{transform:none;opacity:1}}
+a.cta{text-decoration:none;color:#151413}
+/* шапка раздела одной высоты на всех вкладках: карточка модели не растёт от длинного названия */
+.ex-t .pick-now{height:76px;min-height:76px}
+.ex-t .pick-now strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:16px;line-height:1.12}
+.ex-t .pick-now .ic{flex:none;width:50px;height:44px}
+.ex-t .chips{margin-top:8px}.ex-t .chips+.field{margin-top:8px}
+.ex-t .chip{min-width:44px}
+.ex-t .af-cnt{margin-top:4px}
+/* ряды, что листаются вбок: последняя видимая карточка обрезана наполовину (3 целых + половина; для песен 2 + половина) */
+.ex-row .ex-c,.ex-row .ex-c.ex-v{width:calc((min(100vw,460px) - 20px - 30px)/3.5)}
+.ex-row .ex-sc{width:calc((min(100vw,460px) - 40px)/2.5)}
+.af-nm{display:flex;align-items:baseline;gap:7px;min-width:0}
+.af-nm strong{min-width:0}
+.plate{white-space:nowrap}
+.ex-t .pick-now + .opts{margin-top:14px}

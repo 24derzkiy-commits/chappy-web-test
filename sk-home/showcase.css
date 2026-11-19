@@ -205,3 +205,39 @@ main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
 .td-sticky .td-filters{padding-left:15px;scroll-padding-left:15px}
 .td-sticky .ht-field{flex:1;min-width:0;margin:0 23px 0 20px;height:44px}
 .td-sticky .ht-field[hidden]{display:none}
+
+/* ===== довод «Главной» (19.11) · приставка hf- ===== */
+/* лупа не тяжелее соседних меток: нажимаемая зона 44px, рисованная — как у метки */
+.ht-lupa{margin-left:15px;background:transparent;border:0;box-shadow:none;transform:none}
+.ht-lupa svg{box-sizing:content-box;width:16px;height:16px;padding:5px 8px;background:#fffdf6;border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(-1.2deg)}
+.ht-lupa:active{background:transparent;transform:none;box-shadow:none}
+.ht-lupa:active svg{background:var(--yel);transform:translate(1px,1px);box-shadow:.5px .5px 0 var(--ln)}
+.td-sticky .td-filters{padding-left:12px;scroll-padding-left:12px}
+/* инструменты: последняя видимая карточка обрезана наполовину на любой ширине */
+.td-tool{width:calc((var(--tdw) - 40px)/2.5)}
+/* «Твои»: ширина закреплённых такова, что вторая видна наполовину */
+.pins>.pin:not(.add){width:calc((var(--tdw) - 125px)/1.5);padding-right:6px}
+.pins>.pin:not(.add) .nm{overflow:hidden;text-overflow:ellipsis}
+/* шторка «Закрепить на главной» (на фоне витрины) */
+.hf-veil{position:fixed;inset:0;z-index:5;background:rgba(25,24,23,.5)}
+.hf-sheet{position:fixed;z-index:6;left:50%;transform:translateX(-50%);bottom:0;width:min(100%,460px);background:#fffdf6;border:1.5px solid var(--ln);border-bottom:0;border-radius:4px 4px 0 0;box-shadow:0 -2.5px 0 var(--ln);padding:14px 20px 22px}
+.hf-head{display:flex;align-items:center;justify-content:space-between;height:36px;margin-bottom:6px}
+.hf-head h2{margin:0;font:650 19px/1.1 var(--reader);letter-spacing:-.4px}
+.hf-cnt{background:var(--yel);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);padding:4px 8px;font:650 12px/1 var(--reader);transform:rotate(-3deg);font-variant-numeric:tabular-nums}
+.hf-rows{list-style:none;margin:0;padding:0}
+.hf-row{width:100%;min-height:46px;display:flex;align-items:center;gap:12px;border-top:1px solid var(--rule);text-align:left}
+.hf-rows li:first-child .hf-row{border-top:0}
+.hf-gl,.hf-gl svg{flex:none;width:30px;height:27px;display:block}
+.hf-gl .cut{stroke:var(--ln);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.hf-gl .fine{fill:none;stroke:var(--ln);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.hf-nm{flex:1;font:590 15px/1.2 var(--reader);letter-spacing:-.2px}
+.hf-mk{width:28px;height:28px;display:grid;place-items:center;border:1.5px dashed #b9b2a6;border-radius:50%}
+.hf-mk svg{display:none;width:15px;height:14px;fill:none;stroke:var(--ln);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.hf-row[aria-pressed=true] .hf-mk{background:var(--yel);border:1.5px solid var(--ln);border-radius:4px;transform:rotate(-4deg)}
+.hf-row[aria-pressed=true] .hf-mk svg{display:block}
+.hf-sheet.full .hf-row[aria-pressed=false] .hf-nm{color:var(--mute)}
+.hf-row:focus-visible,.hf-done:focus-visible{outline:3px solid #1d64ba;outline-offset:2px}
+.hf-done{display:flex;align-items:center;justify-content:center;height:52px;margin:12px 0 0;background:#fffdf6;border:1.5px solid var(--ln);box-shadow:2.5px 2.5px 0 var(--ln);width:calc(100% - 3px);font:650 17px/1 var(--reader);color:var(--ink);text-decoration:none;transform:rotate(-1deg)}
+.hf-done:active{transform:translate(2px,2px) rotate(-1deg);box-shadow:.5px .5px 0 var(--ln)}
+.hf-tip{position:absolute;right:16px;top:-22px;margin:0;padding:8px 11px;background:var(--yel);border:1.5px solid var(--ln);box-shadow:2px 2px 0 var(--ln);transform:rotate(-2deg);font:700 14px/1 var(--reader);color:var(--ln);white-space:nowrap}
+.hf-tip[hidden]{display:none}

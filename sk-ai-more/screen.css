@@ -89,3 +89,13 @@ a.cta{color:#151413}
 .am-fam{flex:none;white-space:nowrap}
 /* каталог: строки по высоте экрана, чтобы первый экран не резал строку */
 .am-row{min-height:53px}.am-row.ph{min-height:60px}
+
+/* ===== af-: списки моделей и ответ чата ===== */
+/* выбранная строка занимает столько же места, что и остальные: список не прыгает */
+.am-row.on{margin:0 4px 0 2px;border:0;border-top:1px solid var(--ln);box-shadow:inset 0 0 0 1.5px var(--ln),2px 2px 0 var(--ln)}
+.am-row strong .af-new{margin-left:8px}
+.am-row .tx strong{display:flex;align-items:center;flex-wrap:wrap}
+.am-a .am-by{margin-top:10px;font:600 12px/1.2 var(--reader);color:var(--mute)}
+.am-a .am-by::before{content:"— "}
+.am-sheet .done{text-decoration:none}
+.am-chat .pick-now .info{flex-wrap:wrap;row-gap:4px}
