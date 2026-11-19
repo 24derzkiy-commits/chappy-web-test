@@ -52,7 +52,11 @@ function icon(kind,i){var f=FILL[i%3];
 var SONGIC='<svg class="stk" viewBox="0 0 38 34"><path class="cut" fill="#f5dc73" d="m11.5 5.5 20-2.7.7 18.8-4.1.4-.4-9.3-12 1.7.3 11.6Z"/><ellipse cx="9.5" cy="26" rx="5" ry="4" class="cut" fill="#fffaf0" transform="rotate(-18 9.5 26)"/><ellipse cx="26" cy="23.8" rx="5" ry="4" class="cut" fill="#fffaf0" transform="rotate(-18 26 23.8)"/></svg>';
 var VOICEIC='<svg class="stk" viewBox="0 0 38 34"><path class="cut" fill="#f7a4c9" d="m5 8 27-2.5 1.6 20.5L6.6 28Z"/><path class="fine" d="M11 17.5v3M15.5 13v11M20 15.5v6M24.5 11v14M29 16v4"/></svg>';
 var ARROW='<svg viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 7h14M10 2l5 5-5 5"/></svg>';
-function newTag(m){return m.new?'<span class="af-new">Новинка</span>':''}
+function newTag(m){return isNew(m)?'<span class="ab-new" role="img" aria-label="Новая модель">NEW</span>':''}
+/* сведения о модели: AF_DATA.about[ключ] = {line,strong[],more[],input,src,draft}; нет — работают facts */
+function AB(k){var a=D.about;return(a&&a[k])||null}
+function inputOf(kind,m){var a=AB(m.k);/* 19.11.2026: в данных «text» значит «фото необязательно» — у фото и видео зону своего фото оставляем */if(a&&a.input)return(a.input==='text'&&(kind==='photo'||kind==='video'))?'text+photo':a.input;var i=(D.inputs||{})[m.k];if(i)return i;return(kind==='photo'||kind==='video')?'text+photo':'text'}
+function lineOf2(kind,m){var a=AB(m.k);return(a&&a.line)?a.line:lineOf(kind,m)}
 
 /* ---------- общее для вкладок ---------- */
 function tabCommon(kind){ls('af.tab',kind)}
@@ -98,8 +102,8 @@ var CHEV='<svg viewBox="0 0 14 9" fill="none" stroke="currentColor" stroke-width
 
 /* ---------- шаг 1: список нейросетей вида ---------- */
 function rowHtml(kind,m,i){
-  var ln=lineOf(kind,m),pic=(kind==='photo'&&m.img)?'<span class="th"><img src="'+m.img+'" alt=""></span>':'<span class="ic">'+pictoOf(kind,m,i)+'</span>';
-  return'<a class="ac-r" href="'+workHref(m.k)+'">'+pic+'<span class="tx"><strong>'+esc(m.n)+'</strong>'+(ln?'<small>'+esc(ln)+'</small>':'')+'</span><em>'+esc(priceTxt(kind,m))+'</em></a>'}
+  var ln=lineOf2(kind,m),pic=(kind==='photo'&&m.img)?'<span class="th"><img src="'+m.img+'" alt=""></span>':'<span class="ic">'+pictoOf(kind,m,i)+'</span>';
+  return'<a class="ac-r" href="'+workHref(m.k)+'">'+pic+'<span class="tx"><strong>'+esc(m.n)+newTag(m)+'</strong>'+(ln?'<small>'+esc(ln)+'</small>':'')+'</span><em>'+esc(priceTxt(kind,m))+'</em></a>'}
 function initCat(kind){
   var q=param('q'),pm=param('m');
   if(q||(pm&&BYK[kind][pm])){location.replace(workHref((pm&&BYK[kind][pm])?pm:cur(kind),q));return}
@@ -110,11 +114,11 @@ function initCat(kind){
   var news=all.filter(isNew);
   if(news.length){
     h+='<section class="ac-s" aria-label="Новинки"><h2 class="ac-h"><span>Новинки</span></h2><div class="ac-row" id="acnew" tabindex="0">'+
-      news.map(function(m,i){var ln=lineOf(kind,m),
+      news.map(function(m,i){var ab=AB(m.k),ln=(ab&&ab.strong&&ab.strong.length)?ab.strong[0]:lineOf(kind,m),
         cv=(kind==='photo'&&m.img)?'<img src="'+m.img+'" alt="">':pictoOf(kind,m,i);
-        return'<a class="ac-c" href="'+workHref(m.k)+'"><span class="ac-cv c'+(i%3)+'">'+cv+'</span><strong>'+esc(m.n)+'</strong>'+(ln?'<small>'+esc(ln)+'</small>':'')+'<span class="plate">'+esc(priceTxt(kind,m))+'</span></a>'}).join('')+'</div></section>'}
+        return'<a class="ac-c" href="'+workHref(m.k)+'"><span class="ac-cv c'+(i%3)+'">'+cv+newTag(m)+'</span><strong>'+esc(m.n)+'</strong>'+(ln?'<small>'+esc(ln)+'</small>':'')+'<span class="plate">'+esc(priceTxt(kind,m))+'</span></a>'}).join('')+'</div></section>'}
   var rec=QK[kind].map(function(k){return BYK[kind][k]}).filter(Boolean);
-  h+='<section class="ac-s" aria-label="Советуем"><h2 class="ac-h"><span>Советуем</span></h2><div class="ac-recs">'+rec.map(function(m,i){return rowHtml(kind,m,i)}).join('')+'</div></section>';
+  h+='<section class="ac-s" aria-label="Популярные"><h2 class="ac-h"><span>Популярные</span></h2><div class="ac-recs">'+rec.map(function(m,i){return rowHtml(kind,m,i)}).join('')+'</div></section>';
   if(all.length>rec.length){
     var order=[],groups={};
     all.forEach(function(m){var f=m.f||'';if(!groups[f]){groups[f]=[];order.push(f)}groups[f].push(m)});
@@ -127,11 +131,10 @@ function initCat(kind){
 }
 
 /* ---------- шаг 2: экран одной модели ---------- */
-var CHIPS={greet:'Поздравление маме',script:'Сценарий ролика'};
-var CHIPQ={greet:'Придумай поздравление маме',script:'Напиши сценарий ролика про кота'};
+var CHATQ={plan:'Составь план поста о запуске нового сервиса',letter:'Напиши письмо клиенту о сроках заказа'};
 var ANS_W={
- greet:['Мамочка, с днём рождения!','Спасибо за тепло, заботу и добрые руки. Пусть дома всегда пахнет пирогами, а на душе будет весна.','Здоровья тебе и побольше поводов улыбаться.'],
- script:['Кадр 1. Кот сидит на подоконнике и следит за каплями дождя.','Кадр 2. Лапа тянется к капле на стекле, капля убегает вниз.','Кадр 3. Хозяйка открывает окно, кот запрыгивает ей на плечо. Титр: «Дождь — тоже игра».']};
+ plan:['План поста.','1. Заголовок: что нового и зачем это нужно.','2. Три коротких пункта пользы для клиента.','3. Призыв: попробовать уже сегодня.'],
+ letter:['Здравствуйте!','Подтверждаем получение вашего заказа. Срок выполнения — три рабочих дня, о готовности сообщим отдельно.','С уважением, команда.']};
 var BAL=56;
 function setBal(n){var p=$('purse');p.textContent=n+' кр';p.setAttribute('aria-label','Баланс '+n+' кредитов, пополнить')}
 function collapse(){var s=$('str');if(s)s.classList.add('is-min')}
@@ -139,13 +142,16 @@ function p1(a){return a.map(function(x){return'<p>'+esc(x)+'</p>'}).join('')}
 
 function paintCard(kind,m){
   document.title='Chappy · '+m.n;$('selname').textContent=m.n;
-  var tags=strengths(kind,m);
-  $('tags').innerHTML=(isNew(m)?'<span class="af-new">Новинка</span>':'')+tags.map(function(t){return'<span class="ac-tag">'+esc(t)+'</span>'}).join('');
-  $('one').textContent=tags.slice(0,2).join(' · ');
-  $('str').classList.toggle('no-tags',!tags.length&&!isNew(m));
+  var a=AB(m.k),tags=(a&&a.strong&&a.strong.length)?a.strong.slice(0,3):strengths(kind,m),line=(a&&a.line)||'',nw=isNew(m);
+  $('newtag').hidden=!nw;
+  var ln=$('line');ln.textContent=line;ln.hidden=!line;
+  $('tags').innerHTML=tags.map(function(t){return'<span class="ac-tag">'+esc(t)+'</span>'}).join('');
+  $('str').classList.toggle('has-line',!!line);
+  $('one').textContent=line||tags.slice(0,2).join(' · ');
+  $('str').classList.toggle('no-tags',!tags.length&&!line&&!nw);
   $('selprice').textContent=priceTxt(kind,m)}
 function workChat(m0){
-  var m=m0,fld=$('fld'),form=$('compose'),th=$('thread'),chips=$('chips'),bal=BAL,sendP=$('ctaprice'),send=$('send');
+  var m=m0,fld=$('fld'),form=$('compose'),th=$('thread'),bal=BAL,sendP=$('ctaprice'),send=$('send');
   var freeLeft=(param('free')!=null&&!isNaN(+param('free')))?Math.max(0,Math.min(FREE_TOTAL,+param('free'))):FREE_LEFT;
   var mem=param('full')==='1'?100:MEM_START;
   function paintSend(){
@@ -159,20 +165,18 @@ function workChat(m0){
     $('memBar').style.width=mem+'%';
     var full=mem>=100;
     $('compose').hidden=full;$('fullbar').hidden=!full;$('meters').classList.toggle('is-full',full);
-    if(full){chips.hidden=true;collapse()}}
-  chips.innerHTML=Object.keys(CHIPS).map(function(k){return'<button type="button" class="chip" data-q="'+k+'">'+esc(CHIPS[k])+'</button>'}).join('');
-  [].forEach.call(chips.querySelectorAll('.chip'),function(c){c.onclick=function(){fld.value=CHIPQ[c.dataset.q];fld.focus()}});
+    if(full){collapse()}}
   function end(){var l=th.lastElementChild;if(l&&l.scrollIntoView)l.scrollIntoView({block:'end',behavior:'smooth'})}
   function addBot(txt,html,cost){
     var w=document.createElement('div');w.className='ac-m';
     w.innerHTML='<span class="ac-av" aria-hidden="true">'+esc(m.n.charAt(0).toUpperCase())+'</span><div class="ac-b">'+html+'</div>';th.appendChild(w);
     if(cost){var c=document.createElement('div');c.className='ac-cost';c.textContent=cost;th.appendChild(c)}}
   function addUser(t){var u=document.createElement('div');u.className='ac-u';u.textContent=t;th.appendChild(u)}
-  if(mem>=100){addUser(CHIPQ.greet);addBot('',p1(ANS_W.greet),'бесплатно')}
+  if(mem>=100){addUser(CHATQ.plan);addBot('',p1(ANS_W.plan),'бесплатно')}
   /* смена модели: список открывается здесь же, лента остаётся */
   var swb=$('swb'),sw=$('sw');
   function drawSw(){
-    sw.innerHTML=MD.chat.filter(function(x){return x.k!==m.k}).map(function(x){return'<button type="button" class="ac-sr" data-k="'+x.k+'"><strong>'+esc(x.n)+'</strong><em>'+esc(priceTxt('chat',x))+'</em></button>'}).join('');
+    sw.innerHTML=MD.chat.filter(function(x){return x.k!==m.k}).map(function(x){return'<button type="button" class="ac-sr" data-k="'+x.k+'"><strong>'+esc(x.n)+newTag(x)+'</strong><em>'+esc(priceTxt('chat',x))+'</em></button>'}).join('');
     [].forEach.call(sw.querySelectorAll('.ac-sr'),function(b){b.onclick=function(){pick(b.dataset.k)}})}
   function openSw(o){sw.hidden=!o;swb.setAttribute('aria-expanded',String(o));if(o){drawSw();sw.scrollTop=0}}
   swb.onclick=function(){openSw(sw.hidden)};
@@ -180,17 +184,17 @@ function workChat(m0){
     m=BYK.chat[k];ls('af.m.chat',k);try{history.replaceState(null,'',location.pathname+'?m='+encodeURIComponent(k)+(mem>=100?'&full=1':''))}catch(e){}
     paintCard('chat',m);paintSend();openSw(false);
     var s=document.createElement('div');s.className='ac-sep';s.textContent='Дальше отвечает '+m.n;th.appendChild(s);end()}
-  $('newchat').onclick=function(){th.innerHTML='';mem=MEM_START;chips.hidden=false;$('str').classList.remove('is-min');paintMeters();paintSend()};
+  $('newchat').onclick=function(){th.innerHTML='';mem=MEM_START;$('str').classList.remove('is-min');paintMeters();paintSend()};
   form.addEventListener('submit',function(e){
     e.preventDefault();var txt=(fld.value||'').trim();if(!txt)return;
-    fld.value='';chips.hidden=true;collapse();openSw(false);
+    fld.value='';collapse();openSw(false);
     addUser(txt);
     var w=document.createElement('div');w.className='ac-m';
     w.innerHTML='<span class="ac-av" aria-hidden="true">'+esc(m.n.charAt(0).toUpperCase())+'</span><div class="ac-b ac-wait" aria-label="Модель отвечает">…</div>';
     th.appendChild(w);end();
     var cur_=m;
     setTimeout(function(){
-      var key=/сценар/i.test(txt)?'script':(/поздрав/i.test(txt)?'greet':null);
+      var key=/письм/i.test(txt)?'letter':(/пост|план/i.test(txt)?'plan':null);
       var a=key?ANS_W[key]:['Здесь появится ответ выбранной модели на этот вопрос.'];
       var b=w.querySelector('.ac-b');b.classList.remove('ac-wait');b.removeAttribute('aria-label');b.innerHTML=p1(a);
       var c=document.createElement('div');c.className='ac-cost';
@@ -225,19 +229,20 @@ function workVideo(m){
   }
   function draw(){drawOpts();$('ctaprice').textContent=videoPrice(m,st)}
   draw();
-  exVideos();
 }
 function exVideos(){
-  [].forEach.call(document.querySelectorAll('source[data-clip]'),function(s){s.src=s.dataset.clip;s.parentNode.load()});
-  var row=$('exr');if(!row)return;
-  var reduce=matchMedia('(prefers-reduced-motion: reduce)'),vs=[].slice.call(row.querySelectorAll('video')),ft=document.querySelector('footer');
-  function sync(){var r=row.getBoundingClientRect(),top=ft?ft.getBoundingClientRect().top:innerHeight,n=0;
-    vs.forEach(function(v){var b=v.parentNode.getBoundingClientRect();
-      var vis=Math.min(b.bottom,top)-Math.max(b.top,0),full=!reduce.matches&&!document.hidden&&b.left>=r.left-1&&b.right<=r.right+1&&vis>=b.height*.6;
+  var row=$('exr');if(!row)return function(){};
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)'),vs=[].slice.call(row.querySelectorAll('video'));
+  function sync(){
+    if(!row.offsetParent){vs.forEach(function(v){v.pause()});return}
+    var r=row.getBoundingClientRect(),n=0;
+    vs.forEach(function(v){if(!v.getAttribute('src')){v.src=v.dataset.src;v.load()}
+      var b=v.parentNode.getBoundingClientRect();
+      var vis=Math.min(b.bottom,innerHeight)-Math.max(b.top,0),full=!reduce.matches&&!document.hidden&&b.left>=r.left-1&&b.right<=r.right+1&&vis>=b.height*.6;
       if(full&&n<3){n++;v.play().catch(function(){})}else{v.pause()}})}
   var raf=0;function go(){cancelAnimationFrame(raf);raf=requestAnimationFrame(sync)}
-  row.addEventListener('scroll',go,{passive:true});addEventListener('scroll',go,{passive:true});addEventListener('resize',go);addEventListener('load',go);document.addEventListener('visibilitychange',go);
-  vs.forEach(function(v){v.pause()});go();
+  row.addEventListener('scroll',go,{passive:true});addEventListener('scroll',go,{passive:true});addEventListener('resize',go);document.addEventListener('visibilitychange',go);
+  vs.forEach(function(v){v.pause()});return go;
 }
 function workSound(m){
   var v=m.mode==='voice',fld=$('fld'),cnt=$('cnt');
@@ -248,6 +253,7 @@ function workSound(m){
   function upd(){$('ctaprice').textContent=price();count()}
   fld.addEventListener('input',upd);upd();
   var es=$('exs'),ev=$('exv');if(v){es.parentNode.removeChild(es);ev.hidden=false}else{ev.parentNode.removeChild(ev)}
+  $('abexn').textContent='Примеры · '+document.querySelectorAll('#abexp .ex-sc').length;bindTg($('abexb'));
   /* примеры: звук только по нажатию, источник один, уход с экрана — тишина */
   var live=null;
   function exUI(c,on){var b=c.querySelector('.ex-cv');b.setAttribute('aria-pressed',String(on));b.setAttribute('aria-label',(on?'Пауза: ':'Слушать: ')+c.dataset.t);c.classList.toggle('on',on)}
@@ -264,6 +270,62 @@ function workSound(m){
     c.querySelector('.ex-cv').onclick=function(){exToggle(c)}});
   document.addEventListener('visibilitychange',function(){if(document.hidden)exStop()});addEventListener('pagehide',exStop);
 }
+/* ---------- форма по смыслу модели, «Примеры» и «О модели» (ab-) ---------- */
+var CHEV2='<i aria-hidden="true">'+CHEV+'</i>';
+function tgHtml(id,pid,label){return'<button type="button" class="ab-tg" id="'+id+'" aria-expanded="false" aria-controls="'+pid+'"><strong><span>'+label+'</span></strong>'+CHEV2+'</button>'}
+function bindTg(b,onOpen){var p=$(b.getAttribute('aria-controls'));b.onclick=function(){var o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',String(o));p.hidden=!o;if(onOpen)onOpen(o)}}
+function exSet(kind,m){var E=D.examples||{};return E[m.k]||E['*'+kind]||null}
+function buildEx(kind,m,hasField){
+  var sec=$('abex');if(!sec)return;
+  var list=exSet(kind,m);if(!list||!list.length){sec.parentNode.removeChild(sec);return}
+  var vid=kind==='video';
+  sec.innerHTML=tgHtml('abexb','abexp','Примеры · '+list.length)+'<div class="ab-pn" id="abexp" hidden><div class="ex-row" id="exr" tabindex="0">'+list.map(function(e){
+    var cap='<span class="ex-cap">'+esc(e.t)+'</span>',alt=esc(e.d||e.t),
+      inner=vid?'<video muted playsinline loop preload="none" poster="'+e.poster+'" data-src="'+e.clip+'" aria-label="'+alt+'" style="object-position:'+(e.pos||'50% 30%')+'"></video>'
+        :'<img src="'+e.img+'" alt="'+alt+'" loading="lazy" style="object-position:'+(e.pos||'50% 35%')+'">',
+      cls='ex-c'+(vid?' ex-v':'');
+    return(hasField&&e.d)?'<button type="button" class="'+cls+' ab-pick" data-d="'+esc(e.d)+'" aria-label="Взять описание: '+esc(e.t)+'">'+inner+cap+'</button>':'<figure class="'+cls+'">'+inner+cap+'</figure>'}).join('')+'</div></div>';
+  var go=vid?exVideos():null;
+  bindTg($('abexb'),function(){if(go)go()});
+  if(hasField)[].forEach.call(sec.querySelectorAll('.ab-pick'),function(b){b.onclick=function(){var f=$('fld');if(!f)return;f.value=b.dataset.d;f.dispatchEvent(new Event('input',{bubbles:true}));if(f.scrollIntoView)f.scrollIntoView({block:'nearest',behavior:'smooth'})}})}
+function buildAbout(kind,m,inp){
+  var sec=$('aboutsec');if(!sec)return;
+  var a=AB(m.k),f=(D.facts||{})[m.k]||{},rows=[],more=(a&&!a.draft&&a.more&&a.more.length)?a.more:[];
+  rows.push(['На входе',{'text':'Текст','photo':'Фото','text+photo':'Текст и фото'}[inp]||'Текст']);
+  if(kind==='photo'){
+    var fm=[].map.call(document.querySelectorAll('#abfmt .opt'),function(b){return b.textContent.trim()});
+    if(fm.length)rows.push(['Формат',fm.join(', ')]);
+    if(f.res)rows.push(['Размер','до '+f.res]);
+    if(f.n)rows.push(['За раз','до '+f.n+' картинок'])}
+  if(kind==='video'){
+    var ds=m.ds||[],qs=m.qs||[],ms=ds.length&&typeof ds[0]==='string';
+    if(ds.length)rows.push([ms?'Режим':'Длина',ms?ds.join(', '):ds.join(' / ')+' с']);
+    if(qs.length)rows.push(['Качество',qs.join(', ')]);
+    if(f.snd)rows.push(['Звук','есть'])}
+  if(kind==='sound')rows.push(['Режим',m.mode==='song'?'Песня целиком':'Озвучка текста']);
+  sec.innerHTML=tgHtml('aboutb','aboutp','О модели')+'<div class="ab-pn" id="aboutp" hidden>'+
+    (more.length?'<ul class="ab-more">'+more.map(function(t){return'<li>'+esc(t)+'</li>'}).join('')+'</ul>':'')+
+    '<dl class="ab-par">'+rows.map(function(r){return'<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd>'}).join('')+'</dl></div>';
+  bindTg($('aboutb'))}
+function abForm(kind,m){
+  if(kind==='chat')return;
+  var inp=inputOf(kind,m),add=document.querySelector('.ab-add'),cta=$('cta'),need=inp==='photo';
+  if(inp==='text'&&add){add.parentNode.removeChild(add);add=null}
+  if(need){
+    ['fld','cnt'].forEach(function(id){var e=$(id);if(e)e.parentNode.removeChild(e)});
+    var fm=$('abfmt');if(fm)fm.parentNode.removeChild(fm);
+    if(add&&cta){
+      var PH='<i><i><svg class="stk" viewBox="0 0 38 34"><path class="cut" fill="#f7a4c9" d="m5 6 27-1.4 1.6 22.6L6.4 28.6Z"/><path class="fine" d="M19 10v13M12.5 16.5h13"/></svg></i></i>',
+        EMPTY=PH+'<span class="ab-nm">Добавить своё фото</span><em class="ab-must">Обязательно</em>',
+        DONE='<span class="ab-th"><img src="img/ava-face.jpg" alt=""></span><span class="ab-nm">Фото выбрано</span><em class="ab-must">Убрать</em>',
+        on=false,t=0;
+      add.classList.add('ab-req');add.innerHTML=EMPTY;cta.classList.add('ab-off');cta.setAttribute('aria-disabled','true');
+      add.onclick=function(){on=!on;add.innerHTML=on?DONE:EMPTY;add.classList.toggle('has-ph',on);add.classList.remove('is-hl');
+        cta.classList.toggle('ab-off',!on);cta.setAttribute('aria-disabled',String(!on))};
+      cta.addEventListener('click',function(e){if(on)return;e.preventDefault();e.stopImmediatePropagation();
+        add.classList.add('is-hl');clearTimeout(t);t=setTimeout(function(){add.classList.remove('is-hl')},1600)})}}
+  buildEx(kind,m,!!$('fld'));
+  buildAbout(kind,m,inp)}
 function initWork(){
   var k=param('m'),kind=null;
   KINDS.forEach(function(x){if(!kind&&k&&BYK[x][k])kind=x});
@@ -272,7 +334,7 @@ function initWork(){
   [].forEach.call(document.querySelectorAll('[data-kind]'),function(el){if(el.dataset.kind.split(' ').indexOf(kind)<0)el.parentNode.removeChild(el)});
   $('back').href=tabHref(kind,'t=1');
   paintCard(kind,m);
-  ({chat:workChat,photo:workPhoto,video:workVideo,sound:workSound})[kind](m);
+  ({chat:workChat,photo:workPhoto,video:workVideo,sound:workSound})[kind](m);abForm(kind,m);
   var cta=$('cta');if(cta)cta.addEventListener('click',collapse);
   window.AF={cur:cur,gridCell:gridCell,videoPrice:videoPrice,BYK:BYK,kind:kind};
 }
@@ -312,12 +374,12 @@ function initCard(){
 
 /* ---------- ответ чата ---------- */
 var ANS={
- greet:{q:'Придумай поздравление маме',a:['Мамочка, с днём рождения!','Спасибо за тепло, заботу и добрые руки. Пусть дома всегда пахнет пирогами, а на душе будет весна.','Здоровья тебе и побольше поводов улыбаться.']},
- script:{q:'Напиши сценарий ролика про кота',a:['Кадр 1. Кот сидит на подоконнике и следит за каплями дождя.','Кадр 2. Лапа тянется к капле на стекле, капля убегает вниз.','Кадр 3. Хозяйка открывает окно, кот запрыгивает ей на плечо. Титр: «Дождь — тоже игра».']}
+ plan:{q:'Составь план поста о запуске нового сервиса',a:['План поста.','1. Заголовок: что нового и зачем это нужно.','2. Три коротких пункта пользы для клиента.','3. Призыв: попробовать уже сегодня.']},
+ letter:{q:'Напиши письмо клиенту о сроках заказа',a:['Здравствуйте!','Подтверждаем получение вашего заказа. Срок выполнения — три рабочих дня, о готовности сообщим отдельно.','С уважением, команда.']}
 };
 function initAnswer(){
-  tabCommon('chat');var sel=cur('chat'),m=BYK.chat[sel],q=(param('q')||ANS.greet.q).trim();
-  var key=/сценар/i.test(q)?'script':(/поздрав/i.test(q)?'greet':null);
+  tabCommon('chat');var sel=cur('chat'),m=BYK.chat[sel],q=(param('q')||ANS.plan.q).trim();
+  var key=/письм/i.test(q)?'letter':(/пост|план/i.test(q)?'plan':null);
   $('selname').textContent=m.n;$('selprice').textContent=priceTxt('chat',m);
   $('bq').textContent=q;
   var a=key?ANS[key].a:['Здесь появится ответ выбранной модели на этот вопрос.'];
