@@ -1,6 +1,8 @@
 /* Нейросети: выбор модели, цена, вкладки. Общий для sk-ai и sk-ai-more. Данные — af-data.js */
 (function(){
 'use strict';
+/* ПРИМЕР, ждёт решения владельца: правила суточного лимита и памяти ещё не названы */
+var FREE_TOTAL=10,FREE_LEFT=7,MEM_START=33,MEM_STEP=9;
 var D=window.AF_DATA,MD=D.models,QK=D.quick;
 var MORE=/sk-ai-more\/[^\/]*$/.test(location.pathname);
 var SOUND=[{k:'suno',n:'Suno AI',mode:'song',pr:'20 кр',u:20,t:'песня'},{k:'eleven',n:'ElevenLabs',mode:'voice',pr:'95 кр / 1000 зн.',u:95,t:'озвучка'}];
@@ -54,53 +56,164 @@ function newTag(m){return m.new?'<span class="af-new">Новинка</span>':''}
 
 /* ---------- общее для вкладок ---------- */
 function tabCommon(kind){ls('af.tab',kind)}
+var KINDS=['chat','photo','video','sound'];
+var WORK='work.html';
+function workHref(k,q){return href('sk-ai',WORK,'m='+encodeURIComponent(k)+(q?'&q='+encodeURIComponent(q):''))}
+var NEWRE=/^Нов/;
+function isNew(m){return !!m.new||NEWRE.test(m.s||'')}
+var FAMS={
+ chat:{chatgpt:'ChatGPT',claude:'Claude',gemini:'Gemini','grok-text':'Grok',deepseek:'DeepSeek',perplexity:'Perplexity','gpt-5-6':'GPT-5.6',qwen:'Qwen',minimax:'MiniMax'},
+ photo:{flux:'FLUX',imagen4:'Imagen',gpt_image:'GPT Image',flux_2:'FLUX 2',flux_3:'FLUX 3',grok_imagine_image:'Grok Imagine',ideogram_v3:'Ideogram',seedream:'Seedream',nano_banana:'Nano Banana',recraft:'Recraft',recraft_tools:'Recraft Tools',minimax_h3:'MiniMax H3'},
+ video:{veo:'VEO',wan:'Wan',runway:'Runway',kling:'Kling','gemini-omni':'Gemini Omni',seedance:'Seedance','grok-imagine':'Grok Imagine',happyhorse:'HappyHorse',pixverse:'Pixverse',luma:'Luma',omnihuman:'OmniHuman'},
+ sound:{}};
+/* число для «самая доступная»: чат — p, фото — число из «от N кр», видео — base */
+function numPrice(kind,m){if(kind==='chat')return m.p;if(kind==='video')return m.base;if(kind==='photo'){var x=/\d+/.exec(m.pr||'');return x?+x[0]:null}return null}
+var CHEAP={};
+['chat','photo','video'].forEach(function(kind){var b=null,bk=null,tie=false;
+  MD[kind].forEach(function(m){var v=numPrice(kind,m);if(v==null)return;if(b===null||v<b){b=v;bk=m.k;tie=false}else if(v===b)tie=true});
+  if(bk&&!tie)CHEAP[kind]=bk});
+/* сильные стороны — только из данных: метка каталога (s), опции таблицы цен (facts, сетка цен), самая низкая цена в виде */
+function strengths(kind,m){
+  var a=[],f=(D.facts||{})[m.k]||{};
+  if(kind==='sound'){a.push(m.mode==='song'?'Песня целиком':'Озвучка текста');return a}
+  if(m.s&&!NEWRE.test(m.s))a.push(m.s);
+  if(CHEAP[kind]===m.k)a.push('Самая доступная');
+  if(kind==='video'){
+    if(f.snd)a.push('Со звуком');
+    var ds=m.ds||[],qs=m.qs||[];
+    if(ds.length&&typeof ds[0]==='string')a.push(ds.join(' / '));
+    else if(ds.length>1)a.push('До '+Math.max.apply(null,ds)+' с');
+    if(qs.length>1)a.push('До '+qs[qs.length-1]);
+  }
+  if(kind==='photo'){
+    if(f.res&&f.res!=='1K')a.push('До '+f.res);
+    if(f.n)a.push('До '+f.n+' картинок');
+  }
+  return a.slice(0,3)}
+function lineOf(kind,m){return strengths(kind,m).slice(0,2).join(' · ')}
+function pictoOf(kind,m,i){
+  if(kind==='sound')return m.mode==='voice'?VOICEIC:SONGIC;
+  return icon(kind,i)}
+var CHEV='<svg viewBox="0 0 14 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 2 5 5 5-5"/></svg>';
 
-function renderPick(kind,m){
-  $('selname').textContent=m.n;$('selprice').textContent=priceTxt(kind,m);
-  var t=$('seltag');if(t){if(m.new){t.hidden=false;t.className='af-new';t.textContent='Новинка'}else{t.hidden=true}}
-  if(kind==='photo'){var im=$('selimg');if(im&&m.img)im.src=m.img}
-}
-/* три строки под карточкой: выбранная меняется местами с прежней, остальные остаются на месте */
-function slotsFor(kind,sel){var q=QK[kind],s=q.slice(1),i=q.indexOf(sel);if(i>0)s[i-1]=q[0];return s}
-function renderRows(kind,sel,slots,onPick){
-  var box=$('rows');if(!box)return;
-  var rows=slots.map(function(k){return BYK[kind][k]});
-  box.innerHTML=rows.map(function(m,i){return'<button type="button" class="row" data-i="'+i+'" data-k="'+m.k+'"><span class="ic">'+icon(kind,i)+'</span><strong>'+esc(m.n)+newTag(m)+'</strong><em>'+esc(priceTxt(kind,m))+'</em></button>'}).join('')+
-   '<a class="row all" id="all" href="'+listHref(kind,'m='+sel)+'"><strong>Все модели · '+MD[kind].length+'</strong>'+ARROW+'</a>';
-  [].forEach.call(box.querySelectorAll('.row[data-k]'),function(b){b.onclick=function(){onPick(+b.dataset.i)}});
-  var sw=$('swap');if(sw&&kind!=='chat')sw.href=listHref(kind,'m='+sel);
-  if(sw&&kind==='chat')sw.href=href('sk-ai-more','change.html','m='+sel);
+/* ---------- шаг 1: список нейросетей вида ---------- */
+function rowHtml(kind,m,i){
+  var ln=lineOf(kind,m),pic=(kind==='photo'&&m.img)?'<span class="th"><img src="'+m.img+'" alt=""></span>':'<span class="ic">'+pictoOf(kind,m,i)+'</span>';
+  return'<a class="ac-r" href="'+workHref(m.k)+'">'+pic+'<span class="tx"><strong>'+esc(m.n)+'</strong>'+(ln?'<small>'+esc(ln)+'</small>':'')+'</span><em>'+esc(priceTxt(kind,m))+'</em></a>'}
+function initCat(kind){
+  var q=param('q'),pm=param('m');
+  if(q||(pm&&BYK[kind][pm])){location.replace(workHref((pm&&BYK[kind][pm])?pm:cur(kind),q));return}
+  var saved=ls('af.tab');
+  if(!location.search&&saved&&saved!==kind&&FILE[saved]){location.replace(tabHref(saved,'t=1'));return}
+  tabCommon(kind);
+  var all=MD[kind],box=$('ac'),h='';
+  var news=all.filter(isNew);
+  if(news.length){
+    h+='<section class="ac-s" aria-label="Новинки"><h2 class="ac-h"><span>Новинки</span></h2><div class="ac-row" id="acnew" tabindex="0">'+
+      news.map(function(m,i){var ln=lineOf(kind,m),
+        cv=(kind==='photo'&&m.img)?'<img src="'+m.img+'" alt="">':pictoOf(kind,m,i);
+        return'<a class="ac-c" href="'+workHref(m.k)+'"><span class="ac-cv c'+(i%3)+'">'+cv+'</span><strong>'+esc(m.n)+'</strong>'+(ln?'<small>'+esc(ln)+'</small>':'')+'<span class="plate">'+esc(priceTxt(kind,m))+'</span></a>'}).join('')+'</div></section>'}
+  var rec=QK[kind].map(function(k){return BYK[kind][k]}).filter(Boolean);
+  h+='<section class="ac-s" aria-label="Советуем"><h2 class="ac-h"><span>Советуем</span></h2><div class="ac-recs">'+rec.map(function(m,i){return rowHtml(kind,m,i)}).join('')+'</div></section>';
+  if(all.length>rec.length){
+    var order=[],groups={};
+    all.forEach(function(m){var f=m.f||'';if(!groups[f]){groups[f]=[];order.push(f)}groups[f].push(m)});
+    var full=order.map(function(f){var fm=FAMS[kind][f];
+      return(fm?'<h3 class="ac-g">'+esc(fm)+'</h3>':'')+groups[f].map(function(m,i){return rowHtml(kind,m,i)}).join('')}).join('');
+    h+='<section class="ac-s" aria-label="Все"><button type="button" class="ac-all" id="acallb" aria-expanded="false" aria-controls="acfull"><strong>Все · '+all.length+'</strong>'+CHEV+'</button><div class="ac-full" id="acfull" hidden>'+full+'<a class="ac-r ac-find" href="'+listHref(kind)+'"><span class="tx"><strong>Искать в списке</strong></span>'+ARROW+'</a></div></section>'}
+  box.innerHTML=h;
+  var b=$('acallb');if(b)b.onclick=function(){var o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',String(o));$('acfull').hidden=!o};
+  var nr=$('acnew');if(nr)halfCut(nr,'.ac-c');
 }
 
-/* ---------- чат ---------- */
-var CHIPS={greet:'Придумай поздравление маме',script:'Напиши сценарий ролика про кота'};
-function initChat(){
-  tabCommon('chat');var sel=cur('chat'),slots=slotsFor('chat',sel),fld=document.querySelector('.field'),cta=$('cta');
-  function link(){var q=(fld.value||'').trim();
-    cta.href=href('sk-ai-more','chat.html','m='+sel+(q?'&q='+encodeURIComponent(q):''))}
-  function draw(){var m=BYK.chat[sel];renderPick('chat',m);renderRows('chat',sel,slots,function(i){var k=slots[i];slots[i]=sel;sel=k;setCur('chat',k);draw()});
-    $('ctaprice').textContent=priceTxt('chat',m);link()}
-  [].forEach.call(document.querySelectorAll('.chip[data-q]'),function(c){c.onclick=function(){fld.value=CHIPS[c.dataset.q];link();fld.focus()}});
-  fld.addEventListener('input',link);draw();
-}
+/* ---------- шаг 2: экран одной модели ---------- */
+var CHIPS={greet:'Поздравление маме',script:'Сценарий ролика'};
+var CHIPQ={greet:'Придумай поздравление маме',script:'Напиши сценарий ролика про кота'};
+var ANS_W={
+ greet:['Мамочка, с днём рождения!','Спасибо за тепло, заботу и добрые руки. Пусть дома всегда пахнет пирогами, а на душе будет весна.','Здоровья тебе и побольше поводов улыбаться.'],
+ script:['Кадр 1. Кот сидит на подоконнике и следит за каплями дождя.','Кадр 2. Лапа тянется к капле на стекле, капля убегает вниз.','Кадр 3. Хозяйка открывает окно, кот запрыгивает ей на плечо. Титр: «Дождь — тоже игра».']};
+var BAL=56;
+function setBal(n){var p=$('purse');p.textContent=n+' кр';p.setAttribute('aria-label','Баланс '+n+' кредитов, пополнить')}
+function collapse(){var s=$('str');if(s)s.classList.add('is-min')}
+function p1(a){return a.map(function(x){return'<p>'+esc(x)+'</p>'}).join('')}
 
-/* ---------- фото ---------- */
-function initPhoto(){
-  tabCommon('photo');var sel=cur('photo'),slots=slotsFor('photo',sel);
-  function draw(){var m=BYK.photo[sel];renderPick('photo',m);renderRows('photo',sel,slots,function(i){var k=slots[i];slots[i]=sel;sel=k;setCur('photo',k);draw()});$('ctaprice').textContent=priceTxt('photo',m)}
+function paintCard(kind,m){
+  document.title='Chappy · '+m.n;$('selname').textContent=m.n;
+  var tags=strengths(kind,m);
+  $('tags').innerHTML=(isNew(m)?'<span class="af-new">Новинка</span>':'')+tags.map(function(t){return'<span class="ac-tag">'+esc(t)+'</span>'}).join('');
+  $('one').textContent=tags.slice(0,2).join(' · ');
+  $('str').classList.toggle('no-tags',!tags.length&&!isNew(m));
+  $('selprice').textContent=priceTxt(kind,m)}
+function workChat(m0){
+  var m=m0,fld=$('fld'),form=$('compose'),th=$('thread'),chips=$('chips'),bal=BAL,sendP=$('ctaprice'),send=$('send');
+  var freeLeft=(param('free')!=null&&!isNaN(+param('free')))?Math.max(0,Math.min(FREE_TOTAL,+param('free'))):FREE_LEFT;
+  var mem=param('full')==='1'?100:MEM_START;
+  function paintSend(){
+    var showP=freeLeft<=0&&m.p!=null;
+    sendP.style.display=showP?'':'none';
+    if(showP)sendP.textContent=m.p+' кр';
+    send.setAttribute('aria-label',showP?'Отправить за '+m.p+' кр':(freeLeft>0?'Отправить бесплатно':'Отправить'))}
+  function paintMeters(){
+    $('freeTxt').textContent='Бесплатно сегодня · '+freeLeft+' из '+FREE_TOTAL;
+    $('freeBar').style.width=(freeLeft/FREE_TOTAL*100)+'%';
+    $('memBar').style.width=mem+'%';
+    var full=mem>=100;
+    $('compose').hidden=full;$('fullbar').hidden=!full;$('meters').classList.toggle('is-full',full);
+    if(full){chips.hidden=true;collapse()}}
+  chips.innerHTML=Object.keys(CHIPS).map(function(k){return'<button type="button" class="chip" data-q="'+k+'">'+esc(CHIPS[k])+'</button>'}).join('');
+  [].forEach.call(chips.querySelectorAll('.chip'),function(c){c.onclick=function(){fld.value=CHIPQ[c.dataset.q];fld.focus()}});
+  function end(){var l=th.lastElementChild;if(l&&l.scrollIntoView)l.scrollIntoView({block:'end',behavior:'smooth'})}
+  function addBot(txt,html,cost){
+    var w=document.createElement('div');w.className='ac-m';
+    w.innerHTML='<span class="ac-av" aria-hidden="true">'+esc(m.n.charAt(0).toUpperCase())+'</span><div class="ac-b">'+html+'</div>';th.appendChild(w);
+    if(cost){var c=document.createElement('div');c.className='ac-cost';c.textContent=cost;th.appendChild(c)}}
+  function addUser(t){var u=document.createElement('div');u.className='ac-u';u.textContent=t;th.appendChild(u)}
+  if(mem>=100){addUser(CHIPQ.greet);addBot('',p1(ANS_W.greet),'бесплатно')}
+  /* смена модели: список открывается здесь же, лента остаётся */
+  var swb=$('swb'),sw=$('sw');
+  function drawSw(){
+    sw.innerHTML=MD.chat.filter(function(x){return x.k!==m.k}).map(function(x){return'<button type="button" class="ac-sr" data-k="'+x.k+'"><strong>'+esc(x.n)+'</strong><em>'+esc(priceTxt('chat',x))+'</em></button>'}).join('');
+    [].forEach.call(sw.querySelectorAll('.ac-sr'),function(b){b.onclick=function(){pick(b.dataset.k)}})}
+  function openSw(o){sw.hidden=!o;swb.setAttribute('aria-expanded',String(o));if(o){drawSw();sw.scrollTop=0}}
+  swb.onclick=function(){openSw(sw.hidden)};
+  function pick(k){
+    m=BYK.chat[k];ls('af.m.chat',k);try{history.replaceState(null,'',location.pathname+'?m='+encodeURIComponent(k)+(mem>=100?'&full=1':''))}catch(e){}
+    paintCard('chat',m);paintSend();openSw(false);
+    var s=document.createElement('div');s.className='ac-sep';s.textContent='Дальше отвечает '+m.n;th.appendChild(s);end()}
+  $('newchat').onclick=function(){th.innerHTML='';mem=MEM_START;chips.hidden=false;$('str').classList.remove('is-min');paintMeters();paintSend()};
+  form.addEventListener('submit',function(e){
+    e.preventDefault();var txt=(fld.value||'').trim();if(!txt)return;
+    fld.value='';chips.hidden=true;collapse();openSw(false);
+    addUser(txt);
+    var w=document.createElement('div');w.className='ac-m';
+    w.innerHTML='<span class="ac-av" aria-hidden="true">'+esc(m.n.charAt(0).toUpperCase())+'</span><div class="ac-b ac-wait" aria-label="Модель отвечает">…</div>';
+    th.appendChild(w);end();
+    var cur_=m;
+    setTimeout(function(){
+      var key=/сценар/i.test(txt)?'script':(/поздрав/i.test(txt)?'greet':null);
+      var a=key?ANS_W[key]:['Здесь появится ответ выбранной модели на этот вопрос.'];
+      var b=w.querySelector('.ac-b');b.classList.remove('ac-wait');b.removeAttribute('aria-label');b.innerHTML=p1(a);
+      var c=document.createElement('div');c.className='ac-cost';
+      if(freeLeft>0){freeLeft--;c.textContent='бесплатно'}
+      else if(cur_.p==null){c.textContent='цена уточняется'}
+      else{bal=Math.max(0,bal-cur_.p);c.textContent='−'+cur_.p+' кр · осталось '+bal+' кр';setBal(bal)}
+      th.appendChild(c);mem=Math.min(100,mem+MEM_STEP);paintMeters();paintSend();end()},520);
+  });
+  paintMeters();paintSend();
+}
+function workPhoto(m){
+  $('fld').placeholder='Опиши картинку';$('fld').setAttribute('aria-label','Опиши картинку');
+  $('ctaprice').textContent=priceTxt('photo',m);
   [].forEach.call(document.querySelectorAll('.opts .opt'),function(b){b.onclick=function(){[].forEach.call(b.parentNode.querySelectorAll('.opt'),function(x){x.setAttribute('aria-pressed',String(x===b))})}});
-  draw();
 }
-
-/* ---------- видео ---------- */
-function initVideo(){
-  tabCommon('video');var sel=cur('video'),st={},slots=slotsFor('video',sel);
-  var od=$('optd'),oq=$('optq');
+function workVideo(m){
+  $('fld').placeholder='Опиши видео';$('fld').setAttribute('aria-label','Опиши видео');
+  var st=videoDefault(m),od=$('optd'),oq=$('optq');
   function lab(v){return typeof v==='number'?v+' с':v}
-  function drawOpts(m){
+  function drawOpts(){
     var dsl=m.ds||[],qsl=m.qs||[];
     if(m.kind==='fixed'){od.hidden=false;od.innerHTML='<span class="af-one">Цена одна</span>';oq.innerHTML='';oq.hidden=true;od.setAttribute('aria-label','Цена');return}
-    function grp(box,list,key,other,mk){
+    function grp(box,list,key){
       box.hidden=list.length===0;if(!list.length){box.innerHTML='';return}
       box.innerHTML=list.map(function(v){
         var d=key==='d'?v:st.d,q=key==='q'?v:st.q,ok=!!gridCell(m,d,q);
@@ -110,58 +223,66 @@ function initVideo(){
     od.setAttribute('aria-label',typeof dsl[0]==='string'?'Режим':'Длина');
     grp(od,dsl,'d');grp(oq,qsl,'q');
   }
-  function draw(){var m=BYK.video[sel];renderPick('video',m);
-    renderRows('video',sel,slots,function(i){var k=slots[i];slots[i]=sel;sel=k;setCur('video',k);st=videoDefault(BYK.video[k]);draw()});
-    drawOpts(m);$('ctaprice').textContent=videoPrice(m,st)}
-  st=videoDefault(BYK.video[sel]);draw();
-  (function(){
-    /* ролики-примеры: ставим src при загрузке, играет только карточка, видимая целиком, не больше трёх */
-    [].forEach.call(document.querySelectorAll('source[data-clip]'),function(s){s.src=s.dataset.clip;s.parentNode.load()});
-    var row=$('exr');if(!row)return;
-    var reduce=matchMedia('(prefers-reduced-motion: reduce)'),vs=[].slice.call(row.querySelectorAll('video')),ft=document.querySelector('footer');
-    function sync(){var r=row.getBoundingClientRect(),top=ft.getBoundingClientRect().top,n=0;
-      vs.forEach(function(v){var b=v.parentNode.getBoundingClientRect();
-        var vis=Math.min(b.bottom,top)-Math.max(b.top,0),full=!reduce.matches&&!document.hidden&&b.left>=r.left-1&&b.right<=r.right+1&&vis>=b.height*.6;
-        if(full&&n<3){n++;v.play().catch(function(){})}else{v.pause()}})}
-    var raf=0;function go(){cancelAnimationFrame(raf);raf=requestAnimationFrame(sync)}
-    row.addEventListener('scroll',go,{passive:true});addEventListener('scroll',go,{passive:true});addEventListener('resize',go);addEventListener('load',go);document.addEventListener('visibilitychange',go);
-    vs.forEach(function(v){v.pause()});go();
-  })();
+  function draw(){drawOpts();$('ctaprice').textContent=videoPrice(m,st)}
+  draw();
+  exVideos();
 }
-
-/* ---------- звук ---------- */
-function initSound(){
-  tabCommon('sound');
-  var sel=cur('sound'),txt={song:'',voice:''},fld=$('fld'),cnt=$('cnt');
-  function mode(){return BYK.sound[sel].mode}
-  function price(){var m=BYK.sound[sel];if(m.mode==='song')return m.pr;var n=fld.value.length;return n?voicePrice(n)+' кр':m.pr}
-  function draw(pop){
-    var m=BYK.sound[sel],v=m.mode==='voice';
-    $('o1').setAttribute('aria-pressed',String(!v));$('o2').setAttribute('aria-pressed',String(v));
-    $('selname').textContent=m.n;$('selprice').textContent=m.pr;$('seltag').textContent=m.t;$('seltag').className='af-for';$('seltag').hidden=false;
-    $('selic').innerHTML=v?VOICEIC:SONGIC;
-    $('swap').href=listHref('sound','m='+sel);
-    fld.placeholder=v?'Что озвучить':'О чём песня';fld.setAttribute('aria-label',fld.placeholder);
-    $('exs').hidden=v;$('exv').hidden=!v;
-    $('ctaprice').textContent=price();count();
-    if(pop){var i=document.querySelector('.pick-now .info');i.classList.remove('af-pop');void i.offsetWidth;i.classList.add('af-pop')}
-  }
-  function count(){var m=BYK.sound[sel];
-    if(m.mode==='song'){cnt.textContent='Песня целиком · 20 кр';return}
+function exVideos(){
+  [].forEach.call(document.querySelectorAll('source[data-clip]'),function(s){s.src=s.dataset.clip;s.parentNode.load()});
+  var row=$('exr');if(!row)return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)'),vs=[].slice.call(row.querySelectorAll('video')),ft=document.querySelector('footer');
+  function sync(){var r=row.getBoundingClientRect(),top=ft?ft.getBoundingClientRect().top:innerHeight,n=0;
+    vs.forEach(function(v){var b=v.parentNode.getBoundingClientRect();
+      var vis=Math.min(b.bottom,top)-Math.max(b.top,0),full=!reduce.matches&&!document.hidden&&b.left>=r.left-1&&b.right<=r.right+1&&vis>=b.height*.6;
+      if(full&&n<3){n++;v.play().catch(function(){})}else{v.pause()}})}
+  var raf=0;function go(){cancelAnimationFrame(raf);raf=requestAnimationFrame(sync)}
+  row.addEventListener('scroll',go,{passive:true});addEventListener('scroll',go,{passive:true});addEventListener('resize',go);addEventListener('load',go);document.addEventListener('visibilitychange',go);
+  vs.forEach(function(v){v.pause()});go();
+}
+function workSound(m){
+  var v=m.mode==='voice',fld=$('fld'),cnt=$('cnt');
+  function price(){if(!v)return m.pr;var n=fld.value.length;return n?voicePrice(n)+' кр':m.pr}
+  function count(){if(!v){cnt.hidden=true;return}
     var n=fld.value.length;cnt.textContent=n?n+' зн. · '+voicePrice(n)+' кр':'1000 зн. · 95 кр'}
-  function setMode(v){if((mode()==='voice')===v)return;txt[mode()]=fld.value;sel=v?'eleven':'suno';setCur('sound',sel);if(typeof exStop==='function')exStop();fld.value=txt[mode()];draw(true)}
-  $('o1').onclick=function(){setMode(false)};$('o2').onclick=function(){setMode(true)};
-  fld.addEventListener('input',function(){$('ctaprice').textContent=price();count()});
-  draw(false);
+  fld.placeholder=v?'Что озвучить':'О чём песня';fld.setAttribute('aria-label',fld.placeholder);
+  function upd(){$('ctaprice').textContent=price();count()}
+  fld.addEventListener('input',upd);upd();
+  var es=$('exs'),ev=$('exv');if(v){es.parentNode.removeChild(es);ev.hidden=false}else{ev.parentNode.removeChild(ev)}
+  /* примеры: звук только по нажатию, источник один, уход с экрана — тишина */
+  var live=null;
+  function exUI(c,on){var b=c.querySelector('.ex-cv');b.setAttribute('aria-pressed',String(on));b.setAttribute('aria-label',(on?'Пауза: ':'Слушать: ')+c.dataset.t);c.classList.toggle('on',on)}
+  function exBar(c,a){var i=c.querySelector('.ex-pg i');i.style.transform='scaleX('+(a&&a.duration>0&&isFinite(a.duration)?Math.min(1,a.currentTime/a.duration):0)+')'}
+  function exStop(){if(!live)return;var a=live.a,c=live.c;live=null;try{a.pause();a.currentTime=0}catch(e){}exUI(c,false);exBar(c,null)}
+  function exToggle(c){var a=c.querySelector('audio');if(!a.getAttribute('src'))return;
+    if(live&&live.a===a&&!a.paused){a.pause();exUI(c,false);return}
+    if(!live||live.a!==a)exStop();
+    live={a:a,c:c};exUI(c,true);var p=a.play();if(p&&p.catch)p.catch(function(){if(live&&live.a===a){live=null;exUI(c,false)}})}
+  [].forEach.call(document.querySelectorAll('.ex-sc'),function(c){var a=c.querySelector('audio');a.src=a.dataset.audio;
+    a.addEventListener('timeupdate',function(){exBar(c,a)});
+    a.addEventListener('ended',function(){if(live&&live.a===a)live=null;a.currentTime=0;exUI(c,false);exBar(c,null)});
+    a.addEventListener('error',function(){if(live&&live.a===a)live=null;exUI(c,false)});
+    c.querySelector('.ex-cv').onclick=function(){exToggle(c)}});
+  document.addEventListener('visibilitychange',function(){if(document.hidden)exStop()});addEventListener('pagehide',exStop);
+}
+function initWork(){
+  var k=param('m'),kind=null;
+  KINDS.forEach(function(x){if(!kind&&k&&BYK[x][k])kind=x});
+  if(!kind){location.replace(tabHref(ls('af.tab')&&FILE[ls('af.tab')]?ls('af.tab'):'chat','t=1'));return}
+  var m=BYK[kind][k];tabCommon(kind);ls('af.m.'+kind,k);
+  [].forEach.call(document.querySelectorAll('[data-kind]'),function(el){if(el.dataset.kind.split(' ').indexOf(kind)<0)el.parentNode.removeChild(el)});
+  $('back').href=tabHref(kind,'t=1');
+  paintCard(kind,m);
+  ({chat:workChat,photo:workPhoto,video:workVideo,sound:workSound})[kind](m);
+  var cta=$('cta');if(cta)cta.addEventListener('click',collapse);
+  window.AF={cur:cur,gridCell:gridCell,videoPrice:videoPrice,BYK:BYK,kind:kind};
 }
 
 /* ---------- списки моделей ---------- */
 function initList(kind){
-  tabCommon(kind);var sel=cur(kind);
+  tabCommon(kind);
   var rows=[].slice.call(document.querySelectorAll('.am-row'));
-  rows.forEach(function(r){var k=r.dataset.k,on=k===sel;r.classList.toggle('on',on);
-    r.href=(on&&kind==='photo')?href('sk-ai-more','model.html','m='+k):tabHref(kind,'m='+k)});
-  var back=document.querySelector('.am-back a');if(back)back.href=tabHref(kind,'m='+sel);
+  rows.forEach(function(r){r.classList.remove('on');r.href=workHref(r.dataset.k)});
+  var back=document.querySelector('.am-back a');if(back)back.href=tabHref(kind,'t=1');
   var fams=document.querySelector('.am-fams');if(fams)halfCut(fams,'.am-fam');
 }
 
@@ -231,10 +352,9 @@ function halfCut(row,sel){
 /* ---------- запуск ---------- */
 var root=document.querySelector('[data-af]');if(!root)return;
 var t=root.getAttribute('data-af').split('-');
-({tab:function(){({chat:initChat,photo:initPhoto,video:initVideo,sound:initSound})[t[1]]();
-    window.AF={cur:cur,gridCell:gridCell,videoPrice:videoPrice,BYK:BYK}},
+({cat:function(){initCat(t[1])},work:initWork,
   list:function(){initList(t[1])},sheet:initSheet,card:initCard,answer:initAnswer})[t[0]]();
-if(t[0]!=='tab')window.AF={cur:cur,BYK:BYK};
+if(t[0]!=='work')window.AF={cur:cur,BYK:BYK};
 })();
 
 /* 19.11.2026: промпт из «Моё» — ?q=текст подставляется в поле ввода */
