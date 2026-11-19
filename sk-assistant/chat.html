@@ -1,488 +1,281 @@
 <!doctype html>
-<html lang="ru" class="sc-root"><head><script src="../tg.js?v=13" defer></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7f5ef"><title>Chappy · Помощник · разговор</title>
-<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="ai.css"><link rel="stylesheet" href="more.css"><link rel="stylesheet" href="screen.css"></head><body><div class="screen">
-<header><span class="brand">Chappy</span><div class="account"><a class="hw-btn hw-gift" href="../sk-profile-bonus/bonus-acc.html" aria-label="Подарки" title="Подарки"><svg class="hw-ico" viewBox="0 0 38 34" fill="none" aria-hidden="true"><g stroke="#29262a" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path fill="#f7a4c9" d="m6.5 15.5 25-.7.9 15.3-26.4 1.3Z"/><path fill="#fffaf0" d="m4 9.6 30-1 .6 6.8-30.4.8Z"/><path d="m19.3 9 .3 22.4"/><path fill="#f5dc73" d="M19.3 8.6C16 3.2 9.8 3.8 10.4 6.6c.4 2 4.6 2.6 8.9 2Z"/><path fill="#f5dc73" d="M19.3 8.6c3.3-5.4 9.5-4.8 9-2-.4 2-4.7 2.600-9 2Z"/></g></svg></a><button type="button" class="hw-btn hw-wheel" data-wheel-open aria-haspopup="dialog" aria-label="Колесо дня: можно крутить" title="Колесо дня"><svg class="hw-burst" viewBox="0 0 46 46" aria-hidden="true"><polygon points="24.1,0.8 28.7,5.3 35.0,4.4 36.8,10.5 42.8,12.9 41.2,19.1 45.2,24.1 40.7,28.7 41.6,35.0 35.5,36.8 33.1,42.8 26.9,41.2 21.9,45.2 17.3,40.7 11.0,41.6 9.2,35.5 3.2,33.1 4.8,26.9 0.8,21.9 5.3,17.3 4.4,11.0 10.5,9.2 12.9,3.2 19.1,4.8" fill="#f5dc73" stroke="#29262a" stroke-width="1.5" stroke-linejoin="round"/></svg><svg class="hw-ico" viewBox="0 0 38 34" fill="none" aria-hidden="true"><g stroke="#29262a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle class="hw-body" cx="19" cy="19.2" r="12.2"/><path class="hw-w" stroke="none" d="M19 19.2L27.5 10.7A12 12 0 0 1 31.0 19.2ZM19 19.2L27.5 27.7A12 12 0 0 1 19.0 31.2ZM19 19.2L10.5 27.7A12 12 0 0 1 7.0 19.2ZM19 19.2L10.5 10.7A12 12 0 0 1 19.0 7.2Z"/><path d="M19 19.2L19.0 7.2M19 19.2L27.5 10.7M19 19.2L31.0 19.2M19 19.2L27.5 27.7M19 19.2L19.0 31.2M19 19.2L10.5 27.7M19 19.2L7.0 19.2M19 19.2L10.5 10.7" stroke-width="1.1"/><circle cx="19" cy="19.2" r="12.2"/><circle class="hw-hub" cx="19" cy="19.2" r="3.3"/><path class="hw-pt" d="M15.6 2.4 22.4 2.2 19.1 8.6Z"/></g></svg><i class="hw-dot"></i></button><span class="purse" aria-label="Баланс 56 кредитов">56 кр</span></div></header>
-<main class="sc-m"><svg class="cf-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><mask id="cf-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="640" height="640"><image href="img/8420d4d8.jpg" width="640" height="640"/></mask><g id="cf-hero"><path vector-effect="non-scaling-stroke" fill="#f5dc73" d="m18.8 1.6 3.8 2.7 5.3-.6 1.7 4.3 4.7 2.1-.4 4.6 2.6 4-3.2 3.6-.4 4.7-5 .9-2.8 3.9-5.2-1.5-4.7 2-3.8-3.3-5.2-.3-1.3-4.5-3.8-2.9 1.5-4.3-1.5-4.5 4-2.8 1.2-4.7 5.2-.3Z"/><g transform="rotate(-7 19 17)"><svg x="8" y="5.2" width="22" height="23" viewBox="86 98 482 465"><rect width="640" height="640" fill="#282529" mask="url(#cf-mask)"/></svg></g></g></defs></svg><div class="cf-bar"><a class="cf-back" href="assistant.html" aria-label="Назад, к помощнику"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2 4 8l6 6"/></svg></a><span class="cf-free"><svg viewBox="0 0 22 20" fill="none" aria-hidden="true"><path class="cut" d="m3 10.5 5 5L19 3.8" stroke-width="2.6"/></svg>Разговор бесплатный</span><div class="sc-new" id="new" hidden><button type="button" id="newb">Заново</button></div></div>
-<div class="sc-feed" id="feed" role="log" aria-live="polite" aria-label="Разговор с помощником"></div>
-<form class="sc-in" id="form" autocomplete="off"><button type="button" class="as-clip" id="clip" aria-label="Приложить фото"><svg viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17.8 10.4-6.6 6.7a2.6 2.6 0 0 1-3.7-3.7l7.4-7.5a4.2 4.2 0 0 1 6 6l-7.8 7.9a5.8 5.8 0 0 1-8.2-8.2l6.3-6.3"/></svg></button><textarea class="field sc-field" id="field" rows="1" maxlength="400" aria-label="Напиши, что сделать" placeholder="Напиши, что сделать" enterkeyhint="send"></textarea><button type="submit" class="as-send" id="send" aria-label="Отправить"><svg viewBox="0 0 28 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h21m-8-8 8 8-8 8"/></svg></button></form></main>
-<footer><nav aria-label="Разделы Chappy" class="newdock dock-stickers">
-  <button type="button" class="dest">
-    <span class="ink" aria-hidden="true"><svg viewBox="0 0 38 34"><path d="m2.5 16.3 13.3-13q1.7-1.5 3.5-.2l14.5 10.5q2 1.4.6 3.4l-2.2 3.2-2.3-1.4.9 10.5-21.7 2.2L7.9 21l-2.2 2-3.3-3.3q-1.6-1.6.1-3.4Z" class="cut" fill="#f7a4c9"/><path d="m15.4 30.5-.8-9.2 7.5-.8.9 9.2" class="fine"/></svg></span>
-    <span class="cap">Главная</span>
-  </button>
-  <button type="button" class="dest">
-    <span class="ink" aria-hidden="true"><svg viewBox="0 0 38 34"><path d="m8 23 10-15 12 17Z" class="fine"/><circle cx="18" cy="8" r="4.7" class="cut" fill="#f6dd80"/><rect x="3.1" y="19.1" width="9" height="9" transform="rotate(-7 7.6 23.6)" rx="1" class="cut" fill="#faf7ed"/><path d="m29 19.5 5.4 7.4-9.4 1Z" class="cut" fill="#faf7ed"/></svg></span>
-    <span class="cap">Нейросети</span>
-  </button>
-  <button type="button" class="dest" aria-current="page">
-    <span class="ink" aria-hidden="true"><svg viewBox="0 0 38 34"><path d="m18.8 1.6 3.8 2.7 5.3-.6 1.7 4.3 4.7 2.1-.4 4.6 2.6 4-3.2 3.6-.4 4.7-5 .9-2.8 3.9-5.2-1.5-4.7 2-3.8-3.3-5.2-.3-1.3-4.5-3.8-2.9 1.5-4.3-1.5-4.5 4-2.8 1.2-4.7 5.2-.3Z" class="cut" fill="#f5dc73"/></svg><svg class="brand-glyph" viewBox="86 98 482 465" aria-hidden="true"><defs><mask id="chappy-mark" maskUnits="userSpaceOnUse" x="0" y="0" width="640" height="640"><image href="img/8420d4d8.jpg" width="640" height="640"/></mask></defs><rect width="640" height="640" fill="currentColor" mask="url(#chappy-mark)"/></svg></span>
-    <span class="cap">Помощник</span>
-  </button>
-  <button type="button" class="dest">
-    <span class="ink" aria-hidden="true"><svg viewBox="0 0 38 34"><path d="m10.7 4 20 2.1 1.3 2.2-2.4 19-20.8-2.1Z" class="cut" fill="#f6dd80"/><path d="m5 8.5 21.3-1.4 1.6 22.2L6.6 31Z" class="cut" fill="#fffaf0"/><path d="m8.5 23.6 5.2-6 4.2 3.8 3.4-5 3.2 5.7" class="fine"/><circle cx="12" cy="14" r="1.4" fill="#29262a"/></svg></span>
-    <span class="cap">Моё</span>
-  </button>
-  <button type="button" class="dest">
-    <span class="ink" aria-hidden="true"><svg viewBox="0 0 38 34"><path d="M6.3 29.2c.9-6.6 4.5-9.8 9.7-10.7-2.8-1.5-4-4.1-3.8-7.5.2-4.3 3.6-7.3 7.9-7 4.4.2 7.2 3.8 7 8-.1 3.3-1.7 5.7-4.3 6.9 4.8 1.1 8.1 4.9 8.3 10.4Z" class="cut" fill="#fffaf0"/><path d="M12.1 28.9c.4-2.8 1.6-4.6 3.8-5.9" class="fine"/></svg></span>
-    <span class="cap">Профиль</span>
-  </button>
-</nav></footer></div>
+<html lang="ru" class="cd-root"><head><script src="../tg.js?v=14" defer></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7f5ef"><title>Chappy · Помощник · разговор</title>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="screen.css"></head><body>
+<div class="cd-app" id="app">
+<svg class="cd-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><mask id="cd-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="640" height="640"><image href="img/8420d4d8.jpg" width="640" height="640"/></mask><symbol id="cd-logo" viewBox="86 98 482 465"><rect width="640" height="640" fill="#282529" mask="url(#cd-mask)"/></symbol></defs></svg>
+<div class="cd-bar" role="banner"><a class="cd-back" href="assistant.html" aria-label="Назад, к помощнику"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2 4 8l6 6"/></svg></a><span class="cd-logo" aria-hidden="true"><svg viewBox="0 0 482 465"><use href="#cd-logo"/></svg></span><div class="cd-who"><b>Chappy</b><small>разговор бесплатный</small></div><button type="button" class="cd-new" id="new" hidden>Заново</button><a class="cd-bal" href="../sk-profile-money/topup.html" aria-label="Баланс 56 кредитов, пополнить"><span id="bal">56 кр</span></a></div>
+<div class="cd-feed" id="feed" role="log" aria-live="polite" aria-label="Разговор с Chappy"></div>
+<form class="cd-in" id="form" autocomplete="off"><button type="button" class="cd-clip" id="clip" aria-label="Приложить фото"><svg viewBox="0 0 26 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17.8 10.4-6.6 6.7a2.6 2.6 0 0 1-3.7-3.7l7.4-7.5a4.2 4.2 0 0 1 6 6l-7.8 7.9a5.8 5.8 0 0 1-8.2-8.2l6.3-6.3"/></svg></button><textarea class="cd-field" id="field" rows="1" maxlength="400" aria-label="Напиши сообщение" placeholder="Напиши, что нужно" enterkeyhint="send"></textarea><button type="submit" class="cd-send" id="send" aria-label="Отправить"><svg viewBox="0 0 28 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h21m-8-8 8 8-8 8"/></svg></button></form>
+</div>
 <script>
 (function(){
 'use strict';
-var KEY='chappy-assistant-chat-v1',MAXM=30,BAL=56;
-var TRU=function(k){return '../sk-home/trend.html?t='+k+'#'+k};
+var KEY='chappy-assistant-dialog-v2',MAXM=40,BAL0=56,PRICE_T=8;
 var $=function(i){return document.getElementById(i)};
-var feed=$('feed'),field=$('field'),form=$('form'),clip=$('clip'),newBox=$('new'),newB=$('newb');
-var app=document.querySelector('.screen');
-document.documentElement.classList.add('sc-root');app.classList.add('sc-app');
-var st={m:[],mem:{}},busy=false,askT=0;
-window.chatGo=function(u){location.href=u};
+var feed=$('feed'),field=$('field'),form=$('form'),clip=$('clip'),newB=$('new'),balEl=$('bal'),app=$('app');
+var st,busy=false,askT=0,newIdx=-1;
 
-/* ---------- хранилище: всё в try/catch ---------- */
-function load(){try{var raw=window.localStorage.getItem(KEY);if(!raw)return;var o=JSON.parse(raw);
- if(o&&Array.isArray(o.m))st.m=o.m.filter(function(x){return x&&(x.r==='u'||x.r==='a')}).slice(-MAXM);
- if(o&&o.mem&&typeof o.mem==='object')st.mem=o.mem}catch(e){}}
-function save(){try{st.m=st.m.slice(-MAXM);window.localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
-function wipe(){try{window.localStorage.removeItem(KEY)}catch(e){}}
+/* ---------- каталог: ключи и цены как в ../sk-home/hf-data.js ---------- */
+var TR=function(k){return '../sk-home/trend.html?t='+k};
+var IC={
+ alive:'<svg viewBox="0 0 44 40" aria-hidden="true"><path d="M5 8h34v26H5Z" class="bg"/><rect x="4" y="6" width="36" height="28" rx="2"/><path d="M18 13l11 7-11 7Z"/><path d="M9 37h26" stroke-dasharray="2 4"/></svg>',
+ text:'<svg viewBox="0 0 44 40" aria-hidden="true"><path d="M9 7h18l8 8v21H9Z" class="bg"/><path d="M8 4h19l8 8v24H8Z"/><path d="M27 4v8h8"/><path d="M13 29h10M13 24h10M13 19h6"/></svg>'};
+var CAT={
+ kino:{n:'Кинопортрет',p:'13 кр',i:'kino.jpg',o:'58% 30%',u:TR('kino'),m:'Фото-тренд'},
+ fashion:{n:'Алое платье',p:'13 кр',i:'fashion.jpg',o:'50% 40%',u:TR('fashion'),m:'Фото-тренд'},
+ star:{n:'Красная дорожка',p:'13 кр',i:'tr-star.jpg',o:'55% 22%',u:TR('star'),m:'Фото-тренд'},
+ gothic:{n:'Тёмная готика',p:'13 кр',i:'tr-gothic.jpg',o:'45% 22%',u:TR('gothic'),m:'Фото-тренд'},
+ avatar:{n:'Деловой портрет',p:'13 кр',i:'tr-avatar.jpg',o:'50% 22%',u:TR('avatar'),m:'Фото-тренд'},
+ neon:{n:'Неоновый дождь',p:'5 кр',i:'neon.jpg',o:'50% 35%',u:TR('neon'),m:'Фото-тренд'},
+ anime:{n:'Закатный ветер',p:'5 кр',i:'tr-anime.jpg',o:'50% 22%',u:TR('anime'),m:'Фото-тренд'},
+ retro:{n:'Жаркое лето',p:'5 кр',i:'tr-retro.jpg',o:'50% 25%',u:TR('retro'),m:'Фото-тренд'},
+ motion:{n:'Оживить фото',p:'от 23 кр',i:'clip-spin-poster.jpg',o:'47% 50%',u:TR('motion'),m:'Видео из фото'},
+ dance:{n:'Ночной танец',p:'от 23 кр',i:'clip-dance-poster.jpg',o:'50% 25%',u:TR('dance'),m:'Видео из фото'},
+ spacecat:{n:'Кот в космосе',p:'от 23 кр',i:'clip-spacecat-poster.jpg',o:'50% 30%',u:TR('spacecat'),m:'Видео из фото'},
+ sport:{n:'На старте',p:'от 23 кр',i:'clip-sport-poster.jpg',o:'50% 25%',u:TR('sport'),m:'Видео из фото'},
+ 'tool-alive':{n:'Оживить фото',p:'от 23 кр',ic:'alive',u:'../sk-home-create/photo.html?t=tool-alive',m:'Инструмент'},
+ song:{n:'Песня в подарок',p:'23 кр',i:'clip-sing-poster.jpg',o:'50% 30%',u:TR('song'),m:'Песня'},
+ love:{n:'Моё место рядом с тобой',p:'23 кр',i:'ava-hero.jpg',o:'50% 22%',u:TR('love'),m:'Песня'},
+ summer:{n:'Этим летом мы вдвоём',p:'23 кр',i:'mira-4.jpg',o:'50% 22%',u:TR('summer'),m:'Песня'},
+ text:{n:'Текст',p:'8 кр',ic:'text',act:'write',m:'GPT-5.6 Luna',b:'Написать'},
+ gtext:{n:'Текст поздравления',p:'8 кр',ic:'text',act:'write',m:'GPT-5.6 Luna',b:'Написать'}};
+function num(p){var m=/(\d+)/.exec(p);return m?+m[1]:0}
 
-/* ---------- каталог: только из прочитанных экранов ---------- */
-var PH=[
- {id:'kino',t:'Кинопортрет',n:13,img:'img/kino.jpg',pos:'58% 30%',kw:/кино/},
- {id:'fashion',t:'Алое платье',n:13,img:'img/fashion.jpg',pos:'50% 40%',kw:/алое|плать/},
- {id:'star',t:'Красная дорожка',n:13,img:'img/tr-star.jpg',pos:'55% 22%',kw:/красн|дорожк/},
- {id:'neon',t:'Неоновый дождь',n:5,img:'img/neon.jpg',pos:'50% 35%',kw:/неон|дожд/},
- {id:'anime',t:'Закатный ветер',n:5,img:'img/tr-anime.jpg',pos:'50% 22%',kw:/закат|аниме|ветер/},
- {id:'avatar',t:'Деловой портрет',n:13,img:'img/tr-avatar.jpg',pos:'50% 22%',kw:/аватар|делов|резюме/,lead:'Для аватарки — «Деловой портрет».'}];
-var OT={
- video:{t:'Оживить фото',m:'Из твоего фото',pr:'от 23 кр',n:23,img:'img/clip-spin-poster.jpg',pos:'47% 50%',url:TRU('motion'),kind:'video'},
- dance:{t:'Ночной танец',m:'Из твоего фото',pr:'от 23 кр',n:23,img:'img/tr-dance.jpg',pos:'50% 25%',url:TRU('dance'),kind:'video'},
- spacecat:{t:'Кот в космосе',m:'Видео',pr:'от 23 кр',n:23,img:'img/clip-spacecat-poster.jpg',pos:'50% 30%',url:TRU('spacecat'),kind:'video'},
- video2:{t:'Оживить фото',m:'Grok Imagine 1.5',pr:'от 16 кр',n:16,img:'img/mira-1.jpg',pos:'50% 18%',url:'../sk-ai/ai-video.html',kind:'video'},
- song:{t:'Песня в подарок',m:'Песня',pr:'23 кр',n:23,img:'img/song.jpg',pos:'50% 30%',url:TRU('song'),kind:'song'},
- voice:{t:'Озвучка текста',m:'ElevenLabs',pr:'95 кр / 1000 зн.',n:95,icon:'voice',url:'../sk-ai-more/ai-sound.html',kind:'voice'}};
-PH.forEach(function(p){OT[p.id]={t:p.t,m:'Фото-тренд',pr:p.n+' кр',n:p.n,img:p.img,pos:p.pos,url:TRU(p.id),kind:'photo'}});
-var TXT_COST='Списано 8 кр · GPT-5.6 Luna';
+/* ---------- наборы решений: главное m + до двух запасных a ---------- */
+var SETS={
+ img:[{w:'Из твоего фото — кадр как из кино.',m:'kino',a:['fashion','gothic']},
+      {w:'Яркий и недорогой — за 5 кр.',m:'neon',a:['anime','retro']},
+      {w:'Тогда в ярком стиле.',m:'star',a:['avatar']}],
+ vid:[{w:'Твоё фото оживёт — волосы, взгляд, дыхание.',m:'motion',a:['dance','spacecat']},
+      {w:'Тогда что-нибудь с движением.',m:'sport',a:['tool-alive']}],
+ sng:[{w:'Песню слушают снова и снова.',m:'song',a:['love','summer']},
+      {w:'Вот песня про двоих.',m:'love',a:['summer','text']},
+      {w:'Или песня про лето.',m:'summer',a:['song','text']}],
+ txt:[{w:'Текст готов за пару секунд.',m:'text',a:['song']},
+      {w:'Или пусть это будет песня.',m:'song',a:['love']}]};
+var KIND_CH=[
+ {x:'Картинка',v:'img',rec:1,re:/картин|фото|портрет|открытк|аватар|изображ/},
+ {x:'Видео',v:'vid',re:/видео|ролик|оживи|клип/},
+ {x:'Песня',v:'sng',re:/песн|трек|музык/},
+ {x:'Текст',v:'txt',re:/текст|напиши|слов/}];
+KIND_CH.forEach(function(c){c.r=function(){return showNext(c.v,'other')}});
+var SC={
+ gift:{q:'Что порадует больше?',ch:[
+  {x:'Песня',v:'song',rec:1,re:/песн|трек|музык/,r:{k:'sng',w:'Песню слушают снова и снова.',m:'song',a:['gtext','motion']}},
+  {x:'Открытка',v:'card',re:/открытк|фото|картин|портрет/,r:{k:'img',w:'Открытка — это портрет в нежном стиле.',m:'anime',a:['retro','neon']}},
+  {x:'Видео',v:'video',re:/видео|ролик|оживи/,r:{k:'vid',w:'Оживим фото — получится видеооткрытка.',m:'motion',a:['dance','spacecat']}}]},
+ alive:{q:'Что с фото должно случиться?',ch:[
+  {x:'Просто ожить',v:'live',rec:1,re:/ожить|оживи|двигат|дыша|просто/,r:{k:'vid',w:'Фото зашевелится, как будто его снимали сейчас.',m:'tool-alive',a:['dance','spacecat']}},
+  {x:'Станцевать',v:'dance',re:/танц|станцу/,r:{k:'vid',w:'Танец из твоего фото.',m:'dance',a:['motion','spacecat']}},
+  {x:'Спеть',v:'sing',re:/спеть|пес|пой|поёт/,r:{k:'sng',w:'Пусть споёт — для этого есть песня.',m:'song',a:['love','summer']}}]},
+ avatar:{q:'Какой стиль?',ch:[
+  {x:'Деловой',v:'biz',rec:1,re:/делов|строг|работ|резюме/,r:{k:'img',w:'Для аватарки он выглядит строго и красиво.',m:'avatar',a:['kino','neon']}},
+  {x:'Кино',v:'cin',re:/кино|фильм/,r:{k:'img',w:'Кадр как из фильма.',m:'kino',a:['avatar','star']}},
+  {x:'Яркий',v:'neon',re:/ярк|неон|необыч/,r:{k:'img',w:'Яркий и недорогой — за 5 кр.',m:'neon',a:['fashion','anime']}}]},
+ clip:{q:'О чём ролик?',ch:[
+  {x:'Обо мне',v:'me',rec:1,re:/обо мне|(^|[^а-я])я([^а-я]|$)|мо[её]/,r:{k:'vid',w:'Ты в главной роли — из твоего фото.',m:'motion',a:['dance','sport']}},
+  {x:'Смешной',v:'fun',re:/смешн|весел|юмор|кот/,r:{k:'vid',w:'Такое смотрят до конца.',m:'spacecat',a:['motion','dance']}},
+  {x:'Красивый',v:'pretty',re:/красив|стильн|модн/,r:{k:'vid',w:'Ночь, свет и движение.',m:'dance',a:['motion','sport']}}]},
+ free:{q:'Что должно получиться?',ch:KIND_CH}};
+var MORE_CH=[
+ {x:'Дешевле',v:'cheap',rec:1,re:/дешев|недорог|эконом/},
+ {x:'Другой вариант',v:'other',re:/друго|ещ[её]|иначе|вариант/},
+ {x:'Совсем другое',v:'reset',re:/совсем|иное/}];
 
-/* ---------- разбор слов ---------- */
+/* ---------- слова ---------- */
 function norm(s){return String(s).toLowerCase().replace(/ё/g,'е')}
-var REC=[
- [/(?<![а-я])мам(е|у|ы|очке|очку)(?![а-я])/,'маме','мама','Дорогая'],[/(?<![а-я])пап(е|у|ы|очке|очку)(?![а-я])/,'папе','папа','Дорогой'],
- [/(?<![а-я])бабушк(е|у|и)(?![а-я])/,'бабушке','бабушка','Дорогая'],[/(?<![а-я])дедушк(е|у|и)(?![а-я])/,'дедушке','дедушка','Дорогой'],
- [/(?<![а-я])сестр(е|у|ы)(?![а-я])/,'сестре','сестра','Дорогая'],[/(?<![а-я])брат(у|а)(?![а-я])/,'брату','брат','Дорогой'],
- [/(?<![а-я])подруг(е|у|и)(?![а-я])/,'подруге','подруга','Дорогая'],[/(?<![а-я])друг(у|а)(?![а-я])/,'другу','друг','Дорогой'],
- [/(?<![а-я])жен(е|у|ы)(?![а-я])/,'жене','жена','Любимая'],[/(?<![а-я])муж(у|а)(?![а-я])/,'мужу','муж','Любимый'],
- [/(?<![а-я])сын(у|а)(?![а-я])/,'сыну','сын','Дорогой'],[/(?<![а-я])(дочке|дочери|дочку|дочь)(?![а-я])/,'дочке','дочка','Дорогая'],
- [/(?<![а-я])учител(ю|я)(?![а-я])/,'учителю','учитель','Уважаемый'],[/(?<![а-я])коллег(е|у|и)(?![а-я])/,'коллеге','коллега','Дорогой']];
-var OCC=[
- [/(день|дня|дню|днем)\s+рожден|днюх/,'на день рождения','С днём рождения!'],
- [/юбиле/,'на юбилей','С юбилеем!'],[/свадьб/,'на свадьбу','С днём свадьбы!'],
- [/годовщин/,'на годовщину','С годовщиной!'],[/8 марта/,'на 8 Марта','С 8 Марта!'],
- [/23 февраля/,'на 23 Февраля','С 23 Февраля!'],[/нов(ый|ым) год/,'на Новый год','С Новым годом!'],
- [/выпускн/,'на выпускной','С выпускным!']];
-function parseWho(n){var o={},i,r;
+var REC=[[/(^|[^а-я])мам(е|у|ы|очк)/,'маме','мама','Дорогая'],[/(^|[^а-я])пап(е|у|ы|очк)/,'папе','папа','Дорогой'],[/(^|[^а-я])бабушк/,'бабушке','бабушка','Дорогая'],[/(^|[^а-я])дедушк/,'дедушке','дедушка','Дорогой'],[/(^|[^а-я])сестр/,'сестре','сестра','Дорогая'],[/(^|[^а-я])брат(у|а|ик)/,'брату','брат','Дорогой'],[/(^|[^а-я])подруг/,'подруге','подруга','Дорогая'],[/(^|[^а-я])друг(у|а)([^а-я]|$)/,'другу','друг','Дорогой'],[/(^|[^а-я])жен(е|у|ы)([^а-я]|$)/,'жене','жена','Любимая'],[/(^|[^а-я])муж(у|а)([^а-я]|$)/,'мужу','муж','Любимый']];
+var OCC=[[/(день|дня|дню|днем)\s+рожден|днюх/,'на день рождения','С днём рождения!'],[/юбиле/,'на юбилей','С юбилеем!'],[/свадьб/,'на свадьбу','С днём свадьбы!'],[/годовщин/,'на годовщину','С годовщиной!'],[/8 марта/,'на 8 Марта','С 8 Марта!'],[/нов(ый|ым) год/,'на Новый год','С Новым годом!']];
+function parseWho(n){var o={},i;
  for(i=0;i<REC.length;i++){if(REC[i][0].test(n)){o.dat=REC[i][1];o.nom=REC[i][2];o.adj=REC[i][3];break}}
  for(i=0;i<OCC.length;i++){if(OCC[i][0].test(n)){o.occ=OCC[i][1];o.hello=OCC[i][2];break}}
  return(o.dat||o.occ)?o:null}
-function whoLabel(w){if(!w)return'';return[w.dat,w.occ].filter(Boolean).join(' ')||w.raw||''}
-function mergeWho(a,b){var o={},k;a=a||{};b=b||{};for(k in a)o[k]=a[k];for(k in b)o[k]=b[k];return o}
-function plural(n){var a=n%10,b=n%100;return(a===1&&b!==11)?'раз':(a>=2&&a<=4&&(b<10||b>=20))?'раза':'раз'}
 function kindOf(n){
- if(/оживи|оживл|видео|ролик|анимир|анимаци|клип/.test(n))return'video';
- if(/озвуч|озвуч|голос|начитай/.test(n))return'voice';
- if(/поздравить|подарить/.test(n)&&!/текст|напиши|слов/.test(n))return'song';
- if(/песн|трек|мелоди|музык/.test(n))return'song';
- if(/поздрав|текст|подпис|(?<![а-я])пост|напиши|слоган|описани/.test(n))return'text';
- if(/фото|картин|портрет|снимок|изображен|стиль|стиле|тренд|аватар/.test(n))return'photo';
+ if(/песн|трек|мелоди|музык/.test(n))return'sng';
+ if(/видео|ролик|оживи|анимац|клип|сторис|рилс/.test(n))return'vid';
+ if(/текст|напиши|пост(?![а-я])|слоган|подпис|описани/.test(n))return'txt';
+ if(/картинк|фото|портрет|открытк|аватар|изображ|стил/.test(n))return'img';
  return''}
-function styleOf(n){for(var i=0;i<PH.length;i++){if(PH[i].kw.test(n))return PH[i]}return null}
-function ph(id){for(var i=0;i<PH.length;i++){if(PH[i].id===id)return PH[i]}return null}
+function scenOf(n){
+ if(/оживи/.test(n))return'alive';
+ if(/аватар/.test(n))return'avatar';
+ if(/ролик|сторис|рилс|reels/.test(n))return'clip';
+ if(kindOf(n))return'';
+ if(/поздрав|подар|рожден|юбиле|свадьб|годовщин/.test(n))return'gift';
+ return'free'}
 
-/* ---------- ответы ---------- */
-var C3=['Поздравить близкого','Оживить старое фото','Сделать аватарку'];
-function offerMsg(id,t,extra){var m=st.mem;m.last=id;m.seen=m.seen||[];if(m.seen.indexOf(id)<0)m.seen.push(id);m.ask=null;
- var o={r:'a',t:t,o:id};if(id==='song'&&m.who)o.w=whoLabel(m.who);if(extra)for(var k in extra)o[k]=extra[k];return o}
-function photoOffer(p,lead){var m=st.mem;m.want='photo';m.style=p.id;
- return offerMsg(p.id,lead||p.lead||(m.photo?'Сделаю «'+p.t+'» из твоего фото.':'Вот подходящий тренд — «'+p.t+'».'))}
-function askStyle(){var m=st.mem;m.want='photo';m.ask='style';return{r:'a',t:'Какой стиль? Вот три любимых.',ch:['Кинопортрет','Неоновый дождь','Алое платье']}}
-function songReply(){var m=st.mem;m.want='song';var w=m.who;
- if(!w||!w.dat){m.ask='who';return{r:'a',t:w&&w.occ?'Для кого песня '+w.occ+'?':'Для кого и какой повод?',ch:['Маме на день рождения','Подруге на свадьбу','Папе на юбилей']}}
- var d=w.dat||'';return offerMsg('song',d?d.charAt(0).toUpperCase()+d.slice(1)+' — песню: её можно слушать снова и снова.':'Песню — её можно слушать снова и снова.')}
-function videoReply(){var m=st.mem;m.want='video';
- if(!m.photo){m.ask='photo';return{r:'a',t:'Пришли фото — оживлю его. Скрепка слева.',ch:[{a:'clip',x:'Приложить фото'}]}}
- return offerMsg('video','Оживим твоё фото.')}
-function voiceReply(){var m=st.mem;m.want='voice';return offerMsg('voice',m.last==='text'?'Озвучу текст выше.':'Озвучу любой текст голосом.')}
-var CAP=['Свет, кадр и хорошее настроение.','Иногда достаточно одного кадра.','Сегодня — моё.'];
-function textAsk(n,more){var m=st.mem;m.want='text';m.last='text';m.tq=n;m.tmore=!!more;
- return{r:'a',t:more?'Ещё вариант — снова 8 кр.':'Напишу — текст стоит 8 кр.',ch:[{a:'write',x:'Написать · 8 кр'}]}}
-function textReply(n,more){var m=st.mem;m.want='text';m.tq=n;m.tv=more?((m.tv||0)+1)%3:(m.tv||0);var v=m.tv,w=m.who,p=[],cp;
- var topic=(n.match(/(?<![а-я])про\s+([^.,!?]{2,30})/)||[])[1];
- if(/подпис/.test(n)||(more&&m.tk==='cap')){m.tk='cap';p=[CAP[v]]}
- else if(/(?<![а-я])пост/.test(n)||(more&&m.tk==='post')){m.tk='post';if(topic)m.topic=topic.trim();var tp=m.topic;
-  p=['Расскажем '+(tp?'про '+tp:'о главном')+'.',['Заходи сегодня — будем рады тебе.','Загляни к нам — всё самое интересное уже здесь.','Мы ждём тебя. Приходи и расскажи друзьям.'][v]]}
- else{m.tk='greet';var h=w&&w.hello?w.hello:'Поздравляю!';
-  p=[(w&&w.nom?w.adj+' '+w.nom+'! ':'')+h,['Желаю, чтобы рядом были те, кто любит.','Пусть день будет тёплым, а мечты — ближе.','Тебе — тепло, а нам — повод собраться.'][v],['Спасибо, что ты есть.','Береги себя и улыбайся.','Пусть всё задуманное сбудется.'][v]]}
- cp=p.join('\n');m.last='text';m.ask=null;
- return{r:'a',t:p.join('\n'),cp:cp,cost:TXT_COST,post:1,ch:[{a:'again',x:'Ещё вариант · 8 кр'},'Озвучь это']}}
-function priceReply(k){var m=st.mem,l=m.last,o=l&&OT[l],kd=k||(o&&o.kind)||(l==='text'?'text':m.want);
- var t;
- if(k&&o&&o.kind!==k&&!(k==='text'&&l==='text'))o=null;
- if(o){t=o.t+' — '+o.pr+'.';
-  if(o.kind==='photo')t+=o.n>5?' Дешевле — тренды за 5 кр.':' Это самые доступные тренды.';
-  else if(l==='video'||l==='dance')t+=' Дешевле — Grok Imagine 1.5, от 16 кр.';
-  else if(l==='voice')t='Озвучка — 95 кр за 1000 знаков.'}
- else if(kd==='text'||(!k&&l==='text'))t='Текст — 8 кр, GPT-5.6 Luna.';
- else if(kd==='photo')t='Фото-тренды стоят от 5 до 13 кр.';
- else if(kd==='video')t='Оживить фото — от 23 кр, дешевле — от 16 кр.';
- else if(kd==='song')t='Песня в подарок — 23 кр.';
- else if(kd==='voice')t='Озвучка — 95 кр за 1000 знаков.';
- else return{r:'a',t:'Фото от 5 кр, песня 23 кр, видео от 23 кр. Что нужно?',ch:C3};
- return{r:'a',t:t}}
-function creditsReply(){var m=st.mem,o=m.last&&OT[m.last],t=BAL+' кр, как в шапке.';
- if(o){if(o.n>BAL)t+=m.last==='voice'?' На озвучку 1000 знаков не хватит: нужно 95 кр.':' На «'+o.t+'» не хватит: нужно '+o.pr+'.';else{var q=Math.floor(BAL/o.n);t+=' На «'+o.t+'» хватит '+q+' '+plural(q)+'.'}}
- return{r:'a',t:t}}
-function relReply(n,cheap){var m=st.mem,l=m.last,o=l&&OT[l],i,c,seen=m.seen||[];
- if(l==='text')return cheap?{r:'a',t:'Текст стоит 8 кр, дешевле нет.'}:textAsk(m.tq||n||'',true);
- if(!o){return{r:'a',t:'Дешевле чего? Скажи, что нужно.',ch:C3}}
- if(o.kind==='photo'){var cur=ph(l);
-  if(cheap){c=PH.filter(function(p){return p.n<cur.n&&seen.indexOf(p.id)<0})[0]||PH.filter(function(p){return p.n<cur.n&&p.id!==l})[0];
-   if(c)return photoOffer(c,'Есть дешевле — за '+c.n+' кр.');
-   c=PH.filter(function(p){return p.n===cur.n&&seen.indexOf(p.id)<0})[0];
-   if(c)return photoOffer(c,'Дешевле нет, 5 кр — минимум. Вот другой за 5 кр.');
-   return{r:'a',t:'Дешевле нет: 5 кр — минимум для фото.',ch:['Другой стиль']}}
-  c=PH.filter(function(p){return seen.indexOf(p.id)<0})[0];
-  if(!c){m.seen=[l];c=PH.filter(function(p){return p.id!==l})[0]}
-  return photoOffer(c,'Вот другой вариант.')}
- if(o.kind==='video'){
-  if(l==='video'||l==='dance'){return offerMsg('video2',cheap?'Дешевле — Grok Imagine 1.5, от 16 кр.':'Другая модель — Grok Imagine 1.5.')}
-  return cheap?{r:'a',t:'Дешевле нет: от 16 кр — самый доступный вариант.'}:offerMsg('video','Вернёмся к первому — от 23 кр.')}
- if(o.kind==='song')return{r:'a',t:'Песня в подарок стоит 23 кр, цена одна. Могу сменить адресата или повод.'};
- return{r:'a',t:'Озвучка — 95 кр за 1000 знаков, другой цены нет.'}}
+/* ---------- ход разговора: что отвечает Chappy ---------- */
+function plainCh(list){return list.map(function(c){return{x:c.x,v:c.v,rec:c.rec?1:0}})}
+function ask(sid,q,ch){st.q++;st.pend={s:sid};return{r:'c',t:q,ch:plainCh(ch)}}
+function setMsg(k,s,w){st.kind=k;st.cur=s.m;if(st.seen.indexOf(s.m)<0)st.seen.push(s.m);return{r:'c',t:w||s.w,set:{m:s.m,a:s.a.slice(0,2)},more:1}}
+function nextSet(k,mode){var arr=SETS[k]||SETS.img,cur=st.cur,un=arr.filter(function(s){return st.seen.indexOf(s.m)<0}),w,s;
+ if(!un.length){st.seen=cur?[cur]:[];un=arr.filter(function(s){return s.m!==cur})}
+ if(!un.length)un=arr;
+ s=un[0];
+ if(mode==='cheap'){un=un.slice().sort(function(a,b){return num(CAT[a.m].p)-num(CAT[b.m].p)});s=un[0];
+  if(cur&&num(CAT[s.m].p)>=num(CAT[cur].p))w='Дешевле здесь нет — вот другое.'}
+ return{k:k,s:s,w:w}}
+function showNext(k,mode){var n=nextSet(k,mode);return setMsg(n.k,n.s,n.w)}
+function matchChip(list,n){for(var i=0;i<list.length;i++){if(list[i].re&&list[i].re.test(n))return list[i]}return null}
+function first(txt){var n=norm(txt),w=parseWho(n),sid;
+ if(w)st.who=w;
+ sid=scenOf(n);
+ if(sid){st.scen=sid;return ask(sid,SC[sid].q,SC[sid].ch)}
+ st.scen='direct';return showNext(kindOf(n),'other')}
+function answerQ(txt,val){var p=st.pend,sc=SC[p.s],n=norm(txt),c=null,i,own,m,w;st.pend=null;
+ for(i=0;i<sc.ch.length;i++){if(val&&sc.ch[i].v===val){c=sc.ch[i];break}}
+ own=!c&&!val&&!!txt;
+ if(!c)c=matchChip(sc.ch,n);
+ if(!c&&txt){var kk=kindOf(n);if(kk){c=KIND_CH.filter(function(x){return x.v===kk})[0];if(p.s!=='free'){m=showNext(kk,'other');m.t='Понятно. '+m.t;return m}}}
+ if(!c){c=sc.ch[0]}
+ m=c.r&&c.r.m?(st.cur=c.r.m,setMsg(c.r.k,c.r)):c.r();
+ if(own)m.t='Понятно. '+m.t;
+ w=parseWho(n);if(w)st.who=w;
+ return m}
+function moreQ(){
+ if(st.q>=3){var m=showNext(st.kind||'img','other');m.t='Вот ещё. Напиши словами, что нужно — подберу точнее.';return m}
+ st.pend={s:'more'};st.q++;return{r:'c',t:'Чего не хватило?',ch:plainCh(MORE_CH)}}
+function answerMore(txt,val){var n=norm(txt),c=null,i,kk,m;st.pend=null;
+ for(i=0;i<MORE_CH.length;i++){if(val&&MORE_CH[i].v===val)c=MORE_CH[i]}
+ if(!c&&/совсем/.test(n))c=MORE_CH[2];
+ if(!c)c=matchChip(MORE_CH,n);
+ kk=!val&&txt?kindOf(n):'';
+ if(kk&&kk!==st.kind){m=showNext(kk,'other');m.t='Понятно. '+m.t;return m}
+ if(!c)c=MORE_CH[1];
+ if(c.v==='reset'){if(st.q<3)return ask('free','Тогда что должно получиться?',KIND_CH);return showNext(st.kind||'img','other')}
+ return showNext(st.kind||'img',c.v)}
+function followUp(txt){var n=norm(txt),kk=kindOf(n),w=parseWho(n),m;if(w)st.who=w;
+ if(kk&&kk!==st.kind)m=showNext(kk,'other');
+ else m=showNext(st.kind||'img',/дешев|недорог/.test(n)?'cheap':'other');
+ m.t='Понятно. '+m.t;return m}
+function answer(txt,val,photo){var p=st.pend;
+ if(photo){if(p&&p.s!=='more')return answerQ('',null);if(!st.scen)st.scen='free';if(st.q>=3){var pm=showNext(st.kind||'img','other');pm.t='Фото на месте. '+pm.t;return pm}return ask('free','Фото на месте. Что с ним сделать?',KIND_CH)}
+ if(p){if(p.s==='more')return answerMore(txt,val);return answerQ(txt,val)}
+ if(!st.scen)return first(txt);
+ return followUp(txt)}
+function writeText(v){var w=st.who,h=w&&w.hello?w.hello:'Поздравляю!',a=[];v=v%3;
+ a.push(w&&w.nom?w.adj+' '+w.nom+'! '+h:h);
+ a.push(['Желаю, чтобы рядом были те, кто любит.','Пусть день будет тёплым, а мечты — ближе.','Тебе — тепло, а нам — повод собраться.'][v]);
+ a.push(['Спасибо, что ты есть.','Береги себя и улыбайся.','Пусть всё задуманное сбудется.'][v]);return a}
 
-function answer(raw,attach){var m=st.mem,n=norm(raw).replace(/\s+/g,' ').trim(),k,s,w,words;
- if(attach){m.photo=true;
-  if(m.want==='video'||m.ask==='photo')return videoReply();
-  if(m.want==='photo'){s=ph(m.style);return s?photoOffer(s,'Фото на месте. Сделаем «'+s.t+'».'):askStyle()}
-  return{r:'a',t:'Фото на месте. Что с ним сделать?',ch:['Оживи моё фото','Фото в стиле кино']}}
- words=n.replace(/[^а-яa-z0-9 ]/g,'').split(' ').filter(Boolean);
- k=kindOf(n);
- if(/сколько у меня|баланс|кредит|сколько кр|сколько осталось/.test(n))return creditsReply();
- if(/сколько стоит|стоит|цена|цену|цены|почем|прайс|сколько это|сколько будет|сколько надо/.test(n))return priceReply(k);
- if(/что (ты )?(умеешь|можешь)|чем (ты )?(можешь )?помочь|что (ты )?делаешь|возможност|^помощь$|^помоги$/.test(n))
-  return{r:'a',t:'Делаю фото, видео, песни, озвучку и тексты.\nЧто нужно?',ch:C3};
- if(/^(привет|здравств|добрый|доброе|хай|салют|hello|hi)/.test(n))
-  return{r:'a',t:m.last&&OT[m.last]?'Привет! Продолжим с «'+OT[m.last].t+'» или начнём новое?':'Привет! Что сделаем?',ch:m.last?null:C3};
- if(words.length&&words.length<=3&&/^(да|давай|запускай|запусти|поехали|ок|окей|хочу|согласен|согласна|создавай|открывай|го)$/.test(words[0])&&!k){
-  var o=m.last&&OT[m.last];
-  if(o)return{r:'a',t:'Открываю',go:o.url};
-  if(m.last==='text')return{r:'a',t:'Текст уже выше — нажми «Скопировать».'};
-  return{r:'a',t:'Что именно сделать?',ch:C3}}
- if(/спасибо|благодар|супер|класс|отлично/.test(n)&&!k)return{r:'a',t:'Пожалуйста! Нужно ещё что-нибудь?'};
- if(/^(нет|не надо|не нужно|не хочу|отмена|стоп)(?![а-я])/.test(n))return{r:'a',t:'Хорошо. Скажи, если что-то понадобится.'};
- var cheap=/дешев|эконом/.test(n),other=/друго|(?<![а-я])еще(?![а-я])|иначе|вариант|смени|поменяй|не то/.test(n);
- if((cheap||other)&&(!k||(m.last&&OT[m.last]&&OT[m.last].kind===k)||(k==='text'&&m.last==='text')))return relReply(n,cheap);
- if(!k&&m.ask==='style'){s=styleOf(n);if(s)return photoOffer(s)}
- if(m.ask==='who'&&!k){w=parseWho(n);
-  if(w)m.who=mergeWho(m.who,w);else if(n.length<=40&&words.length<=6&&!/\?/.test(n))m.who=mergeWho(m.who,{dat:raw.trim().replace(/^для\s+/i,''),raw:raw.trim()});
-  if(w||m.who&&m.who.dat)return songReply()}
- w=parseWho(n);if(w&&(k==='song'||k==='text'||(!k&&(m.want==='song'||m.want==='text'))))m.who=mergeWho(m.who,w);
- if(k==='voice')return voiceReply();
- if(/ролик|сторис|рилс|reels/.test(n)&&!/оживи|оживл/.test(n)){m.want='video';return offerMsg('dance','Для соцсетей — «Ночной танец» из твоего фото.')}
- if(k==='video')return videoReply();
- if(k==='song')return songReply();
- if(k==='text')return textAsk(n,false);
- s=styleOf(n);
- if(k==='photo'||s){if(s)return photoOffer(s);return askStyle()}
- if(!k&&w&&m.want==='song')return songReply();
- if(!k&&w&&m.want==='text')return textAsk(n,false);
- return{r:'a',t:'Не понял. Что сделать?',ch:C3}}
+/* ---------- состояние ---------- */
+function fresh(){return{m:[{r:'c',t:'Привет! Что хочешь сделать?'}],q:0,seen:[],kind:'',cur:'',scen:'',pend:null,who:null,bal:BAL0,tv:0,pc:0}}
+function load(){try{var raw=window.localStorage.getItem(KEY);if(!raw)return null;var o=JSON.parse(raw);if(o&&Array.isArray(o.m)&&o.m.length&&typeof o.bal==='number')return o}catch(e){}return null}
+function save(){try{if(st.m.length>MAXM)st.m=st.m.slice(-MAXM);window.localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+function wipe(){try{window.localStorage.removeItem(KEY)}catch(e){}}
 
-/* ---------- вывод ---------- */
-var STK={
- voice:'<svg class="as-stk" viewBox="0 0 38 34" aria-hidden="true"><path class="cut" fill="#fffaf0" d="M5 8.4 33 6.6l.8 19.8-28 1.6Z"/><path class="fine" d="M10 17v3M14.5 12v13M19 15v7M23.5 10v16M28 14v8"/></svg>',
- spark:'<svg class="as-stk" viewBox="0 0 38 34" aria-hidden="true"><path class="cut" fill="#f5dc73" d="m19 2.5 4 9.3 9.8 3.2-9.6 3.9L19 31.5l-4.4-12.4L5.4 15l9.7-3.3Z"/><circle cx="29.6" cy="6.2" r="2.6" class="cut" fill="#f7a4c9"/></svg>',
- photo:'<svg class="as-stk" viewBox="0 0 38 34" aria-hidden="true"><path class="cut" fill="#fffaf0" d="m5 7.5 21.5-1.6 1.4 20.8L6.4 28Z"/><path class="fine" d="m8.4 22.6 5-5.8 4 3.6 3.2-4.6 3 5.4"/><circle cx="12" cy="12.4" r="1.4" fill="#29262a"/><path class="cut" fill="#f7a4c9" d="m30 2.5 1.4 4 4 1.4-4 1.4L30 13.3l-1.4-4-4-1.4 4-1.4Z"/></svg>',
- song:'<svg class="as-stk" viewBox="0 0 38 34" aria-hidden="true"><path class="cut" fill="#f7a4c9" d="M13.5 4.8 29 3.2v18.6c.1 3-2.3 5-5.3 5s-4.6-1.6-4.6-3.6 2-3.9 4.9-3.9c.8 0 1.5.1 2 .3V9.6l-8.6 1v14.1c0 2.4-2.3 4.3-5.2 4.3s-4.7-1.6-4.7-3.6 2.1-4 5-4c.8 0 1.6.2 2.1.4Z"/></svg>',
- kino:'<svg class="as-stk" viewBox="0 0 38 34" aria-hidden="true"><path class="cut" fill="#f5dc73" d="m4.6 12.6 28.6-1.2.4 17.6-28.4 1.2Z"/><path class="cut" fill="#fffaf0" d="m4.4 6.4 28.4-3 .8 6.2L5 12.6Z"/><path class="fine" d="m10.4 5.6 3.4 5.4M17.2 5l3.4 5.4M24 4.4l3.4 5.2"/><circle cx="19" cy="21.2" r="4.4" class="cut" fill="#fffaf0"/></svg>'};
-var TIPS=[['Поздравить близкого','song'],['Оживить старое фото','photo'],['Сделать аватарку','spark'],['Ролик для соцсетей','kino']];
-var ALT={song:function(){return[{t:'Текст поздравления',pr:'8 кр',act:'write',q:'поздравление'},{t:OT.video.t,pr:OT.video.pr,url:OT.video.url}]},video:function(){return[{t:OT.dance.t,pr:OT.dance.pr,url:OT.dance.url},{t:OT.spacecat.t,pr:OT.spacecat.pr,url:OT.spacecat.url}]},dance:function(){return[{t:OT.video.t,pr:OT.video.pr,url:OT.video.url},{t:OT.spacecat.t,pr:OT.spacecat.pr,url:OT.spacecat.url}]}};
-PH.forEach(function(p){ALT[p.id]=function(){var o=[];['neon','anime','avatar','kino'].forEach(function(i){if(i!==p.id&&o.length<2){var q=ph(i);o.push({t:q.t,pr:q.n+' кр',url:TRU(q.id)})}});return o}});
-function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
-function bubble(t,cls){var b=el('div',cls||'sc-a');String(t).split('\n').forEach(function(s){b.appendChild(el('p',null,s))});return b}
-function offerEl(id,w){var o=OT[id];if(!o)return null;var s=el('section','sc-offer');s.setAttribute('aria-label','Предложение');
- var top=el('div','sc-top'),th=el('span','sc-th'+(o.icon?' i':''));
- if(o.icon){th.innerHTML=STK[o.icon]}else{var im=el('img');im.src=o.img;im.alt='';im.style.objectPosition=o.pos;th.appendChild(im)}
- var inf=el('div','sc-info');inf.appendChild(el('b',null,o.t));inf.appendChild(el('span','m',id==='song'&&w?w:o.m));inf.appendChild(el('span','plate',o.pr));
- top.appendChild(th);top.appendChild(inf);s.appendChild(top);
- var a=el('a','cf-go','Создать · '+o.pr);a.href=o.url;if(o.pr.length>12)a.style.fontSize='15.5px';s.appendChild(a);return s}
-function altsEl(id){var f=ALT[id];if(!f)return null;var w=el('div','cf-alts');f().forEach(function(x){var b;if(x.act){b=el('button','cf-alt');b.type='button';b.setAttribute('data-act',x.act);b.setAttribute('data-q',x.q)}else{b=el('a','cf-alt');b.href=x.url}b.appendChild(el('b',null,x.t));b.appendChild(el('small',null,x.pr));w.appendChild(b)});return w}
-function avEl(){var a=el('span','cf-av');a.setAttribute('aria-hidden','true');a.innerHTML='<svg viewBox="0 0 38 34"><use href="#cf-hero"/></svg>';return a}
-function markLast(){var l=feed.querySelectorAll('.cf-go');for(var i=0;i<l.length;i++)l[i].classList.toggle('old',i<l.length-1)}
-function chipEls(list){var w=el('div','sc-chips');list.forEach(function(c){var b=el('button','sc-chip',typeof c==='string'?c:c.x);b.type='button';
- if(typeof c==='string')b.setAttribute('data-send',c);else b.setAttribute('data-act',c.a);w.appendChild(b)});return w}
-function copyBtn(text){var b=el('button','sc-copy','Скопировать');b.type='button';b.setAttribute('data-copy',text);return b}
-function renderMsg(x){
- if(x.r==='u'){var u=el('div','sc-u');
-  if(x.ph){var im=el('img');im.src='img/mira-'+(((x.ph-1)%5)+1)+'.jpg';im.alt='Приложенное фото';u.appendChild(im);u.appendChild(el('span',null,'Фото добавлено'))}
-  else u.textContent=x.t;return u}
- var g=el('div','sc-g cf-g'),col=el('div','cf-col');g.appendChild(avEl());g.appendChild(col);
- if(x.t)col.appendChild(bubble(x.t,x.post?'sc-a sc-post':'sc-a'));
- if(x.cost)col.appendChild(el('p','sc-cost',x.cost));
- if(x.o){var oe=offerEl(x.o,x.w);if(oe){col.appendChild(oe);var ae=altsEl(x.o);if(ae)col.appendChild(ae)}}
- if(x.cp||(x.ch&&x.ch.length)){var cw=(x.ch&&x.ch.length)?chipEls(x.ch):el('div','sc-chips');if(x.cp)cw.insertBefore(copyBtn(x.cp),cw.firstChild);col.appendChild(cw)}
- return g}
-var burst,greet,tips;
-function buildHead(){
- burst=el('div','sc-burst');burst.innerHTML='<svg class="b" viewBox="0 0 38 34" fill="none" stroke="#29262a" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path stroke-width="1.55" fill="#f5dc73" d="m18.8 1.6 3.8 2.7 5.3-.6 1.7 4.3 4.7 2.1-.4 4.6 2.6 4-3.2 3.6-.4 4.7-5 .9-2.8 3.9-5.2-1.5-4.7 2-3.8-3.3-5.2-.3-1.3-4.5-3.8-2.9 1.5-4.3-1.5-4.5 4-2.8 1.2-4.7 5.2-.3Z"/></svg><svg class="g" viewBox="86 98 482 465" aria-hidden="true"><defs><mask id="sc-mark" maskUnits="userSpaceOnUse" x="0" y="0" width="640" height="640"><image href="img/8420d4d8.jpg" width="640" height="640"/></mask></defs><rect width="640" height="640" fill="currentColor" mask="url(#sc-mark)"/></svg>';
- greet=el('div','sc-g cf-g');greet.appendChild(avEl());var gc=el('div','cf-col');gc.appendChild(bubble('Привет! С чем помочь?\nСкажи задачу — подберу, чем сделать и сколько стоит.'));greet.appendChild(gc);
- tips=el('div','sc-tips');TIPS.forEach(function(t){var b=el('button','sc-tip');b.type='button';b.setAttribute('data-send',t[0]);
-  var ic=el('span','ic');ic.innerHTML=STK[t[1]];b.appendChild(ic);b.appendChild(document.createTextNode(t[0]));tips.appendChild(b)})}
-function stick(){feed.scrollTop=feed.scrollHeight}
-function draw(){feed.textContent='';buildHead();var any=st.m.length>0;
-  feed.appendChild(greet);
- st.m.forEach(function(x){feed.appendChild(renderMsg(x))});
- if(!any)feed.appendChild(tips);
- newBox.hidden=!any;resetNew();markLast();stick()}
-function add(x){var first=st.m.length===0;st.m.push(x);save();
- if(first){if(burst.parentNode)burst.parentNode.removeChild(burst);if(tips.parentNode)tips.parentNode.removeChild(tips);newBox.hidden=false}
- feed.appendChild(renderMsg(x));markLast();stick()}
+/* ---------- разметка ---------- */
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function logoSvg(){return'<svg viewBox="0 0 482 465" aria-hidden="true"><use href="#cd-logo"/></svg>'}
+function bubble(t,cls){var b=el('div','cd-b'+(cls?' '+cls:''));String(t).split('\n').forEach(function(s){b.appendChild(el('p',null,s))});return b}
+function whoLine(){var w=st.who;return w&&w.dat?w.dat+(w.occ?' '+w.occ:''):''}
+function thumb(c,cls){var t=el('span',cls);if(c.ic)t.innerHTML=IC[c.ic];else{var im=el('img');im.src='img/'+c.i;im.alt='';im.style.objectPosition=c.o;t.appendChild(im)}return t}
+function cardEl(k,old,done,idx){var c=CAT[k],card=el('section','cd-card'),top=el('div','cd-top'),th=thumb(c,'cd-th'+(c.ic?' i':''));
+ var inf=el('div','cd-info');inf.appendChild(el('b',null,c.n));inf.appendChild(el('span',null,k==='song'&&whoLine()?whoLine():c.m));inf.appendChild(el('em',null,c.p));
+ top.appendChild(th);top.appendChild(inf);card.appendChild(top);card.setAttribute('aria-label','Главное решение');
+ if(c.act&&done){card.appendChild(el('div','cd-done','Написано · '+c.p))}
+ else{var a;
+  if(c.act){a=el('button','cd-go'+(old?' old':''),c.b+' · '+c.p);a.type='button';a.setAttribute('data-act','write');a.setAttribute('data-i',idx)}
+  else{a=el('a','cd-go'+(old?' old':''),'Создать · '+c.p);a.href=c.u}
+  card.appendChild(a)}
+ return card}
+function altsEl(list,done,idx){var w=el('div','cd-alts');
+ list.forEach(function(k){var c=CAT[k],a;
+  if(c.act){a=el('button','cd-alt'+(done?' off':''));a.type='button';a.setAttribute('data-act','write');a.setAttribute('data-i',idx)}
+  else{a=el('a','cd-alt');a.href=c.u}
+  a.appendChild(thumb(c,'t'));a.appendChild(el('b',null,c.n));a.appendChild(el('em',null,c.p));w.appendChild(a)});return w}
+function chipsEl(ch,used,chosen){var w=el('div','cd-chips'+(used?' used':''));
+ ch.forEach(function(c){var b=el('button','cd-chip',c.x);b.type='button';b.setAttribute('data-v',c.v);b.setAttribute('data-x',c.x);
+  if(c.rec)b.appendChild(el('i',null,'советую'));
+  if(used&&(chosen===c.v||chosen===c.x))b.classList.add('on');w.appendChild(b)});
+ if(!used){var o=el('button','cd-chip own','Своё…');o.type='button';o.setAttribute('data-own','1');w.appendChild(o)}
+ return w}
+function avCh(sp){var a=el('span','cd-av'+(sp?' sp':''));a.setAttribute('aria-hidden','true');a.innerHTML=logoSvg();return a}
+function avMe(sp){var a=el('span','cd-av'+(sp?' sp':''));a.setAttribute('aria-hidden','true');var i=el('img');i.src='img/ava-face.jpg';i.alt='';a.appendChild(i);return a}
+function rowEl(x,i,prev,pink,isNew){
+ if(x.r==='s')return el('div','cd-strip',x.t);
+ var first=prev!==x.r,row=el('div','cd-row '+x.r+(first?' first':'')+(isNew?' new':''));
+ if(x.r==='u'){var b;
+  if(x.ph){b=el('div','cd-b ph');var im=el('img');im.src='img/mira-'+(((x.ph-1)%5)+1)+'.jpg';im.alt='Моё фото';b.appendChild(im);b.appendChild(el('span',null,'Моё фото'))}
+  else b=bubble(x.t);
+  row.appendChild(b);row.appendChild(avMe(!first));return row}
+ row.appendChild(avCh(!first));
+ var col=el('div','cd-col');row.appendChild(col);
+ if(x.t)col.appendChild(bubble(x.t,x.post?'post':''));
+ if(x.set){var old=i!==pink;col.appendChild(cardEl(x.set.m,old,!!x.done,i));
+  if(x.set.a.length)col.appendChild(altsEl(x.set.a,!!x.done,i));
+  if(x.more&&!old){var mb=el('button','cd-more');mb.type='button';mb.setAttribute('data-act','more');mb.appendChild(document.createTextNode('Не то?'));mb.appendChild(el('span',null,'Расскажи подробнее'));col.appendChild(mb)}}
+ if(x.ch){var nx=st.m[i+1];col.appendChild(chipsEl(x.ch,!!nx,nx&&(nx.v||nx.t)))}
+ if(x.cp){var cw=el('div','cd-chips'),cb=el('button','cd-chip cd-copy','Скопировать'),ag=el('button','cd-chip','Ещё вариант · '+CAT.text.p);
+  cb.type='button';cb.setAttribute('data-copy',x.cp);ag.type='button';ag.setAttribute('data-act','write');ag.setAttribute('data-i','x');cw.appendChild(cb);cw.appendChild(ag);col.appendChild(cw)}
+ if(x.topup){var ta=el('a','cd-go'+(i!==pink?' old':''),'Пополнить');ta.href='../sk-profile-money/topup.html';col.appendChild(ta)}
+ return row}
+function pinkIdx(){for(var i=st.m.length-1;i>=0;i--){if(st.m[i].set||st.m[i].topup)return i}return-1}
+function pending(){return!!(st.pend&&st.m.length&&st.m[st.m.length-1].ch)}
+function paint(){var pk=pinkIdx(),prev='';feed.textContent='';
+ st.m.forEach(function(x,i){feed.appendChild(rowEl(x,i,prev,pk,i===newIdx));prev=x.r});
+ newIdx=-1;newB.hidden=st.m.length<=1;
+ balEl.textContent=st.bal+' кр';
+ balEl.parentNode.setAttribute('aria-label','Баланс '+st.bal+' кредитов, пополнить');
+ field.placeholder=pending()?'Или напиши своё':'Напиши, что нужно'}
+function stick(toTop){var rows=feed.querySelectorAll('.cd-row'),last=rows[rows.length-1];
+ if(toTop&&last&&last.offsetHeight>feed.clientHeight-24)feed.scrollTop=last.offsetTop-feed.offsetTop-8;else feed.scrollTop=feed.scrollHeight}
+function add(x){st.m.push(x);newIdx=st.m.length-1;save();paint();stick(!!x.set)}
 
-/* ---------- ход разговора ---------- */
-function typing(){var g=el('div','sc-g cf-g');var c=el('div','cf-col');var b=el('div','sc-a');var d=el('div','sc-dots');d.innerHTML='<i></i><i></i><i></i>';b.appendChild(d);c.appendChild(b);g.appendChild(avEl());g.appendChild(c);g.setAttribute('aria-label','Помощник печатает');feed.appendChild(g);stick();return g}
-function respond(raw,attach){busy=true;var tg=typing();
- setTimeout(function(){var r;try{r=answer(raw,attach)}catch(e){r={r:'a',t:'Не понял. Что сделать?',ch:C3}}
-  if(tg.parentNode)tg.parentNode.removeChild(tg);
-  var go=r.go;delete r.go;
-  if(r.ch===null)delete r.ch;
-  add(r);busy=false;
-  if(go)setTimeout(function(){window.chatGo(go)},700)},600+Math.floor(Math.random()*300))}
-function send(text){text=String(text||'').trim();if(!text||busy)return false;
- add({r:'u',t:text.slice(0,400)});respond(text,false);return true}
-function runText(more,q){if(busy)return;var m=st.mem;if(q!=null){m.tq=q;more=false}busy=true;var tg=typing();setTimeout(function(){var r=textReply(m.tq||'',!!more);if(tg.parentNode)tg.parentNode.removeChild(tg);add(r);busy=false},600+Math.floor(Math.random()*300))}
-function attachPhoto(){if(busy)return;var m=st.mem;m.pc=(m.pc||0)+1;add({r:'u',ph:m.pc});respond('',true)}
+/* ---------- действия ---------- */
+function typing(){var lm=st.m[st.m.length-1],cont=lm&&lm.r==='c',g=el('div','cd-row c'+(cont?'':' first')),col=el('div','cd-col'),b=el('div','cd-b'),d=el('div','cd-dots');
+ d.innerHTML='<i></i><i></i><i></i>';b.appendChild(d);col.appendChild(b);g.appendChild(avCh(cont));g.appendChild(col);g.setAttribute('aria-label','Chappy печатает');feed.appendChild(g);feed.scrollTop=feed.scrollHeight;return g}
+function delay(fn){busy=true;var tg=typing();
+ setTimeout(function(){if(tg.parentNode)tg.parentNode.removeChild(tg);try{fn()}catch(e){add({r:'c',t:'Не вышло, попробуй ещё раз.'})}busy=false},520+Math.floor(Math.random()*280))}
+function respond(txt,val,photo){delay(function(){add(answer(txt,val,photo))})}
+function say(txt,val){txt=String(txt||'').trim();if(!txt||busy)return false;
+ var u={r:'u',t:txt.slice(0,400)};if(val)u.v=val;st.m.push(u);save();paint();stick();respond(txt,val,false);return true}
+function attach(){if(busy)return;st.pc=(st.pc||0)+1;st.m.push({r:'u',ph:st.pc});save();paint();stick();respond('',null,true)}
+function doWrite(i){if(busy)return;var x=st.m[+i];
+ if(x&&x.done)return;
+ if(st.bal<PRICE_T){add({r:'c',t:'Не хватает кредитов: на текст нужно '+CAT.text.p+', на счёте '+st.bal+' кр.',topup:1});return}
+ if(x&&x.set)x.done=true;
+ st.bal-=PRICE_T;var v=st.tv;st.tv=v+1;save();paint();
+ delay(function(){st.m.push({r:'s',t:'Списано '+CAT.text.p+' · GPT-5.6 Luna'});var a=writeText(v);add({r:'c',t:a.join('\n'),post:1,cp:a.join('\n')})})}
+function doMore(){if(busy)return;st.m.push({r:'u',t:'Не то'});save();paint();stick();delay(function(){add(moreQ());field.focus()})}
+function reset(){clearTimeout(askT);st=fresh();wipe();busy=false;paint();stick()}
 
 /* ---------- события ---------- */
-function fit(){field.style.height='52px';var h=Math.min(104,Math.max(52,field.scrollHeight));field.style.height=h+'px'}
-form.addEventListener('submit',function(e){e.preventDefault();if(send(field.value)){field.value='';fit()}});
-field.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();form.requestSubmit?form.requestSubmit():form.dispatchEvent(new Event('submit',{cancelable:true}))}});
+function fit(){field.style.height='48px';field.style.height=Math.min(104,Math.max(48,field.scrollHeight))+'px'}
+form.addEventListener('submit',function(e){e.preventDefault();if(say(field.value,null)){field.value='';fit()}});
+field.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();if(form.requestSubmit)form.requestSubmit();else form.dispatchEvent(new Event('submit',{cancelable:true}))}});
 field.addEventListener('input',fit);
 $('send').addEventListener('pointerdown',function(e){if(document.activeElement===field)e.preventDefault()});
-clip.addEventListener('click',attachPhoto);
+clip.addEventListener('click',attach);
+function copyFallback(tx,done){try{var a=document.createElement('textarea');a.value=tx;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();document.execCommand('copy');document.body.removeChild(a)}catch(e){}done()}
 feed.addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;
- if(t.hasAttribute('data-send'))send(t.getAttribute('data-send'));
- else if(t.getAttribute('data-act')==='write')runText(st.mem.tmore,t.hasAttribute('data-q')?t.getAttribute('data-q'):null);
- else if(t.getAttribute('data-act')==='again')runText(true);
- else if(t.getAttribute('data-act')==='clip')attachPhoto();
+ if(t.hasAttribute('data-own')){field.focus();return}
+ if(t.hasAttribute('data-v')){say(t.getAttribute('data-x'),t.getAttribute('data-v'));return}
+ var a=t.getAttribute('data-act');
+ if(a==='write')doWrite(t.getAttribute('data-i'));
+ else if(a==='more')doMore();
  else if(t.hasAttribute('data-copy')){var tx=t.getAttribute('data-copy'),done=function(){t.textContent='Скопировано';t.classList.add('ok');setTimeout(function(){t.textContent='Скопировать';t.classList.remove('ok')},1500)};
-  try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(tx).then(done,function(){fallback(tx,done)})}else fallback(tx,done)}catch(er){fallback(tx,done)}}});
-function fallback(tx,done){try{var a=document.createElement('textarea');a.value=tx;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();document.execCommand('copy');document.body.removeChild(a)}catch(e){}done()}
-function resetNew(){clearTimeout(askT);newBox.className='sc-new';newBox.innerHTML='';var b=el('button',null,'Заново');b.type='button';b.id='newb';newBox.appendChild(b)}
-newBox.addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;
- if(t.id==='newb'){clearTimeout(askT);newBox.className='sc-new ask';newBox.innerHTML='';
-  var a=el('button',null,'Стереть?');a.type='button';a.id='newc';var y=el('button',null,'Да');y.type='button';y.id='newy';newBox.appendChild(a);newBox.appendChild(y);
-  askT=setTimeout(resetNew,4000)}
- else if(t.id==='newc')resetNew();
- else if(t.id==='newy'){st={m:[],mem:{}};wipe();busy=false;draw()}});
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(tx).then(done,function(){copyFallback(tx,done)})}else copyFallback(tx,done)}catch(er){copyFallback(tx,done)}}});
+function resetNew(){clearTimeout(askT);newB.textContent='Заново';newB.classList.remove('ask')}
+newB.addEventListener('click',function(){if(newB.classList.contains('ask')){reset();resetNew();return}
+ newB.textContent='Стереть?';newB.classList.add('ask');askT=setTimeout(resetNew,3500)});
 
 /* ---------- высота под клавиатуру ---------- */
-function layout(){var vv=window.visualViewport,ih=window.innerHeight,h=vv?vv.height:ih,kb=(ih-h>120)||h<520,near=feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;
- document.documentElement.style.setProperty('--sc-h',Math.round(h)+'px');
- app.classList.toggle('sc-kb',!!kb);
+function layout(){var vv=window.visualViewport,ih=window.innerHeight,h=vv?vv.height:ih,near=feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;
+ app.style.setProperty('--cd-h',Math.round(h)+'px');
  app.style.transform=(vv&&vv.offsetTop>0)?'translateY('+Math.round(vv.offsetTop)+'px)':'';
- if(near)stick()}
+ if(near)feed.scrollTop=feed.scrollHeight}
 window.addEventListener('resize',layout);
 if(window.visualViewport){window.visualViewport.addEventListener('resize',layout);window.visualViewport.addEventListener('scroll',layout)}
-field.addEventListener('focus',function(){setTimeout(function(){window.scrollTo(0,0);layout();stick()},250)});
-window.__chatLayout=layout;
+field.addEventListener('focus',function(){setTimeout(function(){window.scrollTo(0,0);layout();feed.scrollTop=feed.scrollHeight},250)});
 
-load();
+/* ---------- старт ---------- */
 var qm=(location.search.match(/[?&]q=([^&]*)/)||[])[1],qq='';
 if(qm){try{qq=decodeURIComponent(qm.replace(/\+/g,' ')).trim()}catch(e){}}
-if(qq){st={m:[],mem:{}};wipe();try{history.replaceState(null,'',location.pathname)}catch(e){}}
-draw();layout();
-if(qq){send(qq)}else{var last=st.m[st.m.length-1];if(last&&last.r==='u')respond(last.ph?'':last.t,!!last.ph)}
+if(qq){st=fresh();wipe();try{history.replaceState(null,'',location.pathname)}catch(e){}}else st=load()||fresh();
+paint();layout();stick();
+window.cdDialog={get st(){return st},put:function(o){st=o;paint();stick()},fresh:fresh};
+if(qq){say(qq,null)}else{var lm=st.m[st.m.length-1];if(lm&&lm.r==='u'){respond(lm.ph?'':lm.t,lm.v||null,!!lm.ph)}}
 })();
 </script>
-<!--hw-kit:start-->
-<div class="hw-sheet" id="hw-sheet" role="dialog" aria-modal="true" aria-labelledby="hw-title" data-st="ready" hidden><div class="hw-scrim" data-hw-close></div><div class="hw-panel"><div class="hw-top"><h2 class="hw-title" id="hw-title">Колесо дня</h2><button type="button" class="hw-x" data-hw-close aria-label="Закрыть"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m2 2 8 8M10 2l-8 8"/></svg></button></div><div class="hw-stage"><svg class="hw-big" viewBox="0 0 340 300" role="img" aria-label="Колесо дня, главный приз 5 000 кр" fill="none"><defs><pattern id="hw-dots" width="6.5" height="6.5" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.5" fill="#fa4a9a"/></pattern></defs><path d="M247.9 50.5L262.5 31.4" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M271.5 74.1L281.1 66.8" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M288.3 103.0L310.4 93.8" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M296.9 135.3L308.8 133.7" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M296.9 168.7L320.7 171.8" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M288.3 201.0L299.3 205.6" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M271.5 229.9L290.6 244.5" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M247.9 253.5L255.2 263.1" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M219.0 270.3L228.2 292.4" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M186.7 278.9L188.3 290.8" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M153.3 278.9L150.2 302.7" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M121.0 270.3L116.4 281.3" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M92.1 253.5L77.5 272.6" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M68.5 229.9L58.9 237.2" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M51.7 201.0L29.6 210.2" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M43.1 168.7L31.2 170.3" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M43.1 135.3L19.3 132.2" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M51.7 103.0L40.7 98.4" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M68.5 74.1L49.4 59.5" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M92.1 50.5L84.8 40.9" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><path d="M121.0 33.7L111.8 11.6" stroke="#29262a" stroke-width="1.5" stroke-linecap="round"/><circle cx="181" cy="163" r="122" fill="url(#hw-dots)"/><g class="hw-rot" id="hw-rot"><circle cx="170" cy="152" r="122" fill="#fffdf6" stroke="#29262a" stroke-width="3"/><path d="M170 152L126.0 45.8A115 115 0 0 1 214.0 45.8Z" fill="#f7a4c9" stroke="#29262a" stroke-width="1.5" stroke-linejoin="round"/><path d="M170 152L214.0 45.8A115 115 0 0 1 276.2 108.0Z" fill="#fffdf6" stroke="#29262a" stroke-width="1.5" stroke-linejoin="round"/><path d="M170 152L276.2 108.0A115 115 0 0 1 276.2 196.0Z" fill="#f5dc73" stroke="#29262a" stroke-width="1.5" stroke-linejoin="round"/><path d="M170 152L276.2 196.0A115 115 0 0 1 214.0 258.2Z" fill="#fffdf6" stroke="#29262a" stroke-width="1.5" stroke-linejoin="round"/><path d="M170 152L214.0 258.2A115 115 0 0 1 126.0 258.2Z" fill="#f5dc73" stroke="#29262a" stroke-width="1.5" stroke-linejoin="round"/><path d="M170 152L126.0 258.2A115 115 0 0 1 63.8 196.0Z" fill="#fffdf6" stroke="#29262a" stroke-width="1.5" stroke-linejoin="round"/><path d="M170 152L63.8 196.0A115 115 0 0 1 63.8 108.0Z" fill="#f5dc73" stroke="#29262a" stroke-width="1.5" stroke-linejoin="round"/><path d="M170 152L63.8 108.0A115 115 0 0 1 126.0 45.8Z" fill="#fffdf6" stroke="#29262a" stroke-width="1.5" stroke-linejoin="round"/><text x="170" y="68" text-anchor="middle" font-size="23" font-weight="800" fill="#29262a" font-family="-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif" letter-spacing="-.5">5 000</text><text x="170" y="90" text-anchor="middle" font-size="16" font-weight="750" fill="#29262a" font-family="-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif">кр</text><text x="228.0" y="100.0" transform="rotate(-45 228.0 94.0)" text-anchor="middle" font-size="17" font-weight="700" fill="#29262a" font-family="-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif" letter-spacing="-.3">+15<tspan font-size="11" font-weight="650" dx="3">кр</tspan></text><text x="252.0" y="158.0" transform="rotate(0 252.0 152.0)" text-anchor="middle" font-size="17" font-weight="700" fill="#29262a" font-family="-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif" letter-spacing="-.3">+5<tspan font-size="11" font-weight="650" dx="3">кр</tspan></text><text x="228.0" y="216.0" transform="rotate(45 228.0 210.0)" text-anchor="middle" font-size="17" font-weight="700" fill="#29262a" font-family="-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif" letter-spacing="-.3">+20<tspan font-size="11" font-weight="650" dx="3">кр</tspan></text><text x="170.0" y="240.0" transform="rotate(90 170.0 234.0)" text-anchor="middle" font-size="17" font-weight="700" fill="#29262a" font-family="-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif" letter-spacing="-.3">+2<tspan font-size="11" font-weight="650" dx="3">кр</tspan></text><text x="112.0" y="216.0" transform="rotate(315 112.0 210.0)" text-anchor="middle" font-size="17" font-weight="700" fill="#29262a" font-family="-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif" letter-spacing="-.3">+10<tspan font-size="11" font-weight="650" dx="3">кр</tspan></text><text x="88.0" y="158.0" transform="rotate(360 88.0 152.0)" text-anchor="middle" font-size="17" font-weight="700" fill="#29262a" font-family="-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif" letter-spacing="-.3">+1<tspan font-size="11" font-weight="650" dx="3">кр</tspan></text><text x="112.0" y="100.0" transform="rotate(405 112.0 94.0)" text-anchor="middle" font-size="17" font-weight="700" fill="#29262a" font-family="-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif" letter-spacing="-.3">+3<tspan font-size="11" font-weight="650" dx="3">кр</tspan></text><circle cx="193.1" cy="35.8" r="1.3" fill="#29262a"/><circle cx="235.8" cy="53.5" r="1.3" fill="#29262a"/><circle cx="268.5" cy="86.2" r="1.3" fill="#29262a"/><circle cx="286.2" cy="128.9" r="1.3" fill="#29262a"/><circle cx="286.2" cy="175.1" r="1.3" fill="#29262a"/><circle cx="268.5" cy="217.8" r="1.3" fill="#29262a"/><circle cx="235.8" cy="250.5" r="1.3" fill="#29262a"/><circle cx="193.1" cy="268.2" r="1.3" fill="#29262a"/><circle cx="146.9" cy="268.2" r="1.3" fill="#29262a"/><circle cx="104.2" cy="250.5" r="1.3" fill="#29262a"/><circle cx="71.5" cy="217.8" r="1.3" fill="#29262a"/><circle cx="53.8" cy="175.1" r="1.3" fill="#29262a"/><circle cx="53.8" cy="128.9" r="1.3" fill="#29262a"/><circle cx="71.5" cy="86.2" r="1.3" fill="#29262a"/><circle cx="104.2" cy="53.5" r="1.3" fill="#29262a"/><circle cx="146.9" cy="35.8" r="1.3" fill="#29262a"/></g><polygon points="170.0,133.0 176.5,138.5 184.9,140.2 184.6,148.7 188.5,156.2 181.7,161.4 178.2,169.1 170.0,167.0 161.8,169.1 158.3,161.4 151.5,156.2 155.4,148.7 155.1,140.2 163.5,138.5" fill="#f5dc73" stroke="#29262a" stroke-width="1.6" stroke-linejoin="round"/><circle cx="170" cy="152" r="11" fill="#fffaf0" stroke="#29262a" stroke-width="1.5"/><circle cx="170" cy="152" r="4.2" fill="#f7a4c9" stroke="#29262a" stroke-width="1.4"/><polygon points="170.0,5.0 175.2,13.5 184.8,11.2 182.5,20.8 191.0,26.0 182.5,31.2 184.8,40.8 175.2,38.5 170.0,47.0 164.8,38.5 155.2,40.8 157.5,31.2 149.0,26.0 157.5,20.8 155.2,11.2 164.8,13.5" fill="#f5dc73" stroke="#29262a" stroke-width="1.6" stroke-linejoin="round"/><path d="M161 20H179L170 45Z" fill="#f7a4c9" stroke="#29262a" stroke-width="1.6" stroke-linejoin="round"/><circle cx="170" cy="25" r="3" fill="#29262a"/></svg><svg class="hw-boom" viewBox="0 0 160 160" aria-hidden="true"><polygon points="85.2,19.5 101.0,37.4 127.6,33.5 127.5,55.7 151.8,65.3 135.9,83.2 148.6,102.7 122.9,109.5 119.2,131.5 93.5,124.6 74.8,140.5 59.0,122.6 32.4,126.5 32.5,104.3 8.2,94.7 24.1,76.8 11.4,57.3 37.1,50.5 40.8,28.5 66.5,35.4" fill="#f5dc73" stroke="#29262a" stroke-width="2" stroke-linejoin="round"/></svg><div class="hw-boomtxt" aria-live="polite"><b id="hw-prize">+15</b><span>кр</span></div></div><p class="hw-cap"><span id="hw-cap">Раз в день</span></p><button type="button" class="hw-cta" id="hw-act">Крутить</button></div></div>
-<script>
-/* hw-kit: колесо дня в шапке (19.11.2026). Без зависимостей.
-   Открывает окно #hw-sheet по клику на любой [data-wheel-open]; закрывает крестиком, нажатием мимо и Escape.
-   Колесо доступно раз в сутки, новый день начинается в 00:00 по Москве (UTC+3, без перехода на летнее время).
-   Состояние хранится в localStorage (ключ hw-wheel = «день:приз:забрал»); без него считаем, что колесо доступно.
-   Призы — только те, что нарисованы на колесе (sk-profile/profile-spin.html), порядок по часовой от верха.
-   Для проверки: window.HW_NOW (мс) подменяет «сейчас»; window.HW_PRIZE (0–7) выбирает сектор, по умолчанию +15. */
-(function () {
-  'use strict';
-  if (window.ChappyWheel) return;
-  var KEY = 'hw-wheel', MSK = 3 * 3600000, DAY = 86400000, SPIN_MS = 3600;
-  var PRIZES = ['5 000', '+15', '+5', '+20', '+2', '+10', '+1', '+3'];
-  var sheet = null, act, cap, prizeEl, rot, spinning = false, shown = '', opener = null, mem, timer = null, prevOverflow = '';
-
-  function now() { return window.HW_NOW != null ? +window.HW_NOW : Date.now(); }
-  function mskDay(t) { return Math.floor((t + MSK) / DAY); }
-  function msLeft(t) { return (mskDay(t) + 1) * DAY - MSK - t; }
-  function fmt(ms) {
-    var m = Math.ceil(ms / 60000);
-    if (m < 1) return 'меньше минуты';
-    var h = Math.floor(m / 60), mm = m % 60;
-    return h ? (mm ? h + ' ч ' + mm + ' мин' : h + ' ч') : mm + ' мин';
-  }
-  function left(t) { t = t == null ? now() : t; var ms = msLeft(t); return { ms: ms, text: fmt(ms) }; }
-  function reduced() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
-
-  function load() {
-    var raw = null;
-    try { raw = localStorage.getItem(KEY); } catch (e) { raw = null; }
-    if (raw == null) raw = mem == null ? null : mem;
-    if (!raw) return null;
-    var p = String(raw).split(':');
-    if (+p[0] !== mskDay(now())) return null;
-    var i = +p[1];
-    return { idx: i >= 0 && i < PRIZES.length ? i : 1, taken: p[2] === '1' };
-  }
-  function save(rec) {
-    var raw = rec ? mskDay(now()) + ':' + rec.idx + ':' + (rec.taken ? 1 : 0) : null;
-    mem = raw;
-    try { if (raw) localStorage.setItem(KEY, raw); else localStorage.removeItem(KEY); } catch (e) {}
-  }
-  function state() {
-    if (spinning) return 'spin';
-    var r = load();
-    return r ? (r.taken ? 'spun' : 'win') : 'ready';
-  }
-  function pick() { var p = window.HW_PRIZE; return typeof p === 'number' && p >= 0 && p < PRIZES.length ? p | 0 : 1; }
-  function angle(i) { return (360 - i * 45) % 360; }
-
-  function icons(s) {
-    var done = s === 'spun', list = document.querySelectorAll('.hw-wheel');
-    for (var i = 0; i < list.length; i++) {
-      list[i].classList.toggle('hw-done', done);
-      list[i].setAttribute('aria-label', done ? 'Колесо дня: уже крутили' : 'Колесо дня: можно крутить');
-    }
-  }
-  function setRot(deg, animate) {
-    if (!rot) return;
-    sheet.classList.remove('hw-spin');
-    rot.style.transform = 'rotate(' + (animate ? 0 : deg) + 'deg)';
-    if (animate) {
-      void rot.getBoundingClientRect();
-      sheet.classList.add('hw-spin');
-      rot.style.transform = 'rotate(' + deg + 'deg)';
-    }
-  }
-  function paint(s) {
-    if (!sheet) return;
-    var r = load(), t = left().text;
-    sheet.setAttribute('data-st', s);
-    if (s === 'ready') {
-      cap.textContent = 'Раз в день'; act.textContent = 'Крутить'; act.setAttribute('aria-disabled', 'false');
-      if (shown !== 'ready') setRot(0, false);
-    } else if (s === 'spin') {
-      cap.textContent = 'Крутится…'; act.textContent = 'Крутится'; act.setAttribute('aria-disabled', 'true');
-    } else {
-      var i = r ? r.idx : 1;
-      prizeEl.textContent = PRIZES[i];
-      cap.textContent = 'Следующее — через ' + t;
-      act.textContent = s === 'win' ? 'Забрать' : 'Понятно';
-      act.setAttribute('aria-disabled', 'false');
-      if (shown !== s && shown !== 'spin') setRot(angle(i), false);
-    }
-    shown = s;
-  }
-  function sync() {
-    var s = state();
-    icons(s);
-    if (s !== 'spin') paint(s);
-  }
-
-  function spin() {
-    if (spinning || state() !== 'ready') return;
-    var i = pick();
-    save({ idx: i, taken: false });
-    spinning = true;
-    paint('spin');
-    prizeEl.textContent = PRIZES[i];
-    var fast = reduced();
-    setRot(1800 + angle(i), !fast);
-    if (fast) setRot(angle(i), false);
-    setTimeout(function () { spinning = false; shown = 'spin'; sync(); focusMain(); }, fast ? 300 : SPIN_MS + 150);
-  }
-  function take() {
-    var r = load();
-    if (!r) return;
-    save({ idx: r.idx, taken: true });
-    sync();
-    close();
-  }
-  function focusMain() {
-    if (!isOpen()) return;
-    var b = act.getAttribute('aria-disabled') === 'true' ? sheet.querySelector('.hw-x') : act;
-    if (b && b.focus) b.focus();
-  }
-  function isOpen() { return !!sheet && !sheet.hidden && sheet.classList.contains('hw-on'); }
-
-  function open() {
-    if (!sheet || isOpen()) return;
-    opener = document.activeElement;
-    sync();
-    sheet.hidden = false;
-    void sheet.offsetWidth;
-    sheet.classList.add('hw-on');
-    prevOverflow = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = 'hidden';
-    document.addEventListener('keydown', onKey, true);
-    focusMain();
-  }
-  function close() {
-    if (!isOpen()) return;
-    sheet.classList.remove('hw-on');
-    document.removeEventListener('keydown', onKey, true);
-    document.documentElement.style.overflow = prevOverflow;
-    var o = opener;
-    function fin() { if (!sheet.classList.contains('hw-on')) sheet.hidden = true; }
-    if (reduced()) fin(); else setTimeout(fin, 340);
-    if (o && o.focus && document.contains(o)) { try { o.focus(); } catch (e) {} }
-  }
-  function onKey(e) {
-    if (e.key === 'Escape' || e.key === 'Esc') { e.preventDefault(); close(); return; }
-    if (e.key !== 'Tab') return;
-    var f = [].slice.call(sheet.querySelectorAll('button')).filter(function (b) { return b.getAttribute('aria-disabled') !== 'true'; });
-    if (!f.length) return;
-    var a = document.activeElement, first = f[0], last = f[f.length - 1];
-    if (e.shiftKey && (a === first || !sheet.contains(a))) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && (a === last || !sheet.contains(a))) { e.preventDefault(); first.focus(); }
-  }
-
-  function init() {
-    sheet = document.getElementById('hw-sheet');
-    if (sheet) {
-      act = document.getElementById('hw-act'); cap = document.getElementById('hw-cap');
-      prizeEl = document.getElementById('hw-prize'); rot = document.getElementById('hw-rot');
-      act.addEventListener('click', function () {
-        var s = state();
-        if (s === 'ready') spin(); else if (s === 'win') take(); else if (s === 'spun') close();
-      });
-    }
-    document.addEventListener('click', function (e) {
-      var t = e.target;
-      if (!t || !t.closest) return;
-      var o = t.closest('[data-wheel-open]');
-      if (o) { e.preventDefault(); open(); return; }
-      if (t.closest('[data-hw-close]') && isOpen()) { e.preventDefault(); close(); }
-    });
-    window.addEventListener('storage', function (e) { if (e.key === KEY || e.key === null) sync(); });
-    timer = setInterval(sync, 15000);
-    sync();
-  }
-
-  window.ChappyWheel = {
-    open: open, close: close, state: state, left: left, sync: sync, isOpen: isOpen,
-    prizes: PRIZES.slice(),
-    store: function (rec) { save(rec); sync(); }
-  };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
-})();
-</script>
-<!--hw-kit:end-->
 </body></html>
