@@ -187,3 +187,15 @@ a.cta{text-decoration:none}
 .pm-one .acct{flex-direction:row;align-items:center;justify-content:flex-start;gap:14px;min-height:76px;transform:rotate(-.8deg)}
 .pm-one .acct .ico{width:44px;height:39px}
 .pm-one .acct b{font-size:44px}
+
+/* ===== деньги: переход вверх, скидка PRO, операции (19.11) · приставка pm2- ===== */
+.pm2-pro{display:inline-block;margin:10px 0 0;padding:6px 10px;background:var(--yel);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(-1.5deg);font:650 14px/1.2 var(--reader)}
+.mn-p{display:flex;align-items:baseline;gap:7px}
+.mn-p b{font:inherit}
+.pm2-was{font:550 13px/1 var(--reader);color:var(--mute);text-decoration:line-through;text-decoration-thickness:1.5px}
+.pm2-now{display:inline-block;margin:14px 0 0;padding:6px 10px;background:var(--rose);border:1.5px solid var(--ln);box-shadow:1.5px 1.5px 0 var(--ln);transform:rotate(1.2deg);font:650 14px/1.25 var(--reader)}
+.pm2-now b{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pm2-paid{margin:10px 0 0;text-align:center;font:600 16px/1.2 var(--reader);color:var(--mute)}
+.pm2-paid b{color:var(--ink);font-weight:750;font-variant-numeric:tabular-nums}
+.mn-ops .pm2-start{min-height:44px}
+.mn-ops .pm2-start>span:first-child b{color:var(--mute);font-weight:600}

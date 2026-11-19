@@ -236,3 +236,6 @@ var t=root.getAttribute('data-af').split('-');
   list:function(){initList(t[1])},sheet:initSheet,card:initCard,answer:initAnswer})[t[0]]();
 if(t[0]!=='tab')window.AF={cur:cur,BYK:BYK};
 })();
+
+/* 19.11.2026: промпт из «Моё» — ?q=текст подставляется в поле ввода */
+(function(){try{var q=new URLSearchParams(location.search).get('q');if(!q)return;var put=function(){var f=document.querySelector('input.field,textarea.field');if(f){f.value=q;f.dispatchEvent(new Event('input',{bubbles:true}))}};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',put);else put()}catch(e){}})();

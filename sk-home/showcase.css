@@ -241,3 +241,11 @@ main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
 .hf-done:active{transform:translate(2px,2px) rotate(-1deg);box-shadow:.5px .5px 0 var(--ln)}
 .hf-tip{position:absolute;right:16px;top:-22px;margin:0;padding:8px 11px;background:var(--yel);border:1.5px solid var(--ln);box-shadow:2px 2px 0 var(--ln);transform:rotate(-2deg);font:700 14px/1 var(--reader);color:var(--ln);white-space:nowrap}
 .hf-tip[hidden]{display:none}
+
+/* ===== «Твои» — автоматический топ-5 (19.11) · приставка ht5- ===== */
+/* без «+»: первая наклейка начинается сразу после подписи, вторая видна наполовину */
+.pins.ht5-pins>.pin{width:calc((var(--tdw) - 73px)/1.5);padding-right:6px}
+.pins.ht5-pins>.pin:nth-child(odd){transform:rotate(-1deg)}
+.pins.ht5-pins>.pin:nth-child(even){transform:rotate(.8deg)}
+.pins.ht5-pins>.pin:nth-child(3){transform:rotate(-.6deg)}
+.pins.ht5-pins>.pin .nm{overflow:hidden;text-overflow:ellipsis}
